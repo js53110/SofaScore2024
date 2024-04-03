@@ -1,11 +1,13 @@
 import UIKit
 import SnapKit
-class LeagueInfoViewCell: UITableViewCell {
+
+class LeagueInfoViewCell: UITableViewHeaderFooterView {
         
     let leagueInfoView = LeagueInfoView()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    static let identifier = "leagueHeader"
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         addViews()
         setupConstraints()
     }
@@ -21,12 +23,10 @@ class LeagueInfoViewCell: UITableViewCell {
     func addViews() {
         contentView.addSubview(leagueInfoView)
     }
-
+    
     func setupConstraints() {
         leagueInfoView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(56)
+            $0.top.leading.trailing.equalToSuperview()
         }
     }
 }

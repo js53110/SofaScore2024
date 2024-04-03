@@ -1,19 +1,21 @@
 import UIKit
 import SnapKit
 class MatchViewCell: UITableViewCell {
+    
+    static let identifier = "MatchViewCell"
         
     let matchView = MatchView()
     var matchId: Int = 0
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            addViews()
-            setupConstraints()
-        }
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addViews()
+        setupConstraints()
+    }
     
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func update(data: matchData) {
         matchId = data.matchId
@@ -26,25 +28,14 @@ class MatchViewCell: UITableViewCell {
 
     func setupConstraints() {
         matchView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(56)
+            $0.edges.equalToSuperview()
         }
     }
 }
 
 extension MatchViewCell {
+    
     func updateScore(score: Int, side: teamSide){
         matchView.updateScore(score: score, side: side)
     }
-    
-//    func updateMatchStatus(status: matchStatus) {
-//        homeResult.updateMatchStatus(status: status)
-//        awayResult.updateMatchStatus(status: status)
-//        timeStatusView.updateMatchStatus(status: status)
-//    }
-//    
-//    func updateMatchTime(time: Int) {
-//        timeStatusView.updateMatchTime(time: time)
-//    }
 }

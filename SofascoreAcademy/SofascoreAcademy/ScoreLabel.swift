@@ -21,7 +21,6 @@ class ScoreLabel: BaseView {
             scoreLabel.text = String(score)
             scoreLabel.textColor = color
         }
-//        updateMatchStatus(status: status)
     }
 
     override func addViews() {

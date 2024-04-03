@@ -60,8 +60,7 @@ class LeagueInfoView: BaseView {
         leagueLogoImageView.snp.makeConstraints {
             $0.width.height.equalTo(32)
             $0.leading.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(12)
-            $0.bottom.equalToSuperview().inset(12)
+            $0.top.bottom.equalToSuperview().inset(12)
         }
         
         stackView.snp.makeConstraints() {
