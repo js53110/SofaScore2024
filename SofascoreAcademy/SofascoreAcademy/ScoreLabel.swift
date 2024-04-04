@@ -13,7 +13,6 @@ import SofaAcademic
 class ScoreLabel: BaseView {
     
     private var textColor: UIColor = .black
-
     private var scoreLabel = UILabel()
     
     func update(matchId: Int, status: matchStatus, score: Int?, color: UIColor) {
@@ -41,13 +40,13 @@ class ScoreLabel: BaseView {
         }
         
         scoreLabel.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
 
 extension ScoreLabel {
+    
     func updateScore(score: Int) {
         scoreLabel.text = String(score)
     }

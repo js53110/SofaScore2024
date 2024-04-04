@@ -3,7 +3,7 @@ import SnapKit
 
 class LeagueInfoViewCell: UITableViewHeaderFooterView {
         
-    let leagueInfoView = LeagueInfoView()
+    private let leagueInfoView = LeagueInfoView()
     static let identifier = "leagueHeader"
     
     override init(reuseIdentifier: String?) {

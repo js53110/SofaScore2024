@@ -12,12 +12,11 @@ import SofaAcademic
 
 class LeagueInfoView: BaseView {
  
-    private var arrow: String = "pointer"
-
+    private let arrow: String = "pointer"
+    
     private let stackView = UIStackView()
     private let countryNameLabel = UILabel()
     private let leagueNameLabel = UILabel()
-    
     private let leagueLogoImageView = UIImageView()
     private let arrowImageView = UIImageView()
     
@@ -39,12 +38,10 @@ class LeagueInfoView: BaseView {
         stackView.axis = .horizontal
         stackView.alignment = .center
         countryNameLabel.font = fonts.RobotoBold
-        
         leagueNameLabel.textColor = colors.surfaceLv2
         leagueNameLabel.font = fonts.RobotoBold
         arrowImageView.image = UIImage(named: arrow)
         leagueLogoImageView.contentMode = .scaleAspectFit
-
     }
 
     override func setupConstraints() {
@@ -53,8 +50,7 @@ class LeagueInfoView: BaseView {
         }
         
         arrowImageView.snp.makeConstraints(){
-            $0.top.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().inset(16)
+            $0.size.equalTo(24)
         }
         
         leagueLogoImageView.snp.makeConstraints {

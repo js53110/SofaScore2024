@@ -10,15 +10,8 @@ import UIKit
 import SofaAcademic
 
 class LeaguesView: BaseView {
-    
+        
     private let tableView = UITableView()
-    
-    func update(){
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.reloadData()
-    }
     
     override init() {
         super.init()
@@ -31,6 +24,13 @@ class LeaguesView: BaseView {
         }
     }
     
+    func update(){
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+    }
+    
     override func addViews() {
         addSubview(tableView)
     }
@@ -38,15 +38,6 @@ class LeaguesView: BaseView {
     override func setupConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-    }
-}
-
-extension UIStackView {
-    func clear() {
-        for arrangedSubview in arrangedSubviews {
-            removeArrangedSubview(arrangedSubview)
-            arrangedSubview.removeFromSuperview()
         }
     }
 }
@@ -63,34 +54,36 @@ extension LeaguesView: UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: MatchViewCell.identifier, for: indexPath) as? MatchViewCell {
-            let dataForRow = leaguesData[indexPath.section].matches[indexPath.row]
-            cell.update(data: dataForRow)
-            return cell
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: MatchViewCell.identifier,
+            for: indexPath) as? MatchViewCell {
+                let dataForRow = leaguesData[indexPath.section].matches[indexPath.row]
+                cell.update(data: dataForRow)
+                return cell
         } else {
             fatalError("Failed to equeue cell")
         }
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: LeagueInfoViewCell.identifier) as? LeagueInfoViewCell {
+                let sectionData = leaguesData[section]
+                headerView.update(
+                    countryName: sectionData.countryName,
+                    leagueName: sectionData.leagueName,
+                    leagueLogo: sectionData.leagueLogo)
+                return headerView
+        } else {
+            fatalError("Failed to dequeue header")
+        }
+    }
 }
-
 
 extension LeaguesView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueInfoViewCell.identifier) as? LeagueInfoViewCell {
-            let sectionData = leaguesData[section]
-            headerView.update(
-                countryName: sectionData.countryName,
-                leagueName: sectionData.leagueName,
-                leagueLogo: sectionData.leagueLogo)
-            return headerView
-        } else {
-            fatalError("Failed to dequeue header")
-        }
     }
 }
 

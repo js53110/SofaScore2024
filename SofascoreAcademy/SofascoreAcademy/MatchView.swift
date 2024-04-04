@@ -21,7 +21,7 @@ class MatchView: BaseView {
     private var homeTeamLogo: String?
     private var awayTeam: String?
     private var awayTeamLogo: String?
-    var matchId: Int = 0
+    private var matchId: Int = 0
 
     private var homeTeamLabel = TeamNameLogoView()
     private var awayTeamLabel = TeamNameLogoView()
@@ -85,22 +85,18 @@ class MatchView: BaseView {
         divider.snp.makeConstraints() {
             $0.leading.equalToSuperview().offset(63)
             $0.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(8)
-            $0.bottom.equalToSuperview().inset(8)
+            $0.top.bottom.equalToSuperview().inset(8)
         }
         
         timeRect.snp.makeConstraints() {
             $0.height.equalTo(56)
             $0.width.equalTo(64)
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
+            $0.top.leading.equalToSuperview()
         }
         
         timeStatusView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(4)
-            $0.trailing.equalToSuperview().inset(4)
-            $0.bottom.equalToSuperview().inset(10)
+            $0.top.bottom.equalToSuperview().inset(10)
+            $0.trailing.leading.equalToSuperview().inset(4)
         }
         
         homeTeamLabel.snp.makeConstraints() {
@@ -126,6 +122,7 @@ class MatchView: BaseView {
 }
 
 extension MatchView {
+    
     func updateScore(score: Int, side: teamSide){
         if(side == .home) {
             homeResult.updateScore(score: score)

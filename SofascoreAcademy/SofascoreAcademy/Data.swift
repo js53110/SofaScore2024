@@ -8,7 +8,6 @@
 import Foundation
 
 enum matchStatus {
-    
     case upcoming
     case inProgress
     case homeTeamWin
@@ -17,7 +16,6 @@ enum matchStatus {
 }
 
 struct matchData{
-    
     let matchId: Int
     let homeTeam: String
     let awayTeam: String
@@ -71,5 +69,4 @@ let matches = matches1 + matches2 + matches3
 let leagueInfo1 = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
 let leagueInfo2 = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
 let leagueInfo3 = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
-
 let leaguesData = [leagueInfo1, leagueInfo2, leagueInfo3]

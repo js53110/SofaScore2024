@@ -93,4 +93,10 @@ public enum helpers {
             return colors.surfaceLv2
         }
     }
+    
+    static func clearStackView(stackView: UIStackView) {
+        for subview in stackView.arrangedSubviews {
+            subview.removeFromSuperview()
+        }
+    }
 }

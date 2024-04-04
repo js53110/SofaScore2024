@@ -38,14 +38,12 @@ class TeamNameLogoView: BaseView {
         }
         
         teamNameLabel.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
+            $0.top.bottom.trailing.equalToSuperview()
             $0.leading.equalTo(teamLogoImageView.snp.trailing).offset(8)
-            $0.trailing.equalToSuperview()
         }
         
         teamLogoImageView.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
+            $0.top.bottom.leading.equalToSuperview()
             $0.height.width.equalTo(16)
         }
     }

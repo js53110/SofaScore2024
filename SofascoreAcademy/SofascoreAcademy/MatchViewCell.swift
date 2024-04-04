@@ -4,8 +4,8 @@ class MatchViewCell: UITableViewCell {
     
     static let identifier = "MatchViewCell"
         
-    let matchView = MatchView()
-    var matchId: Int = 0
+    private let matchView = MatchView()
+    private var matchId: Int = 0
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
