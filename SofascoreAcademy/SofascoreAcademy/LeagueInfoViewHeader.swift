@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class LeagueInfoViewCell: UITableViewHeaderFooterView {
+class LeagueInfoViewHeader: UITableViewHeaderFooterView {
         
     private let leagueInfoView = LeagueInfoView()
     static let identifier = "leagueHeader"
@@ -27,6 +27,7 @@ class LeagueInfoViewCell: UITableViewHeaderFooterView {
     func setupConstraints() {
         leagueInfoView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().priority(999)
         }
     }
 }

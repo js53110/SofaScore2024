@@ -17,7 +17,7 @@ class LeaguesView: BaseView {
         super.init()
         
         tableView.register(MatchViewCell.self, forCellReuseIdentifier: MatchViewCell.identifier)
-        tableView.register(LeagueInfoViewCell.self, forHeaderFooterViewReuseIdentifier: LeagueInfoViewCell.identifier)
+        tableView.register(LeagueInfoViewHeader.self, forHeaderFooterViewReuseIdentifier: LeagueInfoViewHeader.identifier)
         
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
@@ -67,7 +67,7 @@ extension LeaguesView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: LeagueInfoViewCell.identifier) as? LeagueInfoViewCell {
+            withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
                 let sectionData = leaguesData[section]
                 headerView.update(
                     countryName: sectionData.countryName,

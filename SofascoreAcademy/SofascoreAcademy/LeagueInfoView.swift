@@ -35,6 +35,7 @@ class LeagueInfoView: BaseView {
     }
 
     override func styleViews() {
+        backgroundColor = .white
         stackView.axis = .horizontal
         stackView.alignment = .center
         countryNameLabel.font = fonts.RobotoBold
