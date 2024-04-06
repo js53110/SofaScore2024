@@ -21,7 +21,7 @@ class MatchView: BaseView {
     private var homeTeamLogo: String?
     private var awayTeam: String?
     private var awayTeamLogo: String?
-    var matchId: Int?
+    private var matchId: Int = 0
 
     private var homeTeamLabel = TeamNameLogoView()
     private var awayTeamLabel = TeamNameLogoView()
@@ -36,10 +36,30 @@ class MatchView: BaseView {
     func update(data: matchData) {
         matchId = data.matchId
         
-        homeTeamLabel.update(teamName: data.homeTeam, teamLogo: data.homeLogo)
-        awayTeamLabel.update(teamName: data.awayTeam, teamLogo: data.awayLogo)
-        homeResult.update(matchId: data.matchId, status: data.status, score: data.homeTeamScore)
-        awayResult.update(matchId: data.matchId, status: data.status, score: data.awayTeamScore)
+        let matchStatus = helpers.getMatchStatus(matchId: matchId)
+        
+        homeTeamLabel.update(
+            teamName: data.homeTeam,
+            teamLogo: data.homeLogo, 
+            color: helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
+        )
+        awayTeamLabel.update(
+            teamName: data.awayTeam,
+            teamLogo: data.awayLogo,
+            color: helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
+        )
+        homeResult.update(
+            matchId: data.matchId,
+            status: data.status,
+            score: data.homeTeamScore,
+            color: helpers.determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
+        )
+        awayResult.update(
+            matchId: data.matchId,
+            status: data.status,
+            score: data.awayTeamScore,
+            color: helpers.determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
+        )
         timeStatusView.update(matchTime: data.timeStamp, status: data.status)
     }
     
@@ -65,22 +85,18 @@ class MatchView: BaseView {
         divider.snp.makeConstraints() {
             $0.leading.equalToSuperview().offset(63)
             $0.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(8)
-            $0.bottom.equalToSuperview().inset(8)
+            $0.top.bottom.equalToSuperview().inset(8)
         }
         
         timeRect.snp.makeConstraints() {
             $0.height.equalTo(56)
             $0.width.equalTo(64)
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
+            $0.top.leading.equalToSuperview()
         }
         
         timeStatusView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview().offset(4)
-            $0.trailing.equalToSuperview().inset(4)
-            $0.bottom.equalToSuperview().inset(10)
+            $0.top.bottom.equalToSuperview().inset(10)
+            $0.trailing.leading.equalToSuperview().inset(4)
         }
         
         homeTeamLabel.snp.makeConstraints() {
@@ -106,6 +122,7 @@ class MatchView: BaseView {
 }
 
 extension MatchView {
+    
     func updateScore(score: Int, side: teamSide){
         if(side == .home) {
             homeResult.updateScore(score: score)
@@ -113,12 +130,6 @@ extension MatchView {
         else if(side == .away) {
             awayResult.updateScore(score: score)
         }
-    }
-    
-    func updateMatchStatus(status: matchStatus) {
-        homeResult.updateMatchStatus(status: status)
-        awayResult.updateMatchStatus(status: status)
-        timeStatusView.updateMatchStatus(status: status)
     }
     
     func updateMatchTime(time: Int) {

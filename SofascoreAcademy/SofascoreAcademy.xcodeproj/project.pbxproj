@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D23289A72BA0F65900139113 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A62BA0F65900139113 /* SnapKit */; };
 		D23289A92BA0F65900139113 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A82BA0F65900139113 /* SnapKit-Dynamic */; };
-		D23289AB2BA0F67000139113 /* LeagueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289AA2BA0F67000139113 /* LeagueView.swift */; };
+		D23289AB2BA0F67000139113 /* LeaguesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289AA2BA0F67000139113 /* LeaguesView.swift */; };
 		D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */; };
 		D23289AF2BA0F7B000139113 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23289AE2BA0F7B000139113 /* Roboto-Bold.ttf */; };
 		D23289B12BA0F99600139113 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289B02BA0F99600139113 /* MatchView.swift */; };
@@ -21,6 +21,8 @@
 		D236A63C2B9B598700C2ADB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A63B2B9B598700C2ADB4 /* ViewController.swift */; };
 		D236A6412B9B598900C2ADB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D236A6402B9B598900C2ADB4 /* Assets.xcassets */; };
 		D236A6442B9B598900C2ADB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D236A6422B9B598900C2ADB4 /* LaunchScreen.storyboard */; };
+		D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */; };
+		D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */; };
 		D2A383042BA88565001C102F /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383032BA88565001C102F /* Styling.swift */; };
 		D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383052BA8FA7C001C102F /* Helpers.swift */; };
 		D2A383082BA8FABD001C102F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383072BA8FABD001C102F /* Data.swift */; };
@@ -30,7 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D23289AA2BA0F67000139113 /* LeagueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueView.swift; sourceTree = "<group>"; };
+		D23289AA2BA0F67000139113 /* LeaguesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesView.swift; sourceTree = "<group>"; };
 		D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoView.swift; sourceTree = "<group>"; };
 		D23289AE2BA0F7B000139113 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D23289B02BA0F99600139113 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		D236A6402B9B598900C2ADB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D236A6432B9B598900C2ADB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D236A6452B9B598900C2ADB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewCell.swift; sourceTree = "<group>"; };
+		D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoViewHeader.swift; sourceTree = "<group>"; };
 		D2A383032BA88565001C102F /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		D2A383052BA8FA7C001C102F /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D2A383072BA8FABD001C102F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -98,10 +102,12 @@
 				D23289B02BA0F99600139113 /* MatchView.swift */,
 				D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */,
 				D2A383072BA8FABD001C102F /* Data.swift */,
-				D23289AA2BA0F67000139113 /* LeagueView.swift */,
+				D23289AA2BA0F67000139113 /* LeaguesView.swift */,
 				D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */,
 				D2A383052BA8FA7C001C102F /* Helpers.swift */,
 				D2A383032BA88565001C102F /* Styling.swift */,
+				D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */,
+				D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */,
 			);
 			path = SofascoreAcademy;
 			sourceTree = "<group>";
@@ -191,14 +197,16 @@
 				D2A383042BA88565001C102F /* Styling.swift in Sources */,
 				D236A63C2B9B598700C2ADB4 /* ViewController.swift in Sources */,
 				D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */,
-				D23289AB2BA0F67000139113 /* LeagueView.swift in Sources */,
+				D23289AB2BA0F67000139113 /* LeaguesView.swift in Sources */,
 				D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */,
+				D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */,
 				D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */,
 				D23289B32BA103F700139113 /* TeamNameLogoView.swift in Sources */,
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
 				D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */,
 				D23289B12BA0F99600139113 /* MatchView.swift in Sources */,
 				D236A63A2B9B598600C2ADB4 /* SceneDelegate.swift in Sources */,
+				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
 				D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

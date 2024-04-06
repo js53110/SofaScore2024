@@ -11,8 +11,7 @@ import UIKit
 import SofaAcademic
 
 class TimeStatusView: BaseView {
-    
-    
+        
     private let timeView = UILabel()
     private let statusView = UILabel()
     
@@ -28,7 +27,6 @@ class TimeStatusView: BaseView {
         }
     }
     
-
     override func addViews() {
         addSubview(timeView)
         addSubview(statusView)
@@ -38,7 +36,6 @@ class TimeStatusView: BaseView {
         timeView.font = fonts.RobotoCondensedRegularMicro
         timeView.textColor = colors.surfaceLv2
         timeView.textAlignment = .center
-        
         statusView.font = fonts.RobotoCondensedRegularMicro
         statusView.textAlignment = .center
     }
@@ -57,6 +54,7 @@ class TimeStatusView: BaseView {
 }
 
 extension TimeStatusView {
+    
     func updateMatchStatus(status: matchStatus) {
         switch status {
         case .inProgress:
