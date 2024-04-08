@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class ViewController: UIViewController, BaseViewProtocol {
+class ViewController: UIViewController {
         
     private let tableView = UITableView()
     
@@ -61,7 +61,7 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController {
+extension ViewController: BaseViewProtocol{
 
     func addViews() {
         view.addSubview(tableView)
@@ -77,6 +77,9 @@ extension ViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
+}
+
+private extension ViewController {
     
     func setupTableView() {
         tableView.register(
