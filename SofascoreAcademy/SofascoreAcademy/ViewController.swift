@@ -9,47 +9,10 @@ class ViewController: UIViewController, BaseViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        tableView.register(
-            MatchViewCell.self,
-            forCellReuseIdentifier: MatchViewCell.identifier
-        )
-        
-        tableView.register(
-            LeagueInfoViewHeader.self,
-            forHeaderFooterViewReuseIdentifier: LeagueInfoViewHeader.identifier
-        )
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        tableView.reloadData()
-        
-        if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0
-        }
-                
         addViews()
         styleViews()
         setupConstraints()
-        setupGestureRecognizers()
-    }
-    
-    func addViews() {
-        view.addSubview(tableView)
-    }
-    
-    func styleViews() {
-        view.backgroundColor = .white
-    }
-    
-    func setupConstraints() {
-        tableView.snp.makeConstraints() {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
-    func setupGestureRecognizers() {
+        setupTableView()
     }
 }
 
@@ -95,5 +58,44 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
+    }
+}
+
+extension ViewController {
+
+    func addViews() {
+        view.addSubview(tableView)
+    }
+    
+    func styleViews() {
+        view.backgroundColor = .white
+    }
+    
+    func setupConstraints() {
+        tableView.snp.makeConstraints() {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func setupTableView() {
+        tableView.register(
+            MatchViewCell.self,
+            forCellReuseIdentifier: MatchViewCell.identifier
+        )
+        
+        tableView.register(
+            LeagueInfoViewHeader.self,
+            forHeaderFooterViewReuseIdentifier: LeagueInfoViewHeader.identifier
+        )
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
     }
 }
