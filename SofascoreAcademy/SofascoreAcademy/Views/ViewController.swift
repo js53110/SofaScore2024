@@ -73,8 +73,7 @@ extension ViewController: BaseViewProtocol{
     
     func setupConstraints() {
         tableView.snp.makeConstraints() {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
