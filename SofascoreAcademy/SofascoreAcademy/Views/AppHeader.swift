@@ -22,9 +22,12 @@ class AppHeader : BaseView {
     let headerButtonIcon1 = UIImageView()
     let headerButtonIcon2 = UIImageView()
     
+    var delegate: settingsButtonTap?
+    
     override func addViews() {
         addSubview(appLogo)
         addSubview(headerButton1)
+        
         addSubview(headerButton2)
         headerButton1.addSubview(headerButtonIcon1)
         headerButton2.addSubview(headerButtonIcon2)
@@ -36,7 +39,6 @@ class AppHeader : BaseView {
         backgroundColor = colors.colorPrimaryDefault
         headerButtonIcon1.image = UIImage(named: headerButtonIcon1Path)
         headerButtonIcon2.image = UIImage(named: headerButtonIcon2Path)
-
     }
     
     override func setupConstraints() {
@@ -72,7 +74,16 @@ class AppHeader : BaseView {
             $0.size.equalTo(24)
             $0.top.edges.equalToSuperview().inset(12)
         }
-
+    }
+    
+    override func setupGestureRecognizers() {
+        headerButton1.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
     }
 }
 
+extension AppHeader {
+    
+    @objc func buttonClicked(_ sender: UIButton) {
+        delegate?.reactToSetingsTap()
+    }
+}

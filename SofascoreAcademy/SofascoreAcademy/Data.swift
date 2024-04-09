@@ -69,4 +69,6 @@ let matches = matches1 + matches2 + matches3
 let leagueInfo1 = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
 let leagueInfo2 = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
 let leagueInfo3 = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
-let leaguesData = [leagueInfo1, leagueInfo2, leagueInfo3]
+let leaguesData1 = [leagueInfo1, leagueInfo1, leagueInfo1]
+let leaguesData2 = [leagueInfo2, leagueInfo2, leagueInfo2]
+let leaguesData3 = [leagueInfo3, leagueInfo3, leagueInfo3]

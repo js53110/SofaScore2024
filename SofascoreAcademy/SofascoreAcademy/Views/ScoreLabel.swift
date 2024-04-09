@@ -21,18 +21,18 @@ class ScoreLabel: BaseView {
             scoreLabel.textColor = color
         }
     }
-
+    
     override func addViews() {
         addSubview(scoreLabel)
     }
-
+    
     override func styleViews() {
         scoreLabel.textColor = textColor
         scoreLabel.textAlignment = .right
         scoreLabel.font = fonts.RobotoRegular14
         scoreLabel.contentMode = .center
     }
-
+    
     override func setupConstraints() {
         snp.makeConstraints() {
             $0.width.equalTo(32)

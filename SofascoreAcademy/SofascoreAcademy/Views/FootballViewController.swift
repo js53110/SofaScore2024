@@ -2,13 +2,15 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class ViewController: UIViewController {
-        
+class FootballViewController: UIViewController {
+    
     private let tableView = UITableView()
+    
+    var delegate: tableCellTap?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         addViews()
         styleViews()
         setupConstraints()
@@ -16,24 +18,24 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension FootballViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        leaguesData.count
+        leaguesData1.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        leaguesData[section].matches.count
+        leaguesData1[section].matches.count
     }
     
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
-                let dataForRow = leaguesData[indexPath.section].matches[indexPath.row]
-                cell.update(data: dataForRow)
-                return cell
+            let dataForRow = leaguesData1[indexPath.section].matches[indexPath.row]
+            cell.update(data: dataForRow)
+            return cell
         } else {
             fatalError("Failed to equeue cell")
         }
@@ -42,27 +44,33 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
-                let sectionData = leaguesData[section]
-                headerView.update(
-                    countryName: sectionData.countryName,
-                    leagueName: sectionData.leagueName,
-                    leagueLogo: sectionData.leagueLogo)
-                return headerView
+            let sectionData = leaguesData1[section]
+            headerView.update(
+                countryName: sectionData.countryName,
+                leagueName: sectionData.leagueName,
+                leagueLogo: sectionData.leagueLogo)
+            return headerView
         } else {
             fatalError("Failed to dequeue header")
         }
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension FootballViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Handle cell selection here
+        let selectedMatch = leaguesData1[indexPath.section].matches[indexPath.row]
+        delegate?.reactToCellTap(match: selectedMatch)
+    }
 }
 
-extension ViewController: BaseViewProtocol{
-
+extension FootballViewController: BaseViewProtocol{
+    
     func addViews() {
         view.addSubview(tableView)
     }
@@ -78,7 +86,7 @@ extension ViewController: BaseViewProtocol{
     }
 }
 
-private extension ViewController {
+private extension FootballViewController {
     
     func setupTableView() {
         tableView.register(
