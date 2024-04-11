@@ -3,36 +3,27 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-protocol parentSportSlugPicker {
-    func getPressedTab(request: sport_slug?)
-}
+
 
 protocol settingsButtonTap {
+    
     func reactToSetingsTap()
 }
 
 protocol tableCellTap {
+    
     func reactToCellTap(match: matchData)
 }
 
-enum sport_slug {
-    case football
-    case basketball
-    case american_football
-}
-
-class MainViewController : UIViewController {
+class MainViewController: UIViewController, SettingsButtonTapDelegate {
     
-    private let footballViewController = FootballViewController()
-    private let basketballViewController = BasketballViewController()
-    private let americanFootballViewController = AmericanFootballViewController()
+    private let sportViewController = SportViewController(sportSlug: .football)
     
     private let appHeader = AppHeader()
     private let customTabBarController = CustomTabBarController()
     
     private let blueContainer = UIView()
     private let containerView = UIView()
-    private var currentChild = UIViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,30 +34,7 @@ class MainViewController : UIViewController {
         
         customTabBarController.delegate = self
         appHeader.delegate = self
-        footballViewController.delegate = self
-        basketballViewController.delegate = self
-        americanFootballViewController.delegate = self
-    }
-}
-
-extension UIViewController {
-    
-    func addChild(child: UIViewController, parent: UIView) {
-        addChild(child)
-        parent.addSubview(child.view)
-        child.view.snp.makeConstraints() {
-            $0.edges.equalToSuperview()
-        }
-        child.didMove(toParent: self)
-    }
-    
-    func remove() {
-        guard parent != nil else {
-            return
-        }
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
+        //        footballViewController?.delegate = self
     }
 }
 
@@ -78,15 +46,13 @@ extension MainViewController : BaseViewProtocol {
         view.addSubview(customTabBarController)
         view.addSubview(containerView)
         
-        currentChild = footballViewController
-        addChild(child: currentChild, parent: containerView)
+        addChild(child: sportViewController, parent: containerView)
     }
     
     func styleViews() {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
         blueContainer.backgroundColor = colors.colorPrimaryDefault
-        
     }
     
     func setupConstraints() {
@@ -115,27 +81,17 @@ extension MainViewController : BaseViewProtocol {
 
 extension MainViewController: parentSportSlugPicker {
     
-    func getPressedTab(request: sport_slug?) {
-        let snapshot = currentChild.view.snapshotView(afterScreenUpdates: true)!
+    func getPressedTab(selectedSportSlug: sportSlug?) {
+        let snapshot = sportViewController.view.snapshotView(afterScreenUpdates: true)!
         snapshot.frame = containerView.bounds
         
-        currentChild.remove()
+        sportViewController.remove()
         
-        if let request = request {
-            switch request {
-            case .football:
-                addChild(child: footballViewController, parent: containerView)
-                currentChild = footballViewController
-            case .basketball:
-                addChild(child: basketballViewController, parent: containerView)
-                currentChild = basketballViewController
-            case .american_football:
-                addChild(child: americanFootballViewController, parent: containerView)
-                currentChild = americanFootballViewController
-            }
+        if let selectedSportSlug = selectedSportSlug {
+            addChild(child: SportViewController(sportSlug: selectedSportSlug), parent: containerView)
         }
         containerView.addSubview(snapshot)
-        UIView.transition(from: snapshot, to: currentChild.view, duration: 0.3, options: .transitionCrossDissolve) { _ in
+        UIView.transition(from: snapshot, to: sportViewController.view, duration: 0.3, options: .transitionCrossDissolve) { _ in
             snapshot.removeFromSuperview()
         }
     }

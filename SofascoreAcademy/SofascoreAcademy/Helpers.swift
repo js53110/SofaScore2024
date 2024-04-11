@@ -99,4 +99,15 @@ public enum helpers {
             subview.removeFromSuperview()
         }
     }
+    
+    static func determineDataForDisplay(sportSlug : sportSlug) -> Array<LeagueInfo> {
+        switch sportSlug {
+        case .football:
+            return leaguesData1
+        case .basketball:
+            return leaguesData2
+        case .americanFootball:
+            return leaguesData3
+        }
+    }
 }

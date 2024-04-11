@@ -12,10 +12,6 @@ class CustomTabBarController: BaseView {
     var n = 1
     var tabIndicator = UIView()
     
-    let footballViewController = FootballViewController()
-    let basketballViewController = BasketballViewController()
-    let americanFootballViewController = AmericanFootballViewController()
-    
     var delegate: parentSportSlugPicker?
     
     override func addViews() {
@@ -109,15 +105,15 @@ extension CustomTabBarController{
 extension CustomTabBarController {
     
     @objc func buttonClicked(_ sender: UIButton) {
-        var data: sport_slug?
+        var selectedSportSlug: sportSlug? = nil
         if sender == tab1View {
-            data = .football
+            selectedSportSlug = .football
             n = 1
         } else if sender == tab2View {
-            data = .basketball
+            selectedSportSlug = .basketball
             n = 2
         } else if sender == tab3View {
-            data = .american_football
+            selectedSportSlug = .americanFootball
             n = 3
         }
         UIView.animate(withDuration: 0.3) {
@@ -127,8 +123,8 @@ extension CustomTabBarController {
                 $0.bottom.equalToSuperview()
                 $0.leading.equalTo((self.n - 1) * 131 + 8)
             }
-            self.layoutIfNeeded() // Ensures immediate layout update inside the animation block
+            self.layoutIfNeeded()
         }
-        delegate?.getPressedTab(request: data)
+        delegate?.getPressedTab(selectedSportSlug: selectedSportSlug)
     }
 }

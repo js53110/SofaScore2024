@@ -3,19 +3,24 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
+protocol SettingsButtonTapDelegate: AnyObject {
+    
+    func reactToSetingsTap()
+}
+
 class AppHeader: BaseView {
     
     private let logoPath = "sofascore_lockup"
     private let headerButtonIcon1Path = "Icon 1"
     private let headerButtonIcon2Path = "Icon 2"
     
-    let appLogo = UIImageView()
-    let headerButton1 = UIButton()
-    let headerButton2 = UIButton()
-    let headerButtonIcon1 = UIImageView()
-    let headerButtonIcon2 = UIImageView()
+    private let appLogo = UIImageView()
+    private let headerButton1 = UIButton()
+    private let headerButton2 = UIButton()
+    private let headerButtonIcon1 = UIImageView()
+    private let headerButtonIcon2 = UIImageView()
     
-    var delegate: settingsButtonTap?
+    weak var delegate: SettingsButtonTapDelegate?
     
     override func addViews() {
         addSubview(appLogo)
@@ -74,7 +79,8 @@ class AppHeader: BaseView {
     }
 }
 
-extension AppHeader {
+// MARK: Private methods
+private extension AppHeader {
     
     @objc func buttonClicked(_ sender: UIButton) {
         delegate?.reactToSetingsTap()

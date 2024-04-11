@@ -8,6 +8,12 @@ enum matchStatus {
     case draw
 }
 
+enum sportSlug {
+    case football
+    case basketball
+    case americanFootball
+}
+
 struct matchData{
     let matchId: Int
     let homeTeam: String

@@ -2,11 +2,22 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class FootballViewController: UIViewController {
+class SportViewController: UIViewController {
     
     private let tableView = UITableView()
     
-    var delegate: tableCellTap?
+//    var delegate: tableCellTap?
+    var data: Array<LeagueInfo>
+    
+    init(sportSlug: sportSlug) {
+//        self.delegate = delegate
+        self.data = helpers.determineDataForDisplay(sportSlug: sportSlug)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +29,14 @@ class FootballViewController: UIViewController {
     }
 }
 
-extension FootballViewController: UITableViewDataSource {
+extension SportViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        leaguesData1.count
+        data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        leaguesData1[section].matches.count
+        data[section].matches.count
     }
     
     
@@ -33,7 +44,7 @@ extension FootballViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
-            let dataForRow = leaguesData1[indexPath.section].matches[indexPath.row]
+            let dataForRow = data[indexPath.section].matches[indexPath.row]
             cell.update(data: dataForRow)
             return cell
         } else {
@@ -44,7 +55,7 @@ extension FootballViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
-            let sectionData = leaguesData1[section]
+            let sectionData = data[section]
             headerView.update(
                 countryName: sectionData.countryName,
                 leagueName: sectionData.leagueName,
@@ -56,7 +67,7 @@ extension FootballViewController: UITableViewDataSource {
     }
 }
 
-extension FootballViewController: UITableViewDelegate {
+extension SportViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
@@ -64,12 +75,12 @@ extension FootballViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Handle cell selection here
-        let selectedMatch = leaguesData1[indexPath.section].matches[indexPath.row]
-        delegate?.reactToCellTap(match: selectedMatch)
+//        let selectedMatch = leaguesData1[indexPath.section].matches[indexPath.row]
+//        delegate?.reactToCellTap(match: selectedMatch)
     }
 }
 
-extension FootballViewController: BaseViewProtocol{
+extension SportViewController: BaseViewProtocol{
     
     func addViews() {
         view.addSubview(tableView)
@@ -86,7 +97,7 @@ extension FootballViewController: BaseViewProtocol{
     }
 }
 
-private extension FootballViewController {
+private extension SportViewController {
     
     func setupTableView() {
         tableView.register(
