@@ -1,10 +1,3 @@
-//
-//  MainViewController.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 08.04.2024..
-//
-
 import Foundation
 import UIKit
 import SofaAcademic

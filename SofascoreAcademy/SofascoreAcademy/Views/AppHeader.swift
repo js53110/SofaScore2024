@@ -1,16 +1,9 @@
-//
-//  AppHeader.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 08.04.2024..
-//
-
 import Foundation
 import UIKit
 import SofaAcademic
 import SnapKit
 
-class AppHeader : BaseView {
+class AppHeader: BaseView {
     
     private let logoPath = "sofascore_lockup"
     private let headerButtonIcon1Path = "Icon 1"

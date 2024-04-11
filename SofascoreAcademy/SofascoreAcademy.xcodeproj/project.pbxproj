@@ -16,7 +16,6 @@
 		D23289B52BA107EE00139113 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23289B42BA107EE00139113 /* Roboto-Regular.ttf */; };
 		D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289B62BA10CDF00139113 /* ScoreLabel.swift */; };
 		D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A6372B9B598600C2ADB4 /* AppDelegate.swift */; };
-		D236A63A2B9B598600C2ADB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A6392B9B598600C2ADB4 /* SceneDelegate.swift */; };
 		D236A63C2B9B598700C2ADB4 /* FootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A63B2B9B598700C2ADB4 /* FootballViewController.swift */; };
 		D236A6412B9B598900C2ADB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D236A6402B9B598900C2ADB4 /* Assets.xcassets */; };
 		D236A6442B9B598900C2ADB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D236A6422B9B598900C2ADB4 /* LaunchScreen.storyboard */; };
@@ -46,7 +45,6 @@
 		D23289B62BA10CDF00139113 /* ScoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		D236A6342B9B598600C2ADB4 /* SofascoreAcademy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SofascoreAcademy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D236A6372B9B598600C2ADB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D236A6392B9B598600C2ADB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D236A63B2B9B598700C2ADB4 /* FootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballViewController.swift; sourceTree = "<group>"; };
 		D236A6402B9B598900C2ADB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D236A6432B9B598900C2ADB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			children = (
 				D29B8CF92BC45A440000CA42 /* Views */,
 				D236A6372B9B598600C2ADB4 /* AppDelegate.swift */,
-				D236A6392B9B598600C2ADB4 /* SceneDelegate.swift */,
 				D236A6402B9B598900C2ADB4 /* Assets.xcassets */,
 				D236A6422B9B598900C2ADB4 /* LaunchScreen.storyboard */,
 				D236A6452B9B598900C2ADB4 /* Info.plist */,
@@ -237,7 +234,6 @@
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
 				D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */,
 				D23289B12BA0F99600139113 /* MatchView.swift in Sources */,
-				D236A63A2B9B598600C2ADB4 /* SceneDelegate.swift in Sources */,
 				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
 				D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */,
 			);
