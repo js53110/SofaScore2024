@@ -1,6 +1,4 @@
-import Foundation
-
-protocol parentSportSlugPicker {
+protocol parentSportSlugPicker: AnyObject {
     
     func getPressedTab(selectedSportSlug: sportSlug?)
 }

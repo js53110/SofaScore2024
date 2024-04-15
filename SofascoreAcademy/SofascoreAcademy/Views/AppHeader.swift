@@ -3,40 +3,35 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-protocol SettingsButtonTapDelegate: AnyObject {
-    
-    func reactToSetingsTap()
-}
-
 class AppHeader: BaseView {
     
     private let logoPath = "sofascore_lockup"
-    private let headerButtonIcon1Path = "Icon 1"
-    private let headerButtonIcon2Path = "Icon 2"
+    private let headerButtonIconSettingsPath = "Icon Settings"
+    private let headerButtonIconTrophyPath = "Icon Trophy"
     
     private let appLogo = UIImageView()
-    private let headerButton1 = UIButton()
-    private let headerButton2 = UIButton()
-    private let headerButtonIcon1 = UIImageView()
-    private let headerButtonIcon2 = UIImageView()
+    private let headerButtonTrophy = UIButton()
+    private let headerButtonSettings = UIButton()
+    private let headerButtonIconSettings = UIImageView()
+    private let headerButtonIconTrophy = UIImageView()
     
-    weak var delegate: SettingsButtonTapDelegate?
+    weak var delegate: settingsButtonTap?
     
     override func addViews() {
         addSubview(appLogo)
-        addSubview(headerButton1)
+        addSubview(headerButtonTrophy)
         
-        addSubview(headerButton2)
-        headerButton1.addSubview(headerButtonIcon1)
-        headerButton2.addSubview(headerButtonIcon2)
+        addSubview(headerButtonSettings)
+        headerButtonSettings.addSubview(headerButtonIconSettings)
+        headerButtonTrophy.addSubview(headerButtonIconTrophy)
     }
     
     override func styleViews() {
         appLogo.image = UIImage(named: logoPath)
         appLogo.contentMode = .scaleAspectFit
         backgroundColor = colors.colorPrimaryDefault
-        headerButtonIcon1.image = UIImage(named: headerButtonIcon1Path)
-        headerButtonIcon2.image = UIImage(named: headerButtonIcon2Path)
+        headerButtonIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)
+        headerButtonIconSettings.image = UIImage(named: headerButtonIconSettingsPath)
     }
     
     override func setupConstraints() {
@@ -51,31 +46,31 @@ class AppHeader: BaseView {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        headerButton1.snp.makeConstraints() {
+        headerButtonSettings.snp.makeConstraints() {
             $0.size.equalTo(48)
             $0.top.bottom.equalToSuperview()
             $0.trailing.equalToSuperview().inset(4)
         }
         
-        headerButton2.snp.makeConstraints() {
+        headerButtonTrophy.snp.makeConstraints() {
             $0.size.equalTo(48)
             $0.top.bottom.equalToSuperview()
             $0.trailing.equalToSuperview().inset(52)
         }
         
-        headerButtonIcon1.snp.makeConstraints() {
+        headerButtonIconSettings.snp.makeConstraints() {
             $0.size.equalTo(24)
-            $0.top.edges.equalToSuperview().inset(12)
+            $0.edges.equalToSuperview().inset(12)
         }
         
-        headerButtonIcon2.snp.makeConstraints() {
+        headerButtonIconTrophy.snp.makeConstraints() {
             $0.size.equalTo(24)
-            $0.top.edges.equalToSuperview().inset(12)
+            $0.edges.equalToSuperview().inset(12)
         }
     }
     
     override func setupGestureRecognizers() {
-        headerButton1.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        headerButtonSettings.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
     }
 }
 

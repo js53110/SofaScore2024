@@ -3,28 +3,16 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-
-
-protocol settingsButtonTap {
-    
-    func reactToSetingsTap()
-}
-
-protocol tableCellTap {
-    
-    func reactToCellTap(match: matchData)
-}
-
-class MainViewController: UIViewController, SettingsButtonTapDelegate {
+class MainViewController: UIViewController{
     
     private let sportViewController = SportViewController(sportSlug: .football)
     
     private let appHeader = AppHeader()
-    private let customTabBarController = CustomTabBarController()
+    private let customTabBarController = CustomTabView()
     
     private let blueContainer = UIView()
     private let containerView = UIView()
-    
+    private var currentChild = UIViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +22,6 @@ class MainViewController: UIViewController, SettingsButtonTapDelegate {
         
         customTabBarController.delegate = self
         appHeader.delegate = self
-        //        footballViewController?.delegate = self
     }
 }
 
@@ -45,7 +32,7 @@ extension MainViewController : BaseViewProtocol {
         view.addSubview(appHeader)
         view.addSubview(customTabBarController)
         view.addSubview(containerView)
-        
+        currentChild = sportViewController
         addChild(child: sportViewController, parent: containerView)
     }
     
@@ -56,9 +43,14 @@ extension MainViewController : BaseViewProtocol {
     }
     
     func setupConstraints() {
-        containerView.snp.makeConstraints() {
-            $0.top.equalTo(customTabBarController.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+        blueContainer.snp.makeConstraints() {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
+        appHeader.snp.makeConstraints() {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
         }
         
         customTabBarController.snp.makeConstraints() {
@@ -67,14 +59,9 @@ extension MainViewController : BaseViewProtocol {
             $0.height.equalTo(48)
         }
         
-        appHeader.snp.makeConstraints() {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.equalToSuperview()
-        }
-        
-        blueContainer.snp.makeConstraints() {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+        containerView.snp.makeConstraints() {
+            $0.top.equalTo(customTabBarController.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
@@ -82,22 +69,17 @@ extension MainViewController : BaseViewProtocol {
 extension MainViewController: parentSportSlugPicker {
     
     func getPressedTab(selectedSportSlug: sportSlug?) {
-        let snapshot = sportViewController.view.snapshotView(afterScreenUpdates: true)!
-        snapshot.frame = containerView.bounds
-        
-        sportViewController.remove()
+        currentChild.remove()
         
         if let selectedSportSlug = selectedSportSlug {
-            addChild(child: SportViewController(sportSlug: selectedSportSlug), parent: containerView)
-        }
-        containerView.addSubview(snapshot)
-        UIView.transition(from: snapshot, to: sportViewController.view, duration: 0.3, options: .transitionCrossDissolve) { _ in
-            snapshot.removeFromSuperview()
+            currentChild = SportViewController(sportSlug: selectedSportSlug)
+            addChild(child: currentChild, parent: containerView)
         }
     }
 }
 
 extension MainViewController: settingsButtonTap {
+    
     func reactToSetingsTap() {
         let settingsViewController = SettingsViewController()
         settingsViewController.modalPresentationStyle = .fullScreen
@@ -106,10 +88,14 @@ extension MainViewController: settingsButtonTap {
     }
 }
 
-extension MainViewController: tableCellTap {
-    func reactToCellTap(match: matchData) {
+extension MainViewController: DisplayMatchInfoOnTap {
+    
+    func displayMatchInfoOnTap() {
+        print("qeq")
         navigationController?.pushViewController(MatchDataViewController(), animated: true)
     }
 }
+
+
 
 

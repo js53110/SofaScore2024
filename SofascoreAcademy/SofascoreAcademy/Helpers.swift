@@ -110,4 +110,15 @@ public enum helpers {
             return leaguesData3
         }
     }
+    
+    static func determineTabButtonData(sportSlug: sportSlug) -> (String, String) {
+        switch sportSlug {
+        case .football:
+            return ("Icon", "Football")
+        case .basketball:
+            return ("icon_basketball", "Basketball")
+        case .americanFootball:
+            return ("icon_american_football", "Am. Football")
+        }
+    }
 }
