@@ -8,7 +8,7 @@ enum matchStatus {
     case draw
 }
 
-enum sportSlug {
+enum sportSlug: Codable{
     case football
     case basketball
     case americanFootball

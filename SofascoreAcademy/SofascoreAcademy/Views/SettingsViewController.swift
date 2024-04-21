@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController {
     }
 }
 
+// MARK: BaseViewProtocol
 extension SettingsViewController: BaseViewProtocol {
     
     func addViews() {

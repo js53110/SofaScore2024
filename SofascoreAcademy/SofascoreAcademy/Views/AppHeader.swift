@@ -15,7 +15,7 @@ class AppHeader: BaseView {
     private let headerButtonIconSettings = UIImageView()
     private let headerButtonIconTrophy = UIImageView()
     
-    weak var delegate: settingsButtonTap?
+    weak var delegate: didSettingsTap?
     
     override func addViews() {
         addSubview(appLogo)

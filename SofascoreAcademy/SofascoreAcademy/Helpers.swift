@@ -121,4 +121,28 @@ public enum helpers {
             return ("icon_american_football", "Am. Football")
         }
     }
+    
+    static func saveDataToUserDefaults(sportSlug: sportSlug) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(sportSlug) {
+            UserDefaults.standard.set(encoded, forKey: "sportSlug")
+        } else {
+            print("Failed to encode sportSlug.")
+        }
+    }
+    
+    static func retrieveDataFromUserDefaults() -> sportSlug {
+        if let savedData = UserDefaults.standard.object(forKey: "sportSlug") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedSportSlug = try? decoder.decode(sportSlug.self, from: savedData) {
+                print("Loaded sportSlug: \(loadedSportSlug)")
+                return loadedSportSlug
+            } else {
+                print("Failed to decode sportSlug.")
+            }
+        } else {
+            print("No sportSlug data found in UserDefaults.")
+        }
+        return .football //default sportSlug
+    }
 }

@@ -7,15 +7,10 @@ class MatchViewCell: UITableViewCell {
     private let matchView = MatchView()
     private var matchId: Int = 0
     
-    weak var delegate: DisplayMatchInfoOnTap?
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addViews()
         setupConstraints()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        matchView.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -35,10 +30,6 @@ class MatchViewCell: UITableViewCell {
         matchView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-    
-    @objc private func handleTap() {
-        delegate?.displayMatchInfoOnTap()
     }
 }
 

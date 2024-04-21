@@ -35,8 +35,7 @@
 		D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */; };
 		D2B91A662BA1C22D0004B74A /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */; };
 		D2B91A692BA2200A0004B74A /* SofaAcademic in Frameworks */ = {isa = PBXBuildFile; productRef = D2B91A682BA2200A0004B74A /* SofaAcademic */; };
-		D2FD91BD2BCD733C00591F6A /* SettingsButtonTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* SettingsButtonTapProtocol.swift */; };
-		D2FD91BF2BCD740100591F6A /* TableCellTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BE2BCD740100591F6A /* TableCellTapProtocol.swift */; };
+		D2FD91BD2BCD733C00591F6A /* DidSettingsTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */; };
 		D2FD91C12BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +67,7 @@
 		D2A383072BA8FABD001C102F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStatusView.swift; sourceTree = "<group>"; };
 		D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
-		D2FD91BC2BCD733C00591F6A /* SettingsButtonTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonTapProtocol.swift; sourceTree = "<group>"; };
-		D2FD91BE2BCD740100591F6A /* TableCellTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellTapProtocol.swift; sourceTree = "<group>"; };
+		D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidSettingsTapProtocol.swift; sourceTree = "<group>"; };
 		D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMatchInfoOnTapProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,8 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				D2807A882BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift */,
-				D2FD91BC2BCD733C00591F6A /* SettingsButtonTapProtocol.swift */,
-				D2FD91BE2BCD740100591F6A /* TableCellTapProtocol.swift */,
+				D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */,
 				D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */,
 			);
 			path = Protocols;
@@ -247,7 +244,6 @@
 			files = (
 				D2A383042BA88565001C102F /* Styling.swift in Sources */,
 				D29B8D092BC4C2A70000CA42 /* MatchDataViewController.swift in Sources */,
-				D2FD91BF2BCD740100591F6A /* TableCellTapProtocol.swift in Sources */,
 				D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */,
 				D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */,
 				D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */,
@@ -266,7 +262,7 @@
 				D2FD91C12BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift in Sources */,
 				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
 				D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */,
-				D2FD91BD2BCD733C00591F6A /* SettingsButtonTapProtocol.swift in Sources */,
+				D2FD91BD2BCD733C00591F6A /* DidSettingsTapProtocol.swift in Sources */,
 				D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

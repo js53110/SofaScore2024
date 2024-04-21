@@ -4,12 +4,9 @@ import SofaAcademic
 
 class SportViewController: UIViewController {
     
-    
-    
     private let tableView = UITableView()
-    
+    private var data: Array<LeagueInfo>
     weak var delegate: DisplayMatchInfoOnTap?
-    var data: Array<LeagueInfo>
     
     init(sportSlug: sportSlug) {
         self.data = helpers.determineDataForDisplay(sportSlug: sportSlug)
@@ -47,7 +44,6 @@ extension SportViewController: UITableViewDataSource {
             for: indexPath) as? MatchViewCell {
             let dataForRow = data[indexPath.section].matches[indexPath.row]
             cell.update(data: dataForRow)
-            cell.delegate = self
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -77,10 +73,11 @@ extension SportViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMatch = data[indexPath.section].matches[indexPath.row]
-        delegate?.displayMatchInfoOnTap()
+        delegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
     }
 }
 
+// MARK: BaseViewProtocol
 extension SportViewController: BaseViewProtocol{
     
     func addViews() {
@@ -98,6 +95,7 @@ extension SportViewController: BaseViewProtocol{
     }
 }
 
+// MARK: Private methods
 private extension SportViewController {
     
     func setupTableView() {

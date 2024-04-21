@@ -3,7 +3,14 @@ import UIKit
 
 extension UIViewController {
     
-    func addChild(child: UIViewController, parent: UIView) {
+    func customAddChild(child: UIViewController, parent: UIView) {
+        let animation: CATransition = CATransition()
+        animation.duration = 0.3
+        animation.type = .push
+        animation.subtype = .fromRight
+        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        child.view.layer.add(animation, forKey: "viewControllerTransition")
+        
         addChild(child)
         parent.addSubview(child.view)
         child.view.snp.makeConstraints() {
