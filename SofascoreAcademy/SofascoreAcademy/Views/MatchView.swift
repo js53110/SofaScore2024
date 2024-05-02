@@ -114,6 +114,7 @@ class MatchView: BaseView {
     }
 }
 
+// MARK: Private methods
 extension MatchView {
     
     func updateScore(score: Int, side: teamSide){

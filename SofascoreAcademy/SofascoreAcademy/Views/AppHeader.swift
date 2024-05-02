@@ -12,26 +12,26 @@ class AppHeader: BaseView {
     private let appLogo = UIImageView()
     private let headerButtonTrophy = UIButton()
     private let headerButtonSettings = UIButton()
-    private let headerButtonIconSettings = UIImageView()
-    private let headerButtonIconTrophy = UIImageView()
+    private let headerIconSettings = UIImageView()
+    private let headerIconTrophy = UIImageView()
     
-    weak var delegate: didSettingsTap?
+    weak var delegate: AppHeaderDelegate?
     
     override func addViews() {
         addSubview(appLogo)
         addSubview(headerButtonTrophy)
         
         addSubview(headerButtonSettings)
-        headerButtonSettings.addSubview(headerButtonIconSettings)
-        headerButtonTrophy.addSubview(headerButtonIconTrophy)
+        headerButtonSettings.addSubview(headerIconSettings)
+        headerButtonTrophy.addSubview(headerIconTrophy)
     }
     
     override func styleViews() {
         appLogo.image = UIImage(named: logoPath)
         appLogo.contentMode = .scaleAspectFit
         backgroundColor = colors.colorPrimaryDefault
-        headerButtonIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)
-        headerButtonIconSettings.image = UIImage(named: headerButtonIconSettingsPath)
+        headerIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)
+        headerIconSettings.image = UIImage(named: headerButtonIconSettingsPath)
     }
     
     override func setupConstraints() {
@@ -58,12 +58,12 @@ class AppHeader: BaseView {
             $0.trailing.equalToSuperview().inset(52)
         }
         
-        headerButtonIconSettings.snp.makeConstraints() {
+        headerIconSettings.snp.makeConstraints() {
             $0.size.equalTo(24)
             $0.edges.equalToSuperview().inset(12)
         }
         
-        headerButtonIconTrophy.snp.makeConstraints() {
+        headerIconTrophy.snp.makeConstraints() {
             $0.size.equalTo(24)
             $0.edges.equalToSuperview().inset(12)
         }

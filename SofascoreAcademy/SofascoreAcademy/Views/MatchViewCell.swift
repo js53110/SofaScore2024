@@ -33,6 +33,7 @@ class MatchViewCell: UITableViewCell {
     }
 }
 
+// MARK: Private methods
 extension MatchViewCell {
     
     func updateScore(score: Int, side: teamSide){

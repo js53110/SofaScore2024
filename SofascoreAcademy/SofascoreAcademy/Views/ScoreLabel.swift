@@ -38,6 +38,7 @@ class ScoreLabel: BaseView {
     }
 }
 
+// MARK: Private methods
 extension ScoreLabel {
     
     func updateScore(score: Int) {

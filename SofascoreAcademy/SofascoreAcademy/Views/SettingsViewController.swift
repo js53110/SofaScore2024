@@ -10,9 +10,6 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Settings"
-        view.backgroundColor = .black
-        
         addViews()
         styleViews()
         setupConstraints()
@@ -50,6 +47,7 @@ extension SettingsViewController: BaseViewProtocol {
     }
 }
 
+// MARK: Private methods
 extension SettingsViewController {
     
     @objc func dismissButtonTapped() {

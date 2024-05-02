@@ -14,7 +14,7 @@ class TabItemView: BaseView {
         
     init(sportSlug : sportSlug) {
         self.sportSlug = sportSlug
-        (logoString, title) = helpers.determineTabButtonData(sportSlug: sportSlug)
+        (logoString, title) = (sportSlug.logo, sportSlug.title)
         super.init()
     }
     
@@ -43,5 +43,4 @@ class TabItemView: BaseView {
             $0.leading.trailing.equalToSuperview().inset(8)
         }
     }
-
 }

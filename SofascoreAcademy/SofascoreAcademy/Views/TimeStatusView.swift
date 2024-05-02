@@ -46,6 +46,7 @@ class TimeStatusView: BaseView {
     }
 }
 
+// MARK: Private methods
 extension TimeStatusView {
     
     func updateMatchStatus(status: matchStatus) {

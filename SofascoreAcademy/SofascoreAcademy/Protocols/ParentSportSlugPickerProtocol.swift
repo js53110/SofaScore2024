@@ -1,4 +1,4 @@
-protocol parentSportSlugPicker: AnyObject {
+protocol ParentSportSlugPicker: AnyObject {
     
-    func getPressedTab(selectedSportSlug: sportSlug?)
+    func displaySelectedSport(selectedSportSlug: sportSlug?)
 }

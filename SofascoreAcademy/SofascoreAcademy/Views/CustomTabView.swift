@@ -5,34 +5,33 @@ import Foundation
 
 class CustomTabView: BaseView {
     
-    private let tabsContainerView = UIView()
+    private let stackView = UIStackView()
     private let tabWidth = UIScreen.main.bounds.width/3
     private var tabButtonFootball = TabItemView(sportSlug: .football)
     private var tabButtonBasketball = TabItemView(sportSlug: .basketball)
     private var tabButtonAmericanFootball = TabItemView(sportSlug: .americanFootball)
-    private var n = 1 //chosen tab id
+    private var selectedIndex = 1
     private var tabIndicator = UIView()
     
-    weak var delegate: parentSportSlugPicker?
+    weak var delegate: ParentSportSlugPicker?
     init(sportSlug: sportSlug){
         switch sportSlug {
         case .football:
-            n = 1
+            selectedIndex = 1
         case .basketball:
-            n = 2
+            selectedIndex = 2
         case .americanFootball:
-            n = 3
+            selectedIndex = 3
         }
         super.init()
     }
     
     override func addViews() {
-        addSubview(tabsContainerView)
-        
-        tabsContainerView.addSubview(tabButtonFootball)
-        tabsContainerView.addSubview(tabButtonBasketball)
-        tabsContainerView.addSubview(tabButtonAmericanFootball)
-        tabsContainerView.addSubview(tabIndicator)
+        addSubview(stackView)
+        stackView.addArrangedSubview(tabButtonFootball)
+        stackView.addArrangedSubview(tabButtonBasketball)
+        stackView.addArrangedSubview(tabButtonAmericanFootball)
+        stackView.addSubview(tabIndicator)
     }
     
     override func styleViews() {
@@ -42,7 +41,7 @@ class CustomTabView: BaseView {
     }
     
     override func setupConstraints() {
-        tabsContainerView.snp.makeConstraints() {
+        stackView.snp.makeConstraints() {
             $0.edges.equalToSuperview()
         }
         
@@ -66,9 +65,9 @@ class CustomTabView: BaseView {
         
         tabIndicator.snp.makeConstraints() {
             $0.height.equalTo(4)
-            $0.width.equalTo(115)
+            $0.width.equalTo(tabWidth - 16)
             $0.bottom.equalToSuperview()
-            $0.leading.equalTo((n-1) * Int(tabWidth) + 8)
+            $0.leading.equalTo((selectedIndex - 1) * Int(tabWidth) + 8)
         }
     }
     
@@ -84,34 +83,19 @@ class CustomTabView: BaseView {
     }
     
     @objc func tabTapped(_ sender: UITapGestureRecognizer) {
-        guard let tabItemView = sender.view as? TabItemView else { return }
-        delegate?.getPressedTab(selectedSportSlug: tabItemView.sportSlug)
-        //        postoji bolji nacin za ovo???
-        UIView.animate(withDuration: 0.3) { [self] in
-            switch tabItemView {
-            case self.tabButtonFootball:
-                self.tabIndicator.snp.remakeConstraints {
-                    $0.height.equalTo(4)
-                    $0.width.equalTo(tabWidth-16)
-                    $0.bottom.equalToSuperview()
-                    $0.leading.equalTo(self.tabButtonFootball.snp.leading).offset(8)
-                }
-            case self.tabButtonBasketball:
-                self.tabIndicator.snp.remakeConstraints {
-                    $0.height.equalTo(4)
-                    $0.width.equalTo(tabWidth-16)
-                    $0.bottom.equalToSuperview()
-                    $0.leading.equalTo(self.tabButtonBasketball.snp.leading).offset(8)
-                }
-            case self.tabButtonAmericanFootball:
-                self.tabIndicator.snp.remakeConstraints {
-                    $0.height.equalTo(4)
-                    $0.width.equalTo(tabWidth-16)
-                    $0.bottom.equalToSuperview()
-                    $0.leading.equalTo(self.tabButtonAmericanFootball.snp.leading).offset(8)
-                }
-            default:
-                break
+        guard let tappedButton = sender.view as? TabItemView else { return }
+        delegate?.displaySelectedSport(selectedSportSlug: tappedButton.sportSlug)
+        moveIndicator(selectedTab: tappedButton)
+    }
+    
+    private func moveIndicator(selectedTab: TabItemView) {
+        
+        UIView.animate(withDuration: 0.3) {
+            self.tabIndicator.snp.remakeConstraints {
+                $0.height.equalTo(4)
+                $0.width.equalTo(self.tabWidth - 16)
+                $0.bottom.equalToSuperview()
+                $0.leading.equalTo(selectedTab.snp.leading).offset(8)
             }
             self.layoutIfNeeded()
         }

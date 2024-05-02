@@ -8,13 +8,35 @@ enum matchStatus {
     case draw
 }
 
-enum sportSlug: Codable{
+enum sportSlug {
     case football
     case basketball
     case americanFootball
+    
+    var title: String {
+        switch self {
+        case .football:
+            return "Football"
+        case .basketball:
+            return "Basketball"
+        case .americanFootball:
+            return "Am. Football"
+        }
+    }
+    
+    var logo: String {
+        switch self {
+        case .football:
+            return "Icon"
+        case .basketball:
+            return "icon_basketball"
+        case .americanFootball:
+            return "icon_american_football"
+        }
+    }
 }
 
-struct matchData{
+struct matchData {
     let matchId: Int
     let homeTeam: String
     let awayTeam: String

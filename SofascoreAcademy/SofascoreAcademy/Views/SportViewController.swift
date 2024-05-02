@@ -6,7 +6,7 @@ class SportViewController: UIViewController {
     
     private let tableView = UITableView()
     private var data: Array<LeagueInfo>
-    weak var delegate: DisplayMatchInfoOnTap?
+    weak var delegate: MatchTapDelegate?
     
     init(sportSlug: sportSlug) {
         self.data = helpers.determineDataForDisplay(sportSlug: sportSlug)
@@ -27,6 +27,7 @@ class SportViewController: UIViewController {
     }
 }
 
+// MARK: UITableViewDataSource
 extension SportViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,6 +66,7 @@ extension SportViewController: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
 extension SportViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

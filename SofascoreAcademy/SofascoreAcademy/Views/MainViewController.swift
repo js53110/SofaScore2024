@@ -3,18 +3,18 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-class MainViewController: UIViewController{
-        
+class MainViewController: UIViewController {
+    
     private let appHeader = AppHeader()
-    private let customTabBarController: CustomTabView
+    private let customTabBar: CustomTabView
     private let blueContainer = UIView()
     private let containerView = UIView()
     private var currentChild: SportViewController
-    private let savedSportSlug = helpers.retrieveDataFromUserDefaults()
+    private let savedSportSlug = UserDefaultsService.retrieveDataFromUserDefaults()
     
     init() {
         self.currentChild = SportViewController(sportSlug: savedSportSlug)
-        self.customTabBarController = CustomTabView(sportSlug: savedSportSlug)
+        self.customTabBar = CustomTabView(sportSlug: savedSportSlug)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,22 +29,22 @@ class MainViewController: UIViewController{
         styleViews()
         setupConstraints()
         
-        customTabBarController.delegate = self
+        customTabBar.delegate = self
         appHeader.delegate = self
         currentChild.delegate = self
     }
 }
 
 // MARK: BaseViewProtocol
-extension MainViewController : BaseViewProtocol {
+extension MainViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(blueContainer)
         view.addSubview(appHeader)
-        view.addSubview(customTabBarController)
+        view.addSubview(customTabBar)
         view.addSubview(containerView)
-
-        customAddChild(child: currentChild, parent: containerView)
+        
+        customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
     }
     
     func styleViews() {
@@ -64,34 +64,36 @@ extension MainViewController : BaseViewProtocol {
             $0.leading.trailing.equalToSuperview()
         }
         
-        customTabBarController.snp.makeConstraints() {
+        customTabBar.snp.makeConstraints() {
             $0.top.equalTo(appHeader.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(48)
         }
         
         containerView.snp.makeConstraints() {
-            $0.top.equalTo(customTabBarController.snp.bottom)
+            $0.top.equalTo(customTabBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
-extension MainViewController: parentSportSlugPicker {
+
+// MARK: ParentSportSlugPickerProtocol
+extension MainViewController: ParentSportSlugPicker {
     
-    func getPressedTab(selectedSportSlug: sportSlug?) {
+    func displaySelectedSport(selectedSportSlug: sportSlug?) {
         currentChild.remove()
         
         if let selectedSportSlug = selectedSportSlug {
-            helpers.saveDataToUserDefaults(sportSlug: selectedSportSlug)
+            UserDefaultsService.saveDataToUserDefaults(sportSlug: selectedSportSlug)
             currentChild = SportViewController(sportSlug: selectedSportSlug)
             currentChild.delegate = self
-            customAddChild(child: currentChild, parent: containerView)
+            customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
         }
     }
 }
 
-// MARK: Protocol
-extension MainViewController: didSettingsTap {
+// MARK: DidSettingsTapProtocol
+extension MainViewController: AppHeaderDelegate {
     
     func reactToSetingsTap() {
         let settingsViewController = SettingsViewController()
@@ -101,8 +103,8 @@ extension MainViewController: didSettingsTap {
     }
 }
 
-// MARK: Protocol
-extension MainViewController: DisplayMatchInfoOnTap {
+// MARK: DisplayMatchInfoOnTapProtocol
+extension MainViewController: MatchTapDelegate {
     
     func displayMatchInfoOnTap(selectedMatch: matchData) {
         navigationController?.pushViewController(MatchDataViewController(matchData: selectedMatch), animated: true)

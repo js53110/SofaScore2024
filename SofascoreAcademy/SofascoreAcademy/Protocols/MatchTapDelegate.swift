@@ -1,4 +1,4 @@
-protocol DisplayMatchInfoOnTap: AnyObject {
+protocol MatchTapDelegate: AnyObject {
     
     func displayMatchInfoOnTap(selectedMatch: matchData)
 }

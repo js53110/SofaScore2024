@@ -22,8 +22,10 @@
 		D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */; };
 		D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */; };
 		D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2807A882BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift */; };
-		D2807A8C2BC84B2900F590CA /* UIViewControllerExrensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2807A8B2BC84B2900F590CA /* UIViewControllerExrensions.swift */; };
+		D2807A8C2BC84B2900F590CA /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2807A8B2BC84B2900F590CA /* UIViewControllerExtensions.swift */; };
 		D2807A8E2BC84CF700F590CA /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2807A8D2BC84CF700F590CA /* TabItemView.swift */; };
+		D2896E442BE438BE0040CEBA /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2896E432BE438BE0040CEBA /* UserDefaultsService.swift */; };
+		D2896E462BE44B9B0040CEBA /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2896E452BE44B9B0040CEBA /* Animations.swift */; };
 		D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */; };
 		D29B8CFD2BC4606A0000CA42 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */; };
 		D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */; };
@@ -35,8 +37,8 @@
 		D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */; };
 		D2B91A662BA1C22D0004B74A /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */; };
 		D2B91A692BA2200A0004B74A /* SofaAcademic in Frameworks */ = {isa = PBXBuildFile; productRef = D2B91A682BA2200A0004B74A /* SofaAcademic */; };
-		D2FD91BD2BCD733C00591F6A /* DidSettingsTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */; };
-		D2FD91C12BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */; };
+		D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */; };
+		D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,8 +57,10 @@
 		D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewCell.swift; sourceTree = "<group>"; };
 		D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoViewHeader.swift; sourceTree = "<group>"; };
 		D2807A882BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentSportSlugPickerProtocol.swift; sourceTree = "<group>"; };
-		D2807A8B2BC84B2900F590CA /* UIViewControllerExrensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExrensions.swift; sourceTree = "<group>"; };
+		D2807A8B2BC84B2900F590CA /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		D2807A8D2BC84CF700F590CA /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		D2896E432BE438BE0040CEBA /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		D2896E452BE44B9B0040CEBA /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 		D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
@@ -67,8 +71,8 @@
 		D2A383072BA8FABD001C102F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStatusView.swift; sourceTree = "<group>"; };
 		D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
-		D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidSettingsTapProtocol.swift; sourceTree = "<group>"; };
-		D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMatchInfoOnTapProtocol.swift; sourceTree = "<group>"; };
+		D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderDelegate.swift; sourceTree = "<group>"; };
+		D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTapDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		D236A6362B9B598600C2ADB4 /* SofascoreAcademy */ = {
 			isa = PBXGroup;
 			children = (
+				D2896E422BE4389C0040CEBA /* Public */,
 				D2807A8A2BC84B1900F590CA /* Extensions */,
 				D2807A872BC8494B00F590CA /* Protocols */,
 				D29B8CF92BC45A440000CA42 /* Views */,
@@ -114,9 +119,6 @@
 				D236A6402B9B598900C2ADB4 /* Assets.xcassets */,
 				D236A6422B9B598900C2ADB4 /* LaunchScreen.storyboard */,
 				D236A6452B9B598900C2ADB4 /* Info.plist */,
-				D2A383072BA8FABD001C102F /* Data.swift */,
-				D2A383052BA8FA7C001C102F /* Helpers.swift */,
-				D2A383032BA88565001C102F /* Styling.swift */,
 			);
 			path = SofascoreAcademy;
 			sourceTree = "<group>";
@@ -125,8 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				D2807A882BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift */,
-				D2FD91BC2BCD733C00591F6A /* DidSettingsTapProtocol.swift */,
-				D2FD91C02BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift */,
+				D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */,
+				D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -134,9 +136,21 @@
 		D2807A8A2BC84B1900F590CA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D2807A8B2BC84B2900F590CA /* UIViewControllerExrensions.swift */,
+				D2807A8B2BC84B2900F590CA /* UIViewControllerExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D2896E422BE4389C0040CEBA /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				D2A383052BA8FA7C001C102F /* Helpers.swift */,
+				D2A383032BA88565001C102F /* Styling.swift */,
+				D2A383072BA8FABD001C102F /* Data.swift */,
+				D2896E432BE438BE0040CEBA /* UserDefaultsService.swift */,
+				D2896E452BE44B9B0040CEBA /* Animations.swift */,
+			);
+			path = Public;
 			sourceTree = "<group>";
 		};
 		D29B8CF92BC45A440000CA42 /* Views */ = {
@@ -246,23 +260,25 @@
 				D29B8D092BC4C2A70000CA42 /* MatchDataViewController.swift in Sources */,
 				D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */,
 				D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */,
+				D2896E442BE438BE0040CEBA /* UserDefaultsService.swift in Sources */,
 				D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */,
 				D29B8D072BC4BB0D0000CA42 /* SettingsViewController.swift in Sources */,
-				D2807A8C2BC84B2900F590CA /* UIViewControllerExrensions.swift in Sources */,
+				D2807A8C2BC84B2900F590CA /* UIViewControllerExtensions.swift in Sources */,
 				D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */,
 				D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */,
 				D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */,
 				D23289B32BA103F700139113 /* TeamNameLogoView.swift in Sources */,
 				D29B8CFD2BC4606A0000CA42 /* AppHeader.swift in Sources */,
 				D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */,
+				D2896E462BE44B9B0040CEBA /* Animations.swift in Sources */,
 				D2807A8E2BC84CF700F590CA /* TabItemView.swift in Sources */,
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
 				D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */,
 				D23289B12BA0F99600139113 /* MatchView.swift in Sources */,
-				D2FD91C12BCD7FDB00591F6A /* DisplayMatchInfoOnTapProtocol.swift in Sources */,
+				D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */,
 				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
 				D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */,
-				D2FD91BD2BCD733C00591F6A /* DidSettingsTapProtocol.swift in Sources */,
+				D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */,
 				D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
