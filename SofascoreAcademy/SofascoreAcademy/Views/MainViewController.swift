@@ -98,7 +98,7 @@ extension MainViewController: ParentSportSlugPicker {
     }
 }
 
-// MARK: DidSettingsTapProtocol
+// MARK: AppHeaderDelegate
 extension MainViewController: AppHeaderDelegate {
     
     func reactToSetingsTap() {
@@ -109,7 +109,7 @@ extension MainViewController: AppHeaderDelegate {
     }
 }
 
-// MARK: DisplayMatchInfoOnTapProtocol
+// MARK: MatchTapDelegate
 extension MainViewController: MatchTapDelegate {
     
     func displayMatchInfoOnTap(selectedMatch: matchData) {
