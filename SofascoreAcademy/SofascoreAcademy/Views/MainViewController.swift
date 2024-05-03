@@ -6,6 +6,8 @@ import SnapKit
 class MainViewController: UIViewController {
     
     private let appHeader = AppHeader()
+    private let datePickerView = DatePickerCollectionView()
+    private let datesMatchesDivider = DatesMatchesDividerView()
     private let customTabBar: CustomTabView
     private let blueContainer = UIView()
     private let containerView = UIView()
@@ -44,6 +46,8 @@ extension MainViewController: BaseViewProtocol {
         view.addSubview(blueContainer)
         view.addSubview(appHeader)
         view.addSubview(customTabBar)
+        view.addSubview(datePickerView)
+        view.addSubview(datesMatchesDivider)
         view.addSubview(containerView)
         
         customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
@@ -72,8 +76,19 @@ extension MainViewController: BaseViewProtocol {
             $0.height.equalTo(48)
         }
         
-        containerView.snp.makeConstraints() {
+        datePickerView.snp.makeConstraints(){
             $0.top.equalTo(customTabBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(48)
+        }
+        
+        datesMatchesDivider.snp.makeConstraints() {
+            $0.top.equalTo(datePickerView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints() {
+            $0.top.equalTo(datesMatchesDivider.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }

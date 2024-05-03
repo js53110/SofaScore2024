@@ -1,8 +1,16 @@
 import Foundation
 import UIKit
 
-public enum helpers {
 
+struct DateData {
+    
+    let dayOfWeek: String
+    let dateString: String
+    let fullDate: String
+}
+
+public enum helpers {
+    
     static func getMatchStatus(matchId: Int) -> matchStatus {
         if let match = matches.first(where: { $0.matchId == matchId }) {
             let matchStatus = match.status
@@ -10,7 +18,7 @@ public enum helpers {
         }
         return .upcoming
     }
-
+    
     static func determineMatchStatusString(matchStatus: matchStatus) -> String {
         switch matchStatus {
         case .homeTeamWin :
@@ -25,7 +33,7 @@ public enum helpers {
             return "-"
         }
     }
-
+    
     static func convertTimestampToTime(timeStamp: TimeInterval) -> String {
         let date = Date(timeIntervalSince1970: timeStamp)
         let dateFormatter = DateFormatter()
@@ -110,4 +118,37 @@ public enum helpers {
             return leaguesData3
         }
     }
+    
+    
+    static func getDataForDateCell(index: Int) -> DateData {
+        // Get the current date
+        let currentDate = Date()
+        
+        // Subtract 7 days from the current date
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.day = -7 + index
+        guard let date = calendar.date(byAdding: dateComponents, to: currentDate) else {
+            fatalError("Failed to calculate date")
+        }
+        
+        // Add the index to the date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE" // Day of week format
+        let dayOfWeek = if(index != 7) {
+            dateFormatter.string(from: date).prefix(3).uppercased()
+        } else {
+            "TODAY"
+        }
+        
+        dateFormatter.dateFormat = "dd.MM." // Date format
+        let dateString = dateFormatter.string(from: date)
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let fullDate = dateFormatter.string(from: date)
+        
+        // Return the data for the date cell
+        return DateData(dayOfWeek: dayOfWeek, dateString: dateString, fullDate: fullDate)
+    }
+    
+    
 }

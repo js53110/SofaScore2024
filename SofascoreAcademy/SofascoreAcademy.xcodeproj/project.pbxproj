@@ -25,6 +25,9 @@
 		D21B98262BE4F8940094308A /* TeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B98252BE4F8940094308A /* TeamModel.swift */; };
 		D21B98282BE4F8EA0094308A /* TeamColorsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B98272BE4F8EA0094308A /* TeamColorsModel.swift */; };
 		D21B982A2BE4F9E30094308A /* Bet365LinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B98292BE4F9E30094308A /* Bet365LinksModel.swift */; };
+		D21B982C2BE50DC90094308A /* DatePickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */; };
+		D21B982E2BE516B90094308A /* DatesMatchesDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */; };
+		D21B98302BE5182E0094308A /* DateViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B982F2BE5182E0094308A /* DateViewCell.swift */; };
 		D23289A72BA0F65900139113 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A62BA0F65900139113 /* SnapKit */; };
 		D23289A92BA0F65900139113 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A82BA0F65900139113 /* SnapKit-Dynamic */; };
 		D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */; };
@@ -80,6 +83,9 @@
 		D21B98252BE4F8940094308A /* TeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamModel.swift; sourceTree = "<group>"; };
 		D21B98272BE4F8EA0094308A /* TeamColorsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamColorsModel.swift; sourceTree = "<group>"; };
 		D21B98292BE4F9E30094308A /* Bet365LinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bet365LinksModel.swift; sourceTree = "<group>"; };
+		D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCollectionView.swift; sourceTree = "<group>"; };
+		D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesMatchesDividerView.swift; sourceTree = "<group>"; };
+		D21B982F2BE5182E0094308A /* DateViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewCell.swift; sourceTree = "<group>"; };
 		D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoView.swift; sourceTree = "<group>"; };
 		D23289AE2BA0F7B000139113 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D23289B02BA0F99600139113 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
@@ -246,6 +252,9 @@
 				D29B8D082BC4C2A70000CA42 /* MatchDataViewController.swift */,
 				D2807A8D2BC84CF700F590CA /* TabItemView.swift */,
 				D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */,
+				D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */,
+				D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */,
+				D21B982F2BE5182E0094308A /* DateViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +345,7 @@
 				D29B8D092BC4C2A70000CA42 /* MatchDataViewController.swift in Sources */,
 				D21B981C2BE4F5590094308A /* VoteModel.swift in Sources */,
 				D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */,
+				D21B98302BE5182E0094308A /* DateViewCell.swift in Sources */,
 				D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */,
 				D2896E442BE438BE0040CEBA /* UserDefaultsService.swift in Sources */,
 				D21B98142BE4F4250094308A /* SeasonModel.swift in Sources */,
@@ -345,6 +355,7 @@
 				D29B8D072BC4BB0D0000CA42 /* SettingsViewController.swift in Sources */,
 				D2896E482BE4DAB20040CEBA /* LoadingViewController.swift in Sources */,
 				D2807A8C2BC84B2900F590CA /* UIViewControllerExtensions.swift in Sources */,
+				D21B982C2BE50DC90094308A /* DatePickerCollectionView.swift in Sources */,
 				D21B980E2BE4F3F30094308A /* TournamentsModel.swift in Sources */,
 				D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */,
 				D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */,
@@ -355,6 +366,7 @@
 				D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */,
 				D2896E462BE44B9B0040CEBA /* Animations.swift in Sources */,
 				D21B98222BE4F8160094308A /* StadiumModel.swift in Sources */,
+				D21B982E2BE516B90094308A /* DatesMatchesDividerView.swift in Sources */,
 				D2807A8E2BC84CF700F590CA /* TabItemView.swift in Sources */,
 				D21B98162BE4F4330094308A /* EventsModel.swift in Sources */,
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
