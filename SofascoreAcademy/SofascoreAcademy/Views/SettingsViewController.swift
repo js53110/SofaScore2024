@@ -26,11 +26,11 @@ extension SettingsViewController: BaseViewProtocol {
     
     func styleViews() {
         view.backgroundColor = .white
-        blueContainer.backgroundColor = colors.colorPrimaryDefault
+        blueContainer.backgroundColor = Colors.colorPrimaryDefault
         
         dismissButton.setTitle("Dismiss", for: .normal)
-        dismissButton.setTitleColor(colors.colorPrimaryDefault, for: .normal)
-        dismissButton.titleLabel?.font = fonts.RobotoRegular14
+        dismissButton.setTitleColor(Colors.colorPrimaryDefault, for: .normal)
+        dismissButton.titleLabel?.font = Fonts.RobotoRegular14
         dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
     }
     
@@ -47,7 +47,7 @@ extension SettingsViewController: BaseViewProtocol {
     }
 }
 
-// MARK: Private methods
+// MARK: Additional methods
 extension SettingsViewController {
     
     @objc func dismissButtonTapped() {

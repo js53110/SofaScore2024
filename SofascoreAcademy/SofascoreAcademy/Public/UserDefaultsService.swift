@@ -1,25 +1,23 @@
 import Foundation
 
 enum UserDefaultsService {
-    static func saveDataToUserDefaults(sportSlug: sportSlug) {
-        
+    
+    static let sportSlugKey = "sportSlug"
+    
+    static func saveDataToUserDefaults(sportSlug: SportSlug) {
         let stringValue = sportSlugToString(sportSlug)
-        UserDefaults.standard.set(stringValue, forKey: "sportSlug")
+        UserDefaults.standard.set(stringValue, forKey: sportSlugKey)
     }
     
-    static func retrieveDataFromUserDefaults() -> sportSlug {
-        
-        guard let stringValue = UserDefaults.standard.string(forKey: "sportSlug"),
+    static func retrieveDataFromUserDefaults() -> SportSlug {
+        guard let stringValue = UserDefaults.standard.string(forKey: sportSlugKey),
               let sport = stringToSportSlug(stringValue) else {
-            print("No SportSlug data found in UserDefaults.")
             return .football // Default sportSlug
         }
-        print("Loaded sportSlug: \(sport)")
         return sport
     }
     
-    static func sportSlugToString(_ sportSlug: sportSlug) -> String {
-        
+    static func sportSlugToString(_ sportSlug: SportSlug) -> String {
         switch sportSlug {
         case .football:
             return "football"
@@ -30,8 +28,7 @@ enum UserDefaultsService {
         }
     }
     
-    static func stringToSportSlug(_ stringValue: String) -> sportSlug? {
-        
+    static func stringToSportSlug(_ stringValue: String) -> SportSlug? {
         switch stringValue {
         case "football":
             return .football

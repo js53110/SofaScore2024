@@ -45,7 +45,7 @@ class MatchDataViewController: UIViewController, BaseViewProtocol {
         navigationItem.standardAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = .white
-        blueContainer.backgroundColor = colors.colorPrimaryDefault
+        blueContainer.backgroundColor = Colors.colorPrimaryDefault
     }
     
     func setupConstraints() {

@@ -20,7 +20,7 @@ class TeamNameLogoView: BaseView {
     }
 
     override func styleViews() {
-        teamNameLabel.font = fonts.RobotoRegular14
+        teamNameLabel.font = Fonts.RobotoRegular14
         teamLogoImageView.contentMode = .scaleAspectFit
     }
 
