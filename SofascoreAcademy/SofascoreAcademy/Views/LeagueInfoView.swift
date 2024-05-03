@@ -1,10 +1,3 @@
-//
-//  LeagueNameView.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 12.03.2024..
-//
-
 import Foundation
 import SnapKit
 import UIKit
@@ -38,9 +31,9 @@ class LeagueInfoView: BaseView {
         backgroundColor = .white
         stackView.axis = .horizontal
         stackView.alignment = .center
-        countryNameLabel.font = fonts.RobotoBold
-        leagueNameLabel.textColor = colors.surfaceLv2
-        leagueNameLabel.font = fonts.RobotoBold
+        countryNameLabel.font = Fonts.RobotoBold
+        leagueNameLabel.textColor = Colors.surfaceLv2
+        leagueNameLabel.font = Fonts.RobotoBold
         arrowImageView.image = UIImage(named: arrow)
         leagueLogoImageView.contentMode = .scaleAspectFit
     }

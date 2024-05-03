@@ -1,10 +1,3 @@
-//
-//  LeagueNameView.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 12.03.2024..
-//
-
 import Foundation
 import SnapKit
 import UIKit
@@ -15,15 +8,15 @@ class TimeStatusView: BaseView {
     private let timeView = UILabel()
     private let statusView = UILabel()
     
-    func update(matchTime: TimeInterval, status: matchStatus) {
-        timeView.text = helpers.convertTimestampToTime(timeStamp: matchTime)
-        statusView.text = helpers.determineMatchStatusString(matchStatus: status)
+    func update(matchTime: TimeInterval, status: MatchStatus) {
+        timeView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
+        statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
         
         switch status {
         case .inProgress:
             statusView.textColor = .red
         default:
-            statusView.textColor = colors.surfaceLv2
+            statusView.textColor = Colors.surfaceLv2
         }
     }
     
@@ -33,10 +26,10 @@ class TimeStatusView: BaseView {
     }
 
     override func styleViews() {
-        timeView.font = fonts.RobotoCondensedRegularMicro
-        timeView.textColor = colors.surfaceLv2
+        timeView.font = Fonts.RobotoCondensedRegularMicro
+        timeView.textColor = Colors.surfaceLv2
         timeView.textAlignment = .center
-        statusView.font = fonts.RobotoCondensedRegularMicro
+        statusView.font = Fonts.RobotoCondensedRegularMicro
         statusView.textAlignment = .center
     }
 
@@ -53,16 +46,17 @@ class TimeStatusView: BaseView {
     }
 }
 
+// MARK: Additional methods
 extension TimeStatusView {
     
-    func updateMatchStatus(status: matchStatus) {
+    func updateMatchStatus(status: MatchStatus) {
         switch status {
         case .inProgress:
             statusView.textColor = .red
         default:
-            statusView.textColor = colors.surfaceLv2
+            statusView.textColor = Colors.surfaceLv2
         }
-        statusView.text = helpers.determineMatchStatusString(matchStatus: status)
+        statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
     }
     
     func updateMatchTime(time: Int) {

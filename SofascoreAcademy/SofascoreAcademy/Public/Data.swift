@@ -1,13 +1,6 @@
-//
-//  Data.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 18.03.2024..
-//
-
 import Foundation
 
-enum matchStatus {
+enum MatchStatus {
     case upcoming
     case inProgress
     case homeTeamWin
@@ -15,13 +8,41 @@ enum matchStatus {
     case draw
 }
 
-struct matchData{
+enum SportSlug {
+    case football
+    case basketball
+    case americanFootball
+    
+    var title: String {
+        switch self {
+        case .football:
+            return "Football"
+        case .basketball:
+            return "Basketball"
+        case .americanFootball:
+            return "Am. Football"
+        }
+    }
+    
+    var logo: String {
+        switch self {
+        case .football:
+            return "Icon"
+        case .basketball:
+            return "icon_basketball"
+        case .americanFootball:
+            return "icon_american_football"
+        }
+    }
+}
+
+struct matchData {
     let matchId: Int
     let homeTeam: String
     let awayTeam: String
     let homeLogo: String
     let awayLogo: String
-    let status: matchStatus
+    let status: MatchStatus
     let timeStamp: TimeInterval
     let homeTeamScore: Int?
     let awayTeamScore: Int?
@@ -69,4 +90,6 @@ let matches = matches1 + matches2 + matches3
 let leagueInfo1 = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
 let leagueInfo2 = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
 let leagueInfo3 = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
-let leaguesData = [leagueInfo1, leagueInfo2, leagueInfo3]
+let leaguesData1 = [leagueInfo1, leagueInfo1, leagueInfo1]
+let leaguesData2 = [leagueInfo2, leagueInfo2, leagueInfo2]
+let leaguesData3 = [leagueInfo3, leagueInfo3, leagueInfo3]

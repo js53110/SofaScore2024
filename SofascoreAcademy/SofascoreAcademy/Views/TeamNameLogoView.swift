@@ -1,10 +1,3 @@
-//
-//  LeagueNameView.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 12.03.2024..
-//
-
 import Foundation
 import SnapKit
 import UIKit
@@ -27,7 +20,7 @@ class TeamNameLogoView: BaseView {
     }
 
     override func styleViews() {
-        teamNameLabel.font = fonts.RobotoRegular14
+        teamNameLabel.font = Fonts.RobotoRegular14
         teamLogoImageView.contentMode = .scaleAspectFit
     }
 

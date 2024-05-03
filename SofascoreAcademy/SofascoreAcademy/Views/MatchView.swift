@@ -1,16 +1,9 @@
-//
-//  LeagueNameView.swift
-//  SofascoreAcademy
-//
-//  Created by Akademija on 12.03.2024..
-//
-
 import Foundation
 import SnapKit
 import UIKit
 import SofaAcademic
 
-public enum teamSide {
+public enum TeamSide {
     case home
     case away
 }
@@ -36,29 +29,29 @@ class MatchView: BaseView {
     func update(data: matchData) {
         matchId = data.matchId
         
-        let matchStatus = helpers.getMatchStatus(matchId: matchId)
+        let matchStatus = Helpers.getMatchStatus(matchId: matchId)
         
         homeTeamLabel.update(
             teamName: data.homeTeam,
             teamLogo: data.homeLogo, 
-            color: helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
+            color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         awayTeamLabel.update(
             teamName: data.awayTeam,
             teamLogo: data.awayLogo,
-            color: helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
+            color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         homeResult.update(
             matchId: data.matchId,
             status: data.status,
             score: data.homeTeamScore,
-            color: helpers.determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
+            color: Helpers.determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         awayResult.update(
             matchId: data.matchId,
             status: data.status,
             score: data.awayTeamScore,
-            color: helpers.determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
+            color: Helpers.determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         timeStatusView.update(matchTime: data.timeStamp, status: data.status)
     }
@@ -74,7 +67,7 @@ class MatchView: BaseView {
     }
 
     override func styleViews() {
-        divider.backgroundColor = colors.surfaceLv4
+        divider.backgroundColor = Colors.surfaceLv4
     }
 
     override func setupConstraints() {
@@ -121,9 +114,10 @@ class MatchView: BaseView {
     }
 }
 
+// MARK: Additional methods
 extension MatchView {
     
-    func updateScore(score: Int, side: teamSide){
+    func updateScore(score: Int, side: TeamSide){
         if(side == .home) {
             homeResult.updateScore(score: score)
         }
