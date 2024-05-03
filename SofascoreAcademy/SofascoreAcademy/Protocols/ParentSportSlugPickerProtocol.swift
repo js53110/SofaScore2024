@@ -1,4 +1,4 @@
 protocol ParentSportSlugPicker: AnyObject {
     
-    func displaySelectedSport(selectedSportSlug: sportSlug?)
+    func displaySelectedSport(selectedSportSlug: SportSlug?)
 }

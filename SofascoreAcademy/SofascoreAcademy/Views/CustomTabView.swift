@@ -6,22 +6,21 @@ import Foundation
 class CustomTabView: BaseView {
     
     private let stackView = UIStackView()
-    private let tabWidth = UIScreen.main.bounds.width/3
     private var tabButtonFootball = TabItemView(sportSlug: .football)
     private var tabButtonBasketball = TabItemView(sportSlug: .basketball)
     private var tabButtonAmericanFootball = TabItemView(sportSlug: .americanFootball)
-    private var selectedIndex = 1
     private var tabIndicator = UIView()
+    private var selectedTab: TabItemView
     
     weak var delegate: ParentSportSlugPicker?
-    init(sportSlug: sportSlug){
+    init(sportSlug: SportSlug){
         switch sportSlug {
         case .football:
-            selectedIndex = 1
+            selectedTab = tabButtonFootball
         case .basketball:
-            selectedIndex = 2
+            selectedTab = tabButtonBasketball
         case .americanFootball:
-            selectedIndex = 3
+            selectedTab = tabButtonAmericanFootball
         }
         super.init()
     }
@@ -35,7 +34,8 @@ class CustomTabView: BaseView {
     }
     
     override func styleViews() {
-        backgroundColor = colors.colorPrimaryDefault
+        backgroundColor = Colors.colorPrimaryDefault
+        stackView.distribution = .fillEqually
         tabIndicator.backgroundColor = .white
         tabIndicator.layer.cornerRadius = 2
     }
@@ -45,29 +45,11 @@ class CustomTabView: BaseView {
             $0.edges.equalToSuperview()
         }
         
-        tabButtonFootball.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
-            $0.width.equalTo(tabWidth)
-            $0.leading.equalToSuperview()
-        }
-        
-        tabButtonBasketball.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
-            $0.width.equalTo(tabWidth)
-            $0.leading.equalTo(tabButtonFootball.snp.trailing)
-        }
-        
-        tabButtonAmericanFootball.snp.makeConstraints() {
-            $0.top.bottom.equalToSuperview()
-            $0.width.equalTo(tabWidth)
-            $0.leading.equalTo(tabButtonBasketball.snp.trailing)
-        }
-        
         tabIndicator.snp.makeConstraints() {
             $0.height.equalTo(4)
-            $0.width.equalTo(tabWidth - 16)
             $0.bottom.equalToSuperview()
-            $0.leading.equalTo((selectedIndex - 1) * Int(tabWidth) + 8)
+            $0.trailing.equalTo(selectedTab.snp.trailing).inset(8)
+            $0.leading.equalTo(selectedTab.snp.leading).offset(8)
         }
     }
     
@@ -93,8 +75,8 @@ class CustomTabView: BaseView {
         UIView.animate(withDuration: 0.3) {
             self.tabIndicator.snp.remakeConstraints {
                 $0.height.equalTo(4)
-                $0.width.equalTo(self.tabWidth - 16)
                 $0.bottom.equalToSuperview()
+                $0.trailing.equalTo(selectedTab.snp.trailing).inset(8)
                 $0.leading.equalTo(selectedTab.snp.leading).offset(8)
             }
             self.layoutIfNeeded()

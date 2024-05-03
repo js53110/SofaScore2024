@@ -9,9 +9,10 @@ struct DateData {
     let fullDate: String
 }
 
-public enum helpers {
-    
-    static func getMatchStatus(matchId: Int) -> matchStatus {
+
+public enum Helpers {
+
+    static func getMatchStatus(matchId: Int) -> MatchStatus {
         if let match = matches.first(where: { $0.matchId == matchId }) {
             let matchStatus = match.status
             return matchStatus
@@ -19,7 +20,8 @@ public enum helpers {
         return .upcoming
     }
     
-    static func determineMatchStatusString(matchStatus: matchStatus) -> String {
+
+    static func determineMatchStatusString(matchStatus: MatchStatus) -> String {
         switch matchStatus {
         case .homeTeamWin :
             return "FT"
@@ -42,7 +44,7 @@ public enum helpers {
         return timeString
     }
     
-    static func determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus) -> UIColor {
+    static func determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
         case .upcoming:
             return .black
@@ -51,28 +53,28 @@ public enum helpers {
         case .homeTeamWin:
             return .black
         case .awayTeamWin:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         case .draw:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         }
     }
     
-    static func determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus) -> UIColor {
+    static func determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
         case .upcoming:
             return .black
         case .inProgress:
             return .black
         case .homeTeamWin:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         case .awayTeamWin:
             return .black
         case .draw:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         }
     }
     
-    static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus) -> UIColor {
+    static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
         case .upcoming:
             return .black
@@ -81,24 +83,24 @@ public enum helpers {
         case .homeTeamWin:
             return .black
         case .awayTeamWin:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         case .draw:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         }
     }
     
-    static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus) -> UIColor {
+    static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
         case .upcoming:
             return .black
         case .inProgress:
             return .red
         case .homeTeamWin:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         case .awayTeamWin:
             return .black
         case .draw:
-            return colors.surfaceLv2
+            return Colors.surfaceLv2
         }
     }
     
@@ -108,7 +110,7 @@ public enum helpers {
         }
     }
     
-    static func determineDataForDisplay(sportSlug : sportSlug) -> Array<LeagueInfo> {
+    static func determineDataForDisplay(sportSlug : SportSlug) -> Array<LeagueInfo> {
         switch sportSlug {
         case .football:
             return leaguesData1
@@ -121,10 +123,8 @@ public enum helpers {
     
     
     static func getDataForDateCell(index: Int) -> DateData {
-        // Get the current date
         let currentDate = Date()
         
-        // Subtract 7 days from the current date
         let calendar = Calendar.current
         var dateComponents = DateComponents()
         dateComponents.day = -7 + index
@@ -132,21 +132,19 @@ public enum helpers {
             fatalError("Failed to calculate date")
         }
         
-        // Add the index to the date
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE" // Day of week format
+        dateFormatter.dateFormat = "EEEE"
         let dayOfWeek = if(index != 7) {
             dateFormatter.string(from: date).prefix(3).uppercased()
         } else {
             "TODAY"
         }
         
-        dateFormatter.dateFormat = "dd.MM." // Date format
+        dateFormatter.dateFormat = "dd.MM." 
         let dateString = dateFormatter.string(from: date)
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let fullDate = dateFormatter.string(from: date)
         
-        // Return the data for the date cell
         return DateData(dayOfWeek: dayOfWeek, dateString: dateString, fullDate: fullDate)
     }
     
