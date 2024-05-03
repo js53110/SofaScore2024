@@ -11,10 +11,12 @@ class MainViewController: UIViewController {
     private let containerView = UIView()
     private var currentChild: SportViewController
     private let savedSportSlug = UserDefaultsService.retrieveDataFromUserDefaults()
+    private var currentSportSlug: sportSlug
     
     init() {
         self.currentChild = SportViewController(sportSlug: savedSportSlug)
         self.customTabBar = CustomTabView(sportSlug: savedSportSlug)
+        self.currentSportSlug = savedSportSlug
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -81,13 +83,17 @@ extension MainViewController: BaseViewProtocol {
 extension MainViewController: ParentSportSlugPicker {
     
     func displaySelectedSport(selectedSportSlug: sportSlug?) {
-        currentChild.remove()
         
-        if let selectedSportSlug = selectedSportSlug {
-            UserDefaultsService.saveDataToUserDefaults(sportSlug: selectedSportSlug)
-            currentChild = SportViewController(sportSlug: selectedSportSlug)
-            currentChild.delegate = self
-            customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
+        if(selectedSportSlug != currentSportSlug) {
+            currentChild.remove()
+            
+            if let selectedSportSlug = selectedSportSlug {
+                UserDefaultsService.saveDataToUserDefaults(sportSlug: selectedSportSlug)
+                currentChild = SportViewController(sportSlug: selectedSportSlug)
+                currentSportSlug = selectedSportSlug
+                currentChild.delegate = self
+                customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
+            }
         }
     }
 }
