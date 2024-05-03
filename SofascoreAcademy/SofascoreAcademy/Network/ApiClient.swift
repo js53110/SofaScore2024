@@ -4,7 +4,7 @@ import Network
 
 class ApiClient {
     
-    func getEventDataOld(completionHandler: @escaping ((EventDataResponse)?) -> Void){
+    func getEventDataOld(completionHandler: @escaping ((EventDataResponse)?) -> Void) {
     let urlString = "https://static-api.sofascore.dev/api/event/11352380"
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
@@ -22,7 +22,6 @@ class ApiClient {
     }
     
     func getEventDataNew() async throws -> EventDataResponse? {
-        
         let urlString = "https://static-api.sofascore.dev/api/event/11352380"
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
