@@ -1,3 +1,4 @@
 struct EventsResponse: Codable {
-    let events: Event
+    
+    let events: [Event]
 }
