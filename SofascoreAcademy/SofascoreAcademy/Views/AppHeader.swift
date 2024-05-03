@@ -29,7 +29,7 @@ class AppHeader: BaseView {
     override func styleViews() {
         appLogo.image = UIImage(named: logoPath)
         appLogo.contentMode = .scaleAspectFit
-        backgroundColor = colors.colorPrimaryDefault
+        backgroundColor = Colors.colorPrimaryDefault
         headerIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)
         headerIconSettings.image = UIImage(named: headerButtonIconSettingsPath)
     }
@@ -74,7 +74,7 @@ class AppHeader: BaseView {
     }
 }
 
-// MARK: Private methods
+// MARK: Additional methods
 private extension AppHeader {
     
     @objc func buttonClicked(_ sender: UIButton) {

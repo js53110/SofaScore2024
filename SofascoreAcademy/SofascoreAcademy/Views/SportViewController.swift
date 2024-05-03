@@ -8,8 +8,8 @@ class SportViewController: UIViewController {
     private var data: Array<LeagueInfo>
     weak var delegate: MatchTapDelegate?
     
-    init(sportSlug: sportSlug) {
-        self.data = helpers.determineDataForDisplay(sportSlug: sportSlug)
+    init(sportSlug: SportSlug) {
+        self.data = Helpers.determineDataForDisplay(sportSlug: sportSlug)
         super.init(nibName: nil, bundle: nil)
     }
     

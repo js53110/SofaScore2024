@@ -5,14 +5,14 @@ import SnapKit
 
 class TabItemView: BaseView {
     
-    let sportSlug: sportSlug
+    let sportSlug: SportSlug
     
     private let logoString: String
     private let title: String
     private let tabLogo = UIImageView()
     private let tabLabel = UILabel()
         
-    init(sportSlug : sportSlug) {
+    init(sportSlug : SportSlug) {
         self.sportSlug = sportSlug
         (logoString, title) = (sportSlug.logo, sportSlug.title)
         super.init()

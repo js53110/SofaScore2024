@@ -11,7 +11,7 @@ class MainViewController: UIViewController {
     private let containerView = UIView()
     private var currentChild: SportViewController
     private let savedSportSlug = UserDefaultsService.retrieveDataFromUserDefaults()
-    private var currentSportSlug: sportSlug
+    private var currentSportSlug: SportSlug
     
     init() {
         self.currentChild = SportViewController(sportSlug: savedSportSlug)
@@ -52,7 +52,7 @@ extension MainViewController: BaseViewProtocol {
     func styleViews() {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
-        blueContainer.backgroundColor = colors.colorPrimaryDefault
+        blueContainer.backgroundColor = Colors.colorPrimaryDefault
     }
     
     func setupConstraints() {
@@ -69,7 +69,6 @@ extension MainViewController: BaseViewProtocol {
         customTabBar.snp.makeConstraints() {
             $0.top.equalTo(appHeader.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(48)
         }
         
         containerView.snp.makeConstraints() {
@@ -82,8 +81,7 @@ extension MainViewController: BaseViewProtocol {
 // MARK: ParentSportSlugPickerProtocol
 extension MainViewController: ParentSportSlugPicker {
     
-    func displaySelectedSport(selectedSportSlug: sportSlug?) {
-        
+    func displaySelectedSport(selectedSportSlug: SportSlug?) {
         if(selectedSportSlug != currentSportSlug) {
             currentChild.remove()
             

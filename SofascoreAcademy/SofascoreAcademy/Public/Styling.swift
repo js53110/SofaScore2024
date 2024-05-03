@@ -1,14 +1,14 @@
 import Foundation
 import UIKit
 
-public enum fonts {
+public enum Fonts {
     static let RobotoBold = UIFont(name: "Roboto-Bold", size: 14)
     static let RobotoRegular14 = UIFont(name: "Roboto-Regular", size: 14)
     static let RobotoRegular12 = UIFont(name: "Roboto-Regular", size: 12)
     static let RobotoCondensedRegularMicro = UIFont(name: "RobotoCondensed-Regular", size: 12)
 }
 
-public enum colors {
+public enum Colors {
     static let surfaceLv2 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
     static let red = UIColor.red
     static let surfaceLv4 = UIColor(white: 18.0 / 255.0, alpha: 0.1)

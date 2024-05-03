@@ -8,7 +8,7 @@ class ScoreLabel: BaseView {
     private var textColor: UIColor = .black
     private var scoreLabel = UILabel()
     
-    func update(matchId: Int, status: matchStatus, score: Int?, color: UIColor) {
+    func update(matchId: Int, status: MatchStatus, score: Int?, color: UIColor) {
         if let score = score {
             scoreLabel.text = String(score)
             scoreLabel.textColor = color
@@ -22,7 +22,7 @@ class ScoreLabel: BaseView {
     override func styleViews() {
         scoreLabel.textColor = textColor
         scoreLabel.textAlignment = .right
-        scoreLabel.font = fonts.RobotoRegular14
+        scoreLabel.font = Fonts.RobotoRegular14
         scoreLabel.contentMode = .center
     }
     
@@ -38,7 +38,7 @@ class ScoreLabel: BaseView {
     }
 }
 
-// MARK: Private methods
+// MARK: Additional methods
 extension ScoreLabel {
     
     func updateScore(score: Int) {

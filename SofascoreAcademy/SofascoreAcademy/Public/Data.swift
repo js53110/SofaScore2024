@@ -1,6 +1,6 @@
 import Foundation
 
-enum matchStatus {
+enum MatchStatus {
     case upcoming
     case inProgress
     case homeTeamWin
@@ -8,7 +8,7 @@ enum matchStatus {
     case draw
 }
 
-enum sportSlug {
+enum SportSlug {
     case football
     case basketball
     case americanFootball
@@ -42,7 +42,7 @@ struct matchData {
     let awayTeam: String
     let homeLogo: String
     let awayLogo: String
-    let status: matchStatus
+    let status: MatchStatus
     let timeStamp: TimeInterval
     let homeTeamScore: Int?
     let awayTeamScore: Int?
