@@ -36,9 +36,9 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "DateCell", for: indexPath) as? DateViewCell {
-            let dataForCell = helpers.getDataForDateCell(index: indexPath.row)
+            let dataForCell = Helpers.getDataForDateCell(index: indexPath.row)
             cell.update(data: dataForCell)
-            cell.backgroundColor = colors.colorPrimaryVariant
+            cell.backgroundColor = Colors.colorPrimaryVariant
             return cell
         } else {
             fatalError("Failed to dequeue cell")
@@ -55,7 +55,6 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         scrollToCenterForItem(at: indexPath, animated: true)
         
-        // Get the selected cell
         if let cell = collectionView.cellForItem(at: indexPath) as? DateViewCell {
             print(cell.fullDate)
         }

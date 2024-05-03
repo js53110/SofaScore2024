@@ -43,8 +43,8 @@ class DateViewCell: UICollectionViewCell {
         dateLabel.textColor = .white
         dayLabel.textAlignment = .center
         dateLabel.textAlignment = .center
-        dayLabel.font = fonts.RobotoCondensedRegularMicro
-        dateLabel.font = fonts.RobotoCondensedRegularMicro
+        dayLabel.font = Fonts.RobotoCondensedRegularMicro
+        dateLabel.font = Fonts.RobotoCondensedRegularMicro
     }
     
     func setupConstraints() {

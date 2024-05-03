@@ -11,6 +11,6 @@ class DatesMatchesDividerView: BaseView {
     }
     
     override func styleViews() {
-        backgroundColor = colors.surface0
+        backgroundColor = Colors.surface0
     }
 }
