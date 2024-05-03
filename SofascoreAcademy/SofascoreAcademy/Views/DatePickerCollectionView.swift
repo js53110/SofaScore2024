@@ -4,11 +4,13 @@ import UIKit
 
 class DatePickerCollectionView: UICollectionView {
     
+    weak var datePickDelegate: DatePickDelegate?
+    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-
+        
         super.init(frame: frame, collectionViewLayout: layout)
         
         setupCollectionView()
@@ -49,17 +51,16 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
 extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 56, height: 48)
-        }
+        return CGSize(width: 56, height: 48)
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         scrollToCenterForItem(at: indexPath, animated: true)
-        
         if let cell = collectionView.cellForItem(at: indexPath) as? DateViewCell {
-            print(cell.fullDate)
+            datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate)
         }
     }
-
+    
 }
 
 extension UICollectionView {

@@ -36,6 +36,7 @@ class MainViewController: UIViewController {
         customTabBar.delegate = self
         appHeader.delegate = self
         currentChild.delegate = self
+        datePickerView.datePickDelegate = self
     }
 }
 
@@ -127,5 +128,21 @@ extension MainViewController: MatchTapDelegate {
     
     func displayMatchInfoOnTap(selectedMatch: matchData) {
         navigationController?.pushViewController(MatchDataViewController(matchData: selectedMatch), animated: true)
+    }
+}
+
+extension MainViewController: DatePickDelegate {
+    
+    func displayEventsForSelectedDate(selectedDate: String)  {
+        print("Selected", selectedDate)
+        Task {
+            do {
+                let data = try await ApiClient().getEventDataNew(sportSlug: currentSportSlug, date: selectedDate)
+                print(data)
+            } catch {
+                print("Error:", error)
+            }
+        }
+        
     }
 }
