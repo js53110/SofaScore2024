@@ -14,8 +14,8 @@ class ApiClient {
         
         print(response)
         
-        let eventResponse = try JSONDecoder().decode(EventsResponse.self, from: data)
-        return eventResponse.events
+        let eventResponse = try JSONDecoder().decode([Event].self, from: data)
+        return eventResponse
     }
 }
 
