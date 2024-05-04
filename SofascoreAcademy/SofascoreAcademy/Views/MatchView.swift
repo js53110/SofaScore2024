@@ -26,34 +26,34 @@ class MatchView: BaseView {
     private var divider = UIView()
     private var timeRect = UIView()
     
-    func update(data: matchData) {
-        matchId = data.matchId
+    func update(data: Event) {
+        matchId = data.id
         
         let matchStatus = Helpers.getMatchStatus(matchId: matchId)
         
         homeTeamLabel.update(
-            teamName: data.homeTeam,
-            teamLogo: data.homeLogo, 
+            teamName: data.homeTeam.name,
+            teamLogo: "",
             color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         awayTeamLabel.update(
-            teamName: data.awayTeam,
-            teamLogo: data.awayLogo,
+            teamName: data.awayTeam.name,
+            teamLogo: "",
             color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         homeResult.update(
-            matchId: data.matchId,
+            matchId: data.id,
             status: data.status,
-            score: data.homeTeamScore,
+            score: data.homeScore.total,
             color: Helpers.determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
         awayResult.update(
-            matchId: data.matchId,
+            matchId: data.id,
             status: data.status,
-            score: data.awayTeamScore,
+            score: data.awayScore.total,
             color: Helpers.determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
         )
-        timeStatusView.update(matchTime: data.timeStamp, status: data.status)
+        timeStatusView.update(matchTime: Helpers.dateStringToTimestamp(data.startDate) ?? 0, status: data.status)
     }
     
     override func addViews() {

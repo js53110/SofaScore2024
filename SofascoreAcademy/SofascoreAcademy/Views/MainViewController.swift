@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
         self.customTabBar = CustomTabView(sportSlug: savedSportSlug)
         self.currentSportSlug = savedSportSlug
         super.init(nibName: nil, bundle: nil)
+        
+        displayEventsForSelectedDate(selectedDate: "2024-04-28")
     }
     
     required init?(coder: NSCoder) {
@@ -126,7 +128,7 @@ extension MainViewController: AppHeaderDelegate {
 // MARK: MatchTapDelegate
 extension MainViewController: MatchTapDelegate {
     
-    func displayMatchInfoOnTap(selectedMatch: matchData) {
+    func displayMatchInfoOnTap(selectedMatch: Event) {
         navigationController?.pushViewController(MatchDataViewController(matchData: selectedMatch), animated: true)
     }
 }
@@ -137,8 +139,17 @@ extension MainViewController: DatePickDelegate {
         print("Selected", selectedDate)
         Task {
             do {
-                let data = try await ApiClient().getEventDataNew(sportSlug: currentSportSlug, date: selectedDate)
-                print(data)
+                let requestDataFootball = try await ApiClient().getEventDataNew(sportSlug: .football, date: selectedDate)
+                let requestDataBasketball = try await ApiClient().getEventDataNew(sportSlug: .basketball, date: selectedDate)
+                let requestDataAmFootball = try await ApiClient().getEventDataNew(sportSlug: .americanFootball, date: selectedDate)
+
+                let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
+                let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
+                let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+
+                leaguesData1 = dataFootball
+                leaguesData2 = dataBasketball
+                leaguesData3 = dataAmFootball
             } catch {
                 print("Error:", error)
             }

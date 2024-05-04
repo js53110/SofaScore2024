@@ -17,8 +17,8 @@ class MatchViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(data: matchData) {
-        matchId = data.matchId
+    func update(data: Event) {
+        matchId = data.id
         matchView.update(data: data)
     }
     

@@ -5,7 +5,7 @@ import SofaAcademic
 class SportViewController: UIViewController {
     
     private let tableView = UITableView()
-    private var data: Array<LeagueInfo>
+    private var data: Array<LeagueData>
     weak var delegate: MatchTapDelegate?
     
     init(sportSlug: SportSlug) {
@@ -35,7 +35,7 @@ extension SportViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data[section].matches.count
+        data[section].events.count
     }
     
     
@@ -43,7 +43,7 @@ extension SportViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
-            let dataForRow = data[indexPath.section].matches[indexPath.row]
+            let dataForRow = data[indexPath.section].events[indexPath.row]
             cell.update(data: dataForRow)
             return cell
         } else {
@@ -56,9 +56,9 @@ extension SportViewController: UITableViewDataSource {
             withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
             let sectionData = data[section]
             headerView.update(
-                countryName: sectionData.countryName,
-                leagueName: sectionData.leagueName,
-                leagueLogo: sectionData.leagueLogo)
+                countryName: sectionData.country,
+                leagueName: sectionData.name,
+                leagueLogo: "")
             return headerView
         } else {
             fatalError("Failed to dequeue header")
@@ -74,7 +74,7 @@ extension SportViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMatch = data[indexPath.section].matches[indexPath.row]
+        let selectedMatch: Event = data[indexPath.section].events[indexPath.row]
         delegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
     }
 }

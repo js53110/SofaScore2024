@@ -17,20 +17,20 @@ public enum Helpers {
             let matchStatus = match.status
             return matchStatus
         }
-        return .upcoming
+        return .notstarted
     }
     
 
-    static func determineMatchStatusString(matchStatus: MatchStatus) -> String {
+    static func determineMatchStatusString(matchStatus: String) -> String {
         switch matchStatus {
-        case .homeTeamWin :
-            return "FT"
-        case .awayTeamWin :
-            return "FT"
-        case .draw :
-            return "FT"
-        case .inProgress :
-            return "37'" // Updating time in ViewController
+//        case .homeTeamWin :
+//            return "FT"
+//        case .awayTeamWin :
+//            return "FT"
+//        case .draw :
+//            return "FT"
+//        case .inProgress :
+//            return "37'" // Updating time in ViewController
         default:
             return "-"
         }
@@ -46,7 +46,7 @@ public enum Helpers {
     
     static func determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
-        case .upcoming:
+        case .notstarted:
             return .black
         case .inProgress:
             return .black
@@ -61,7 +61,7 @@ public enum Helpers {
     
     static func determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
-        case .upcoming:
+        case .notstarted:
             return .black
         case .inProgress:
             return .black
@@ -76,7 +76,7 @@ public enum Helpers {
     
     static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
-        case .upcoming:
+        case .notstarted:
             return .black
         case .inProgress:
             return .red
@@ -91,7 +91,7 @@ public enum Helpers {
     
     static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
         switch matchStatus {
-        case .upcoming:
+        case .notstarted:
             return .black
         case .inProgress:
             return .red
@@ -110,7 +110,7 @@ public enum Helpers {
         }
     }
     
-    static func determineDataForDisplay(sportSlug : SportSlug) -> Array<LeagueInfo> {
+    static func determineDataForDisplay(sportSlug : SportSlug) -> Array<LeagueData> {
         switch sportSlug {
         case .football:
             return leaguesData1
@@ -147,6 +147,48 @@ public enum Helpers {
         
         return DateData(dayOfWeek: dayOfWeek, dateString: dateString, fullDate: fullDate)
     }
+    
+    static func groupEventsByTournament(eventsData: [Event]) -> [LeagueData] {
+        var groupedEvents: [Int: (name: String, slug: String, country: String, events: [Event])] = [:]
+
+        var tempGroupedEvents: [Int: (name: String, slug: String, country: String, events: [Event])] = [:]
+
+        for event in eventsData {
+            let tournamentID = event.tournament.id
+            let tournamentName = event.tournament.name
+            let tournamentSlug = event.tournament.slug
+            let tournamentCountry = event.tournament.country.name
+
+            if var tournamentEntry = tempGroupedEvents[tournamentID] {
+                tournamentEntry.events.append(event)
+                tempGroupedEvents[tournamentID] = tournamentEntry
+            } else {
+                tempGroupedEvents[tournamentID] = (name: tournamentName, slug: tournamentSlug, country: tournamentCountry, events: [event])
+            }
+        }
+        
+        let groupedEventsArray = tempGroupedEvents.values.map { eventData in
+            return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, events: eventData.events)
+        }
+
+        return groupedEventsArray
+    }
+
+    static func dateStringToTimestamp(_ dateString: String) -> TimeInterval? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+
+        if let date = dateFormatter.date(from: dateString) {
+            return date.timeIntervalSince1970
+        } else {
+            return nil
+        }
+    }
+
+
+
+
+
     
     
 }

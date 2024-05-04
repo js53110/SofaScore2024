@@ -1,7 +1,7 @@
 import Foundation
 
 enum MatchStatus {
-    case upcoming
+    case notstarted
     case inProgress
     case homeTeamWin
     case awayTeamWin
@@ -55,21 +55,37 @@ struct LeagueInfo {
     let matches: [matchData]
 }
 
+struct ParsedDataArray {
+    let parsedData: [LeagueData]
+}
+
+struct ParsedData {
+    let key: Int
+    let value: LeagueData
+}
+
+struct LeagueData {
+    let name: String
+    let slug: String
+    let country: String
+    let events: [Event]
+}
+
 let matchData1 = matchData(matchId: 1, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .awayTeamWin, timeStamp: 1710331200, homeTeamScore: 1, awayTeamScore: 2)
 
 let matchData2 = matchData(matchId: 2, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .inProgress, timeStamp: 1710342000, homeTeamScore: 0, awayTeamScore: 1)
 
-let matchData3 = matchData(matchId: 3, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .upcoming, timeStamp: 1710349200, homeTeamScore: nil, awayTeamScore: nil)
+let matchData3 = matchData(matchId: 3, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .notstarted, timeStamp: 1710349200, homeTeamScore: nil, awayTeamScore: nil)
 
-let matchData4 = matchData(matchId: 4, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .upcoming, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
+let matchData4 = matchData(matchId: 4, homeTeam: "Real Madrid", awayTeam: "Barcelona", homeLogo: "rmLogo", awayLogo: "fcb_logo", status: .notstarted, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
 
 let matchData5 = matchData(matchId: 5, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .draw, timeStamp: 1710331200, homeTeamScore: 3, awayTeamScore: 3)
 
 let matchData6 = matchData(matchId: 6, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .inProgress, timeStamp: 1710342000, homeTeamScore: 1, awayTeamScore: 1)
 
-let matchData7 = matchData(matchId: 7, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .upcoming, timeStamp: 1710349200, homeTeamScore: nil, awayTeamScore: nil)
+let matchData7 = matchData(matchId: 7, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .notstarted, timeStamp: 1710349200, homeTeamScore: nil, awayTeamScore: nil)
 
-let matchData8 = matchData(matchId: 8, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .upcoming, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
+let matchData8 = matchData(matchId: 8, homeTeam: "Bayern Munich", awayTeam: "RB Leipzig", homeLogo: "bayernLogo", awayLogo: "leipzigLogo", status: .notstarted, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
 
 let matchData9 = matchData(matchId: 9, homeTeam: "Arsenal", awayTeam: "Manchester United", homeLogo: "arsenalLogo", awayLogo: "mutd_logo", status: .awayTeamWin, timeStamp: 1710331200, homeTeamScore: 1, awayTeamScore: 3)
 
@@ -77,7 +93,7 @@ let matchData10 = matchData(matchId: 10, homeTeam: "Arsenal", awayTeam: "Manches
 
 let matchData11 = matchData(matchId: 11, homeTeam: "Arsenal", awayTeam: "Manchester United", homeLogo: "arsenalLogo", awayLogo: "mutd_logo", status: .draw, timeStamp: 1710349200, homeTeamScore: 2, awayTeamScore: 2)
 
-let matchData12 = matchData(matchId: 12, homeTeam: "Arsenal", awayTeam: "Manchester United", homeLogo: "arsenalLogo", awayLogo: "mutd_logo", status: .upcoming, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
+let matchData12 = matchData(matchId: 12, homeTeam: "Arsenal", awayTeam: "Manchester United", homeLogo: "arsenalLogo", awayLogo: "mutd_logo", status: .notstarted, timeStamp: 1710354600, homeTeamScore: nil, awayTeamScore: nil)
 
 let matches1: Array<matchData> = [matchData1, matchData4, matchData3, matchData2].sorted(by: { $0.timeStamp < $1.timeStamp })
 
@@ -87,9 +103,14 @@ let matches3: Array<matchData> = [matchData9, matchData10, matchData11, matchDat
 
 let matches = matches1 + matches2 + matches3
 
-let leagueInfo1 = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
-let leagueInfo2 = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
-let leagueInfo3 = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
-let leaguesData1 = [leagueInfo1, leagueInfo1, leagueInfo1]
-let leaguesData2 = [leagueInfo2, leagueInfo2, leagueInfo2]
-let leaguesData3 = [leagueInfo3, leagueInfo3, leagueInfo3]
+//var leagueInfoFootball = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
+//var leagueInfoBasketball = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
+//var leagueInfoAmericanFootball = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
+
+var leagueInfoFootball = LeagueInfo(countryName: "Spain", leagueName: "LaLiga", leagueLogo: "LaLigaLogo", matches: matches1)
+var leagueInfoBasketball = LeagueInfo(countryName: "Germany", leagueName: "Bundesliga", leagueLogo: "BundesligaLogo", matches: matches2)
+var leagueInfoAmericanFootball = LeagueInfo(countryName: "England", leagueName: "Premier League", leagueLogo: "plLogo", matches: matches3)
+
+var leaguesData1: [LeagueData] = []
+var leaguesData2: [LeagueData] = []
+var leaguesData3: [LeagueData] = []

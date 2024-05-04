@@ -5,9 +5,9 @@ import SofaAcademic
 class MatchDataViewController: UIViewController, BaseViewProtocol {
     
     private let blueContainer = UIView()
-    private let matchData: matchData
+    private let matchData: Event
     
-    init(matchData: matchData){
+    init(matchData: Event){
         self.matchData = matchData
         super.init(nibName: nil, bundle: nil)
     }
