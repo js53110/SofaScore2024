@@ -1,4 +1,5 @@
 import UIKit
+import SofaAcademic
 import SnapKit
 
 class LeagueInfoViewHeader: UITableViewHeaderFooterView {
@@ -15,10 +16,10 @@ class LeagueInfoViewHeader: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func update(countryName: String, leagueName: String, leagueLogo: String) {
-        leagueInfoView.update(countryName: countryName, leagueName: leagueName, leagueLogo: leagueLogo)
-    }
+}
+
+//MARK: BaseViewProtocol
+extension LeagueInfoViewHeader: BaseViewProtocol {
     
     func addViews() {
         contentView.addSubview(leagueInfoView)
@@ -29,5 +30,17 @@ class LeagueInfoViewHeader: UITableViewHeaderFooterView {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().priority(999)
         }
+    }
+}
+
+//MARK: Additional methods
+extension LeagueInfoViewHeader {
+    
+    func update(countryName: String, leagueName: String, leagueLogo: UIImage) {
+        leagueInfoView.update(countryName: countryName, leagueName: leagueName, leagueLogo: leagueLogo)
+    }
+    
+    func updateLeagueLogo(leagueLogo: UIImage) {
+        leagueInfoView.updateLeagueLogo(leagueLogo: leagueLogo)
     }
 }

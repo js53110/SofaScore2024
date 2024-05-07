@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class MatchDataViewController: UIViewController, BaseViewProtocol {
+class MatchDataViewController: UIViewController {
     
     private let blueContainer = UIView()
     private let matchData: Event
@@ -33,6 +33,11 @@ class MatchDataViewController: UIViewController, BaseViewProtocol {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
+    
+}
+
+extension MatchDataViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(blueContainer)

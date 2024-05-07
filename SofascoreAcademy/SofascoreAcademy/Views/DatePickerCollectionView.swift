@@ -4,6 +4,7 @@ import UIKit
 
 class DatePickerCollectionView: UICollectionView {
     
+    static let middleIndexPath: IndexPath = [0, 7]
     weak var datePickDelegate: DatePickDelegate?
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -19,16 +20,9 @@ class DatePickerCollectionView: UICollectionView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupCollectionView() {
-        self.register(DateViewCell.self, forCellWithReuseIdentifier: "DateCell")
-        self.showsHorizontalScrollIndicator = false
-        
-        self.delegate = self
-        self.dataSource = self
-    }
 }
 
+//MARK: UICollectionViewDataSource
 extension DatePickerCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -41,6 +35,13 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
             let dataForCell = Helpers.getDataForDateCell(index: indexPath.row)
             cell.update(data: dataForCell)
             cell.backgroundColor = Colors.colorPrimaryVariant
+            if(firstStart) {
+                scrollToTodayDate()
+                if(indexPath == DatePickerCollectionView.middleIndexPath) {
+                    cell.setSelected(true)
+                    firstStart = !firstStart
+                }
+            }
             return cell
         } else {
             fatalError("Failed to dequeue cell")
@@ -48,6 +49,7 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
     }
 }
 
+//MARK: UICollectionViewDelegate
 extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -57,25 +59,39 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         scrollToCenterForItem(at: indexPath, animated: true)
         if let cell = collectionView.cellForItem(at: indexPath) as? DateViewCell {
-            datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate)
+            if(selectedDate != cell.fullDate){
+                selectedDate = cell.fullDate
+                
+                collectionView.visibleCells.forEach {
+                    ($0 as? DateViewCell)?.setSelected(false)
+                }
+                cell.setSelected(true)
+                
+                datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate)
+            }
         }
     }
-    
 }
 
+//MARK: UICollectionView
 extension UICollectionView {
     
     func scrollToCenterForItem(at indexPath: IndexPath, animated: Bool) {
-        guard let layoutAttributes = layoutAttributesForItem(at: indexPath) else {
-            return
-        }
-        
-        let cellCenterX = layoutAttributes.frame.midX
-        let collectionViewCenterX = bounds.width / 2
-        
-        let offsetX = cellCenterX - collectionViewCenterX
-        let contentOffset = CGPoint(x: max(offsetX, 0), y: 0)
-        
-        setContentOffset(contentOffset, animated: animated)
+        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+    }
+}
+
+//MARK: Private methods
+private extension DatePickerCollectionView {
+    
+    func setupCollectionView() {
+        self.register(DateViewCell.self, forCellWithReuseIdentifier: "DateCell")
+        self.showsHorizontalScrollIndicator = false
+        self.delegate = self
+        self.dataSource = self
+    }
+    
+    func scrollToTodayDate() {
+        scrollToCenterForItem(at: DatePickerCollectionView.middleIndexPath, animated: true)
     }
 }

@@ -1,25 +1,56 @@
 import Foundation
 import UIKit
+import SofaAcademic
+import SnapKit
 
 class LoadingViewController: UIViewController {
     
     private let apiClient = ApiClient()
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        apiClient.getEventDataOld { eventData in
-        //            print(eventData ?? "No data found")
-        //        }
-//        Task {
-//            let eventData = try await apiClient.getEventDataNew()
-//            if let eventData = eventData {
-//                for tournament in eventData.game.tournaments {
-//                    print(tournament.category.name)
-//                    print(tournament.tournament.name)
-//                    print(tournament.events.first?.homeTeam.name)
-//                    print(tournament.events.first?.awayTeam.name)
-//                }
-//            }
-//        }
+        setupView()
+    }
+    
+    func setupView() {
+        addViews()
+    }
+    
+    func addViews() {
+        let mainVC = MainViewController()
+        customAddChild(child: mainVC, parent: view, animation: nil)
+    }
+}
+
+extension LoadingViewController {
+    
+    func displayEventsForCurrentDate(selectedDate: String)  {
+        Task {
+            do {
+                let requestDataFootball = try await ApiClient().getEventDataNew(sportSlug: .football, date: selectedDate)
+                let requestDataBasketball = try await ApiClient().getEventDataNew(sportSlug: .basketball, date: selectedDate)
+                let requestDataAmFootball = try await ApiClient().getEventDataNew(sportSlug: .americanFootball, date: selectedDate)
+                
+                let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
+                let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
+                let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+                
+                footballData = dataFootball
+                basketballData = dataBasketball
+                americanFootballData = dataAmFootball
+                
+                setupView()
+            } catch {
+                print("Error:", error)
+            }
+        }
     }
 }

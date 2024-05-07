@@ -64,13 +64,19 @@ class CustomTabView: BaseView {
         tabButtonAmericanFootball.addGestureRecognizer(tapAmericanFootball)
     }
     
+    
+}
+
+//MARK: Private methods
+private extension CustomTabView {
+    
     @objc func tabTapped(_ sender: UITapGestureRecognizer) {
         guard let tappedButton = sender.view as? TabItemView else { return }
         delegate?.displaySelectedSport(selectedSportSlug: tappedButton.sportSlug)
         moveIndicator(selectedTab: tappedButton)
     }
     
-    private func moveIndicator(selectedTab: TabItemView) {
+    func moveIndicator(selectedTab: TabItemView) {
         
         UIView.animate(withDuration: 0.3) {
             self.tabIndicator.snp.remakeConstraints {

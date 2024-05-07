@@ -13,12 +13,6 @@ class LeagueInfoView: BaseView {
     private let leagueLogoImageView = UIImageView()
     private let arrowImageView = UIImageView()
     
-    func update(countryName: String, leagueName: String, leagueLogo: String) {
-        countryNameLabel.text = countryName
-        leagueNameLabel.text = leagueName
-        leagueLogoImageView.image = UIImage(named: leagueLogo)
-    }
-    
     override func addViews() {
         addSubview(stackView)
         addSubview(leagueLogoImageView)
@@ -57,5 +51,19 @@ class LeagueInfoView: BaseView {
             $0.leading.equalTo(leagueLogoImageView.snp.trailing).offset(32)
             $0.centerY.equalToSuperview() 
         }
+    }
+}
+
+//MARK: Additional methods
+extension LeagueInfoView {
+    
+    func update(countryName: String, leagueName: String, leagueLogo: UIImage) {
+        countryNameLabel.text = countryName
+        leagueNameLabel.text = leagueName
+        leagueLogoImageView.image = leagueLogo
+    }
+    
+    func updateLeagueLogo(leagueLogo: UIImage) {
+        leagueLogoImageView.image = leagueLogo
     }
 }

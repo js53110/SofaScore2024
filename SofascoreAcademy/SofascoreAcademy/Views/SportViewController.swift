@@ -6,7 +6,10 @@ class SportViewController: UIViewController {
     
     private let tableView = UITableView()
     private var data: Array<LeagueData>
-    weak var delegate: MatchTapDelegate?
+    private let noDataLabel = UILabel()
+    
+    weak var matchTapDelegate: MatchTapDelegate?
+    weak var dayInfoDelegate: DayInfoProtocol?
     
     init(sportSlug: SportSlug) {
         self.data = Helpers.determineDataForDisplay(sportSlug: sportSlug)
@@ -23,7 +26,12 @@ class SportViewController: UIViewController {
         addViews()
         styleViews()
         setupConstraints()
+        setupDayInfo()
         setupTableView()
+        
+        if(data.count == 0) {
+            setupNoDataView()
+        }
     }
 }
 
@@ -45,6 +53,7 @@ extension SportViewController: UITableViewDataSource {
             for: indexPath) as? MatchViewCell {
             let dataForRow = data[indexPath.section].events[indexPath.row]
             cell.update(data: dataForRow)
+            fetchTeamsLogosFromApi(homeTeamId: dataForRow.homeTeam.id, awayTeamId: dataForRow.awayTeam.id, indexPath: indexPath)
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -55,15 +64,20 @@ extension SportViewController: UITableViewDataSource {
         if let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
             let sectionData = data[section]
+            
             headerView.update(
                 countryName: sectionData.country,
                 leagueName: sectionData.name,
-                leagueLogo: "")
+                leagueLogo: UIImage()
+            )
+            
+            fetchLeagueLogoFromApi(tournamentId: sectionData.id, section: section)
             return headerView
         } else {
             fatalError("Failed to dequeue header")
         }
     }
+    
 }
 
 // MARK: UITableViewDelegate
@@ -75,7 +89,43 @@ extension SportViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMatch: Event = data[indexPath.section].events[indexPath.row]
-        delegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
+        matchTapDelegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
+    }
+}
+
+// MARK: LeagueLogoLoadDelegate
+extension SportViewController: LeagueLogoLoadDelegate {
+    func fetchLeagueLogoFromApi(tournamentId: Int, section: Int) {
+        Task {
+            do {
+                let leagueLogo = try await ApiClient().getLeagueLogoApi(tournamentId: tournamentId)
+                if let headerView = self.tableView.headerView(forSection: section) as? LeagueInfoViewHeader {
+                    headerView.updateLeagueLogo(leagueLogo: leagueLogo ?? UIImage())
+                }
+                
+            } catch {
+                print("Error fetching league logo: \(error)")
+            }
+        }
+    }
+}
+
+// MARK: TeamLogoLoadProtocol
+extension SportViewController: TeamLogoLoadProtocol {
+    func fetchTeamsLogosFromApi(homeTeamId: Int, awayTeamId: Int, indexPath: IndexPath) {
+        Task {
+            do {
+                let homeTeamLogo = try await ApiClient().getTeamLogoApi(teamId: homeTeamId)
+                let awayTeamLogo = try await ApiClient().getTeamLogoApi(teamId: awayTeamId)
+                if let cell = self.tableView.cellForRow(at: indexPath) as? MatchViewCell {
+                    cell.updateHomeTeamLogo(teamLogo: homeTeamLogo ?? UIImage())
+                    cell.updateAwayTeamLogo(teamLogo: awayTeamLogo ?? UIImage())
+                }
+                
+            } catch {
+                print("Error fetching league logo: \(error)")
+            }
+        }
     }
 }
 
@@ -120,4 +170,21 @@ private extension SportViewController {
             tableView.sectionHeaderTopPadding = 0
         }
     }
+    
+    func setupDayInfo() {
+        let count = Helpers.getEventsCount(data: data)
+        dayInfoDelegate?.displayInfoForDate(count: count)
+    }
+    
+    func setupNoDataView() {
+        view.addSubview(noDataLabel)
+        noDataLabel.snp.makeConstraints() {
+            $0.center.equalToSuperview()
+        }
+        noDataLabel.text = "No events found for selected date"
+        
+        noDataLabel.font = Fonts.RobotoBold
+        noDataLabel.textColor = Colors.surfaceLv2
+    }
 }
+

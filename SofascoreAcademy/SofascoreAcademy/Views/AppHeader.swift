@@ -5,9 +5,9 @@ import SnapKit
 
 class AppHeader: BaseView {
     
-    private let logoPath = "sofascore_lockup"
-    private let headerButtonIconSettingsPath = "Icon Settings"
-    private let headerButtonIconTrophyPath = "Icon Trophy"
+    private let logoPath = "sofascore_logo"
+    private let headerButtonIconSettingsPath = "icon_settings"
+    private let headerButtonIconTrophyPath = "icon_trophy"
     
     private let appLogo = UIImageView()
     private let headerButtonTrophy = UIButton()
@@ -20,16 +20,16 @@ class AppHeader: BaseView {
     override func addViews() {
         addSubview(appLogo)
         addSubview(headerButtonTrophy)
-        
         addSubview(headerButtonSettings)
+        
         headerButtonSettings.addSubview(headerIconSettings)
         headerButtonTrophy.addSubview(headerIconTrophy)
     }
     
     override func styleViews() {
+        backgroundColor = Colors.colorPrimaryDefault
         appLogo.image = UIImage(named: logoPath)
         appLogo.contentMode = .scaleAspectFit
-        backgroundColor = Colors.colorPrimaryDefault
         headerIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)
         headerIconSettings.image = UIImage(named: headerButtonIconSettingsPath)
     }

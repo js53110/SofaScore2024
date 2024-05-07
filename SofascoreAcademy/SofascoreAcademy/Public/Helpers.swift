@@ -9,33 +9,9 @@ struct DateData {
     let fullDate: String
 }
 
-
 public enum Helpers {
-
-    static func getMatchStatus(matchId: Int) -> MatchStatus {
-        if let match = matches.first(where: { $0.matchId == matchId }) {
-            let matchStatus = match.status
-            return matchStatus
-        }
-        return .notstarted
-    }
     
-
-    static func determineMatchStatusString(matchStatus: String) -> String {
-        switch matchStatus {
-//        case .homeTeamWin :
-//            return "FT"
-//        case .awayTeamWin :
-//            return "FT"
-//        case .draw :
-//            return "FT"
-//        case .inProgress :
-//            return "37'" // Updating time in ViewController
-        default:
-            return "-"
-        }
-    }
-    
+    //MARK: Date Functions
     static func convertTimestampToTime(timeStamp: TimeInterval) -> String {
         let date = Date(timeIntervalSince1970: timeStamp)
         let dateFormatter = DateFormatter()
@@ -44,83 +20,61 @@ public enum Helpers {
         return timeString
     }
     
-    static func determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
-        switch matchStatus {
-        case .notstarted:
-            return .black
-        case .inProgress:
-            return .black
-        case .homeTeamWin:
-            return .black
-        case .awayTeamWin:
-            return Colors.surfaceLv2
-        case .draw:
-            return Colors.surfaceLv2
+    static func dateStringToTimestamp(_ dateString: String) -> TimeInterval? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            return date.timeIntervalSince1970
+        } else {
+            return nil
         }
     }
     
-    static func determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
-        switch matchStatus {
-        case .notstarted:
-            return .black
-        case .inProgress:
-            return .black
-        case .homeTeamWin:
-            return Colors.surfaceLv2
-        case .awayTeamWin:
-            return .black
-        case .draw:
-            return Colors.surfaceLv2
-        }
+    static func getTodaysDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: Date())
     }
     
-    static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
-        switch matchStatus {
-        case .notstarted:
-            return .black
-        case .inProgress:
-            return .red
-        case .homeTeamWin:
-            return .black
-        case .awayTeamWin:
-            return Colors.surfaceLv2
-        case .draw:
-            return Colors.surfaceLv2
+    static func getDateAndDayFromString(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
+            
+            if components.day != nil {
+                let dayOfWeekNumber = calendar.component(.weekday, from: date)
+                let dayOfWeekString = dateFormatter.weekdaySymbols[dayOfWeekNumber - 1].prefix(3)
+                
+                if calendar.isDateInToday(date) {
+                    return "Today"
+                } else {
+                    let dateFormatterOutput = DateFormatter()
+                    dateFormatterOutput.dateFormat = "dd.MM.yyyy"
+                    let formattedDate = dateFormatterOutput.string(from: date)
+                    
+                    return "\(dayOfWeekString), \(formattedDate)"
+                }
+            }
         }
+        
+        return "Invalid date format"
     }
     
-    static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: MatchStatus) -> UIColor {
-        switch matchStatus {
-        case .notstarted:
-            return .black
-        case .inProgress:
-            return .red
-        case .homeTeamWin:
-            return Colors.surfaceLv2
-        case .awayTeamWin:
-            return .black
-        case .draw:
-            return Colors.surfaceLv2
-        }
-    }
-    
-    static func clearStackView(stackView: UIStackView) {
-        for subview in stackView.arrangedSubviews {
-            subview.removeFromSuperview()
-        }
-    }
-    
+    //MARK: Data Functions
     static func determineDataForDisplay(sportSlug : SportSlug) -> Array<LeagueData> {
         switch sportSlug {
         case .football:
-            return leaguesData1
+            return footballData
         case .basketball:
-            return leaguesData2
+            return basketballData
         case .americanFootball:
-            return leaguesData3
+            return americanFootballData
         }
     }
-    
     
     static func getDataForDateCell(index: Int) -> DateData {
         let currentDate = Date()
@@ -140,7 +94,7 @@ public enum Helpers {
             "TODAY"
         }
         
-        dateFormatter.dateFormat = "dd.MM." 
+        dateFormatter.dateFormat = "dd.MM."
         let dateString = dateFormatter.string(from: date)
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let fullDate = dateFormatter.string(from: date)
@@ -149,46 +103,104 @@ public enum Helpers {
     }
     
     static func groupEventsByTournament(eventsData: [Event]) -> [LeagueData] {
-        var groupedEvents: [Int: (name: String, slug: String, country: String, events: [Event])] = [:]
-
-        var tempGroupedEvents: [Int: (name: String, slug: String, country: String, events: [Event])] = [:]
-
+        var groupedEvents: [Int: (name: String, slug: String, country: String, id: Int, events: [Event])] = [:]
+        
         for event in eventsData {
             let tournamentID = event.tournament.id
             let tournamentName = event.tournament.name
             let tournamentSlug = event.tournament.slug
             let tournamentCountry = event.tournament.country.name
-
-            if var tournamentEntry = tempGroupedEvents[tournamentID] {
+            
+            if var tournamentEntry = groupedEvents[tournamentID] {
                 tournamentEntry.events.append(event)
-                tempGroupedEvents[tournamentID] = tournamentEntry
+                groupedEvents[tournamentID] = tournamentEntry
             } else {
-                tempGroupedEvents[tournamentID] = (name: tournamentName, slug: tournamentSlug, country: tournamentCountry, events: [event])
+                groupedEvents[tournamentID] = (name: tournamentName, slug: tournamentSlug, country: tournamentCountry, id: tournamentID, events: [event])
             }
         }
         
-        let groupedEventsArray = tempGroupedEvents.values.map { eventData in
-            return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, events: eventData.events)
+        let groupedEventsArray = groupedEvents.values.map { eventData in
+            return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, id: eventData.id, events: eventData.events)
         }
-
+        
         return groupedEventsArray
     }
-
-    static func dateStringToTimestamp(_ dateString: String) -> TimeInterval? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-
-        if let date = dateFormatter.date(from: dateString) {
-            return date.timeIntervalSince1970
-        } else {
-            return nil
+    
+    static func getEventsCount(data: Array<LeagueData>) -> Int {
+        var count = 0;
+        for tournament in data {
+            for _ in tournament.events {
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
+    //MARK: MatchStatus Functions
+    static func determineMatchStatusString(matchStatus: String) -> String {
+        switch matchStatus {
+        case "finished" :
+            return "FT"
+        case "inprogress" :
+            return "x" //todo: get match minute
+        default:
+            return "-"
         }
     }
-
-
-
-
-
     
+    static func determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: String?) -> UIColor {
+        switch matchWinner {
+        case "away":
+            return Colors.surfaceLv2
+        case "draw":
+            return Colors.surfaceLv2
+        default:
+            return .black
+        }
+        
+    }
     
+    static func determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: String?) -> UIColor {
+        switch matchWinner {
+        case "home":
+            return Colors.surfaceLv2
+        case "draw":
+            return Colors.surfaceLv2
+        default:
+            return .black
+        }
+    }
+    
+    static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: String) -> UIColor {
+        switch matchStatus {
+        case "inprogress":
+            return Colors.red
+        case "draw":
+            return Colors.surfaceLv2
+        default:
+            return .black
+        }
+    }
+    
+    static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: String) -> UIColor {
+        switch matchStatus {
+        case "inprogress":
+            return Colors.red
+        case "draw":
+            return Colors.surfaceLv2
+        default:
+            return .black
+        }
+    }
+    
+    static func getSlugStringFromEnum(sportSlug: SportSlug) -> String{
+        switch sportSlug {
+        case .football:
+            return "football"
+        case .basketball:
+            return "basketball"
+        case .americanFootball:
+            return "american-football"
+        }
+    }
 }

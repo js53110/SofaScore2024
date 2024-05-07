@@ -8,18 +8,6 @@ class TimeStatusView: BaseView {
     private let timeView = UILabel()
     private let statusView = UILabel()
     
-    func update(matchTime: TimeInterval, status: String) {
-        timeView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
-        statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
-        
-        switch status {
-//        case .inProgress:
-//            statusView.textColor = .red
-        default:
-            statusView.textColor = Colors.surfaceLv2
-        }
-    }
-    
     override func addViews() {
         addSubview(timeView)
         addSubview(statusView)
@@ -49,10 +37,22 @@ class TimeStatusView: BaseView {
 // MARK: Additional methods
 extension TimeStatusView {
     
+    func update(matchTime: TimeInterval, status: String) {
+        timeView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
+        statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
+        
+        switch status {
+        case "inprogress":
+            statusView.textColor = .red
+        default:
+            statusView.textColor = Colors.surfaceLv2
+        }
+    }
+    
     func updateMatchStatus(status: String) {
         switch status {
-//        case .inProgress:
-//            statusView.textColor = .red
+        case "inprogress":
+            statusView.textColor = .red
         default:
             statusView.textColor = Colors.surfaceLv2
         }

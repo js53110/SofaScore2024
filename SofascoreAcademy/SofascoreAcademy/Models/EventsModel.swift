@@ -9,6 +9,6 @@ struct Event: Codable {
     let startDate: String
     let homeScore: Score
     let awayScore: Score
-    let winnerCode: String
+    let winnerCode: String?
     let round: Int
 }

@@ -19,42 +19,10 @@ class MatchView: BaseView {
     private var homeTeamLabel = TeamNameLogoView()
     private var awayTeamLabel = TeamNameLogoView()
     private var timeStatusView = TimeStatusView()
-    
     private var homeResult = ScoreLabel()
     private var awayResult = ScoreLabel()
-    
     private var divider = UIView()
     private var timeRect = UIView()
-    
-    func update(data: Event) {
-        matchId = data.id
-        
-        let matchStatus = Helpers.getMatchStatus(matchId: matchId)
-        
-        homeTeamLabel.update(
-            teamName: data.homeTeam.name,
-            teamLogo: "",
-            color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
-        )
-        awayTeamLabel.update(
-            teamName: data.awayTeam.name,
-            teamLogo: "",
-            color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchStatus: matchStatus)
-        )
-        homeResult.update(
-            matchId: data.id,
-            status: data.status,
-            score: data.homeScore.total,
-            color: Helpers.determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
-        )
-        awayResult.update(
-            matchId: data.id,
-            status: data.status,
-            score: data.awayScore.total,
-            color: Helpers.determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: matchStatus)
-        )
-        timeStatusView.update(matchTime: Helpers.dateStringToTimestamp(data.startDate) ?? 0, status: data.status)
-    }
     
     override func addViews() {
         addSubview(timeRect)
@@ -75,16 +43,16 @@ class MatchView: BaseView {
             $0.height.equalTo(56)
         }
         
-        divider.snp.makeConstraints() {
-            $0.leading.equalToSuperview().offset(63)
-            $0.trailing.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(8)
-        }
-        
         timeRect.snp.makeConstraints() {
             $0.height.equalTo(56)
             $0.width.equalTo(64)
             $0.top.leading.equalToSuperview()
+        }
+        
+        divider.snp.makeConstraints() {
+            $0.leading.equalToSuperview().offset(63)
+            $0.trailing.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(8)
         }
         
         timeStatusView.snp.makeConstraints {
@@ -117,6 +85,34 @@ class MatchView: BaseView {
 // MARK: Additional methods
 extension MatchView {
     
+    func update(data: Event) {
+        matchId = data.id
+                
+        homeTeamLabel.update(
+            teamName: data.homeTeam.name,
+            teamLogo: UIImage(),
+            color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
+        )
+        awayTeamLabel.update(
+            teamName: data.awayTeam.name,
+            teamLogo: UIImage(),
+            color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
+        )
+        homeResult.update(
+            matchId: data.id,
+            status: data.status,
+            score: data.homeScore.total,
+            color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
+        )
+        awayResult.update(
+            matchId: data.id,
+            status: data.status,
+            score: data.awayScore.total,
+            color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
+        )
+        timeStatusView.update(matchTime: Helpers.dateStringToTimestamp(data.startDate) ?? 0, status: data.status)
+    }
+    
     func updateScore(score: Int, side: TeamSide){
         if(side == .home) {
             homeResult.updateScore(score: score)
@@ -128,5 +124,13 @@ extension MatchView {
     
     func updateMatchTime(time: Int) {
         timeStatusView.updateMatchTime(time: time)
+    }
+    
+    func updateHomeTeamLogo(teamLogo: UIImage) {
+        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
+    }
+    
+    func updateAwayTeamLogo(teamLogo: UIImage) {
+        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
     }
 }
