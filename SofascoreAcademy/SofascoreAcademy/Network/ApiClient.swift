@@ -10,12 +10,20 @@ class ApiClient {
         let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
                 
         let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
-        var request: URLRequest = URLRequest(url: URL(string: urlString)!)
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let (data, _) = try await URLSession.shared.data(for: request)
-        let eventResponse = try JSONDecoder().decode([Event].self, from: data)
-        return eventResponse
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let eventResponse = try JSONDecoder().decode([Event].self, from: data)
+            return eventResponse
+        } catch {
+            throw error
+        }
     }
     
     func getLeagueLogoApi(tournamentId: Int) async throws -> UIImage? {
@@ -26,18 +34,21 @@ class ApiClient {
         }
         
         let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/image"
-        var request = URLRequest(url: URL(string: urlString)!)
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-            
-            if let logoImage: UIImage = UIImage(data: data) {
-                ImageCache.shared.setImage(logoImage, forKey: cacheKey)
-                return logoImage
-            } else {
+            guard let logoImage = UIImage(data: data) else {
                 return nil
             }
+            
+            ImageCache.shared.setImage(logoImage, forKey: cacheKey)
+            return logoImage
         } catch {
             throw error
         }
@@ -51,18 +62,21 @@ class ApiClient {
         }
         
         let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/image"
-        var request = URLRequest(url: URL(string: urlString)!)
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-            
-            if let logoImage: UIImage = UIImage(data: data) {
-                ImageCache.shared.setImage(logoImage, forKey: cacheKey)
-                return logoImage
-            } else {
+            guard let logoImage = UIImage(data: data) else {
                 return nil
             }
+            
+            ImageCache.shared.setImage(logoImage, forKey: cacheKey)
+            return logoImage
         } catch {
             throw error
         }
