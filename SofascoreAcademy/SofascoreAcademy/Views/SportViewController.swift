@@ -98,13 +98,15 @@ extension SportViewController: LeagueLogoLoadDelegate {
     func fetchLeagueLogoFromApi(tournamentId: Int, section: Int) {
         Task {
             do {
-                let leagueLogo = try await ApiClient().getLeagueLogoApi(tournamentId: tournamentId)
-                if let headerView = self.tableView.headerView(forSection: section) as? LeagueInfoViewHeader {
-                    headerView.updateLeagueLogo(leagueLogo: leagueLogo ?? UIImage())
+                let result =  await ApiClient().getLeagueLogoApi(tournamentId: tournamentId)
+                switch result {
+                case .success(let leagueLogo):
+                    if let headerView = self.tableView.headerView(forSection: section) as? LeagueInfoViewHeader {
+                        headerView.updateLeagueLogo(leagueLogo: leagueLogo )
+                    }
+                case .failure(let error):
+                    print("Error fetching league logo: \(error)")
                 }
-                
-            } catch {
-                print("Error fetching league logo: \(error)")
             }
         }
     }
@@ -115,19 +117,28 @@ extension SportViewController: TeamLogoLoadProtocol {
     func fetchTeamsLogosFromApi(homeTeamId: Int, awayTeamId: Int, indexPath: IndexPath) {
         Task {
             do {
-                let homeTeamLogo = try await ApiClient().getTeamLogoApi(teamId: homeTeamId)
-                let awayTeamLogo = try await ApiClient().getTeamLogoApi(teamId: awayTeamId)
-                if let cell = self.tableView.cellForRow(at: indexPath) as? MatchViewCell {
-                    cell.updateHomeTeamLogo(teamLogo: homeTeamLogo ?? UIImage())
-                    cell.updateAwayTeamLogo(teamLogo: awayTeamLogo ?? UIImage())
-                }
+                let homeTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: homeTeamId)
+                let awayTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: awayTeamId)
                 
-            } catch {
-                print("Error fetching league logo: \(error)")
+                switch homeTeamLogoResult {
+                case .success(let homeTeamLogo):
+                    switch awayTeamLogoResult {
+                    case .success(let awayTeamLogo):
+                        if let cell = self.tableView.cellForRow(at: indexPath) as? MatchViewCell {
+                            cell.updateHomeTeamLogo(teamLogo: homeTeamLogo )
+                            cell.updateAwayTeamLogo(teamLogo: awayTeamLogo )
+                        }
+                    case .failure(let error):
+                        print("Error fetching away team logo: \(error)")
+                    }
+                case .failure(let error):
+                    print("Error fetching home team logo: \(error)")
+                }
             }
         }
     }
 }
+
 
 // MARK: BaseViewProtocol
 extension SportViewController: BaseViewProtocol{

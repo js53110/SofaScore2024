@@ -173,32 +173,47 @@ extension MainViewController: MatchTapDelegate {
 //MARK: DatePickDelegate
 extension MainViewController: DatePickDelegate {
     
-    func displayEventsForSelectedDate(selectedDate: String)  {
+    func displayEventsForSelectedDate(selectedDate: String) {
         currentChild.remove()
         startLoading()
         
         Task {
             do {
-                let requestDataFootball = try await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
-                let requestDataBasketball = try await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
-                let requestDataAmFootball = try await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
+                let requestDataFootballResult =  await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
+                let requestDataBasketballResult =  await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
+                let requestDataAmFootballResult =  await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
                 
-                let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
-                let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
-                let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+                switch requestDataFootballResult {
+                case .success(let requestDataFootball):
+                    let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
+                    footballData = dataFootball
+                case .failure(let error):
+                    print("Error fetching football data:", error)
+                }
                 
-                footballData = dataFootball
-                basketballData = dataBasketball
-                americanFootballData = dataAmFootball
+                switch requestDataBasketballResult {
+                case .success(let requestDataBasketball):
+                    let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
+                    basketballData = dataBasketball
+                case .failure(let error):
+                    print("Error fetching basketball data:", error)
+                }
+                
+                switch requestDataAmFootballResult {
+                case .success(let requestDataAmFootball):
+                    let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+                    americanFootballData = dataAmFootball
+                case .failure(let error):
+                    print("Error fetching American football data:", error)
+                }
                 
                 updateView()
-            } catch {
-                print("Error:", error)
             }
             
             stopLoading()
         }
     }
+    
 }
 
 //MARK: DayInfoProtocol
@@ -214,10 +229,10 @@ private extension MainViewController {
     
     func setupLoadingIndicator() {
         containerView.addSubview(loadingIndicator)
-
+        
         loadingIndicator.color = .gray
         loadingIndicator.hidesWhenStopped = true
-                
+        
         loadingIndicator.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
