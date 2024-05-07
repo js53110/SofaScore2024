@@ -1,3 +1,5 @@
+import Foundation
+
 struct TeamColors: Codable {
     
     let primary: String

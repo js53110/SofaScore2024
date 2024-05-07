@@ -1,3 +1,5 @@
+import Foundation
+
 struct Venue: Codable {
     
     let city: City

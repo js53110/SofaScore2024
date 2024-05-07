@@ -1,3 +1,5 @@
+import Foundation
+
 struct EventDataResponse: Codable {
     
     let createdByNickname: String?

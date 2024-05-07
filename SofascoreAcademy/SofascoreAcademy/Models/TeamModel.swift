@@ -1,3 +1,5 @@
+import Foundation
+
 struct Team: Codable {
     
     let name: String

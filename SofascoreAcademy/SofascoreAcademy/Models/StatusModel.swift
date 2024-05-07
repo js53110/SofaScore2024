@@ -1,3 +1,5 @@
+import Foundation
+
 struct Status: Codable {
     
     let code: Int

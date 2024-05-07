@@ -1,3 +1,5 @@
+import Foundation
+
 struct Tournaments: Codable {
     
     let tournament: Tournament

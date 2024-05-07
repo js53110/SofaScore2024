@@ -1,3 +1,5 @@
+import Foundation
+
 struct Sport: Codable {
     
     let id: Int

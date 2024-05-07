@@ -1,3 +1,5 @@
+import Foundation
+
 struct Bet365Links: Codable {
     
     let deeplink: String

@@ -1,3 +1,5 @@
+import Foundation
+
 struct Season: Codable {
     
     let name: String

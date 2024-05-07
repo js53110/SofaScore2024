@@ -1,3 +1,5 @@
+import Foundation
+
 struct Game: Codable {
     
     let sport: Sport

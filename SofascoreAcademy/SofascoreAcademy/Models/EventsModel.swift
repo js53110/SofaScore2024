@@ -1,3 +1,5 @@
+import Foundation
+
 struct Events: Codable {
     
     let roundInfo: RoundInfo

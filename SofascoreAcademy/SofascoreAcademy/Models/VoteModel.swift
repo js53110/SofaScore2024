@@ -1,3 +1,5 @@
+import Foundation
+
 struct Vote: Codable {
     
     let vote1: Int
