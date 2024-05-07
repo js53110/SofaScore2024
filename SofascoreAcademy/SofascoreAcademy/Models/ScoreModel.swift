@@ -1,3 +1,5 @@
+import Foundation
+
 struct Score: Codable {
     
     let total: Int?

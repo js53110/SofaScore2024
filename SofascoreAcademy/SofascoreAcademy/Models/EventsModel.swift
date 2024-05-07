@@ -1,3 +1,5 @@
+import Foundation
+
 struct Event: Codable {
     
     let id: Int

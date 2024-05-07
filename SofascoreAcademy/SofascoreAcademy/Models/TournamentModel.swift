@@ -1,3 +1,5 @@
+import Foundation
+
 struct Tournament: Codable {
     
     let id: Int

@@ -179,9 +179,9 @@ extension MainViewController: DatePickDelegate {
         
         Task {
             do {
-                let requestDataFootball = try await ApiClient().getEventDataNew(sportSlug: .football, date: selectedDate)
-                let requestDataBasketball = try await ApiClient().getEventDataNew(sportSlug: .basketball, date: selectedDate)
-                let requestDataAmFootball = try await ApiClient().getEventDataNew(sportSlug: .americanFootball, date: selectedDate)
+                let requestDataFootball = try await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
+                let requestDataBasketball = try await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
+                let requestDataAmFootball = try await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
                 
                 let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
                 let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
