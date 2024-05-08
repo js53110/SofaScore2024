@@ -74,7 +74,7 @@ class AppHeader: BaseView {
     }
 }
 
-// MARK: Additional methods
+// MARK: Private methods
 private extension AppHeader {
     
     @objc func buttonClicked(_ sender: UIButton) {

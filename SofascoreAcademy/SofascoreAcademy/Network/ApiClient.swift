@@ -8,8 +8,11 @@ enum NetworkError: Error {
 
 class ApiClient {
     
+    static let shared = ApiClient()
     static let urlBase = "https://academy-backend.sofascore.dev"
-    
+    private let urlSession = URLSession.shared
+    private let imageCache = ImageCache.shared
+
     func getDataForSport(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
         let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
         
@@ -22,7 +25,7 @@ class ApiClient {
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await urlSession.data(for: request)
             let eventResponse = try JSONDecoder().decode([Event].self, from: data)
             return .success(eventResponse)
         } catch {
@@ -33,7 +36,7 @@ class ApiClient {
     func getLeagueLogoApi(tournamentId: Int) async -> Result<UIImage, NetworkError> {
         let cacheKey: String = "league_\(tournamentId)"
         
-        if let cachedImage = ImageCache.shared.image(forKey: cacheKey) {
+        if let cachedImage = imageCache.image(forKey: cacheKey) {
             return .success(cachedImage)
         }
         
@@ -46,12 +49,12 @@ class ApiClient {
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await urlSession.data(for: request)
             guard let logoImage = UIImage(data: data) else {
                 return .failure(.invalidData)
             }
             
-            ImageCache.shared.setImage(logoImage, forKey: cacheKey)
+            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)
@@ -61,7 +64,7 @@ class ApiClient {
     func getTeamLogoApi(teamId: Int) async -> Result<UIImage, NetworkError> {
         let cacheKey: String = "team_\(teamId)"
         
-        if let cachedImage = ImageCache.shared.image(forKey: cacheKey) {
+        if let cachedImage = imageCache.image(forKey: cacheKey) {
             return .success(cachedImage)
         }
         
@@ -74,12 +77,12 @@ class ApiClient {
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await urlSession.data(for: request)
             guard let logoImage = UIImage(data: data) else {
                 return .failure(.invalidData)
             }
             
-            ImageCache.shared.setImage(logoImage, forKey: cacheKey)
+            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)

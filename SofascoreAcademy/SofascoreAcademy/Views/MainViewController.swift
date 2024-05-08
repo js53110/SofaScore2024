@@ -47,6 +47,7 @@ class MainViewController: UIViewController {
         styleViews()
         setupConstraints()
         
+        //MARK: Assigning delegates
         customTabBar.delegate = self
         appHeader.delegate = self
         currentChild.matchTapDelegate = self

@@ -73,8 +73,8 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: UICollectionView
-extension UICollectionView {
+//MARK: UICollectionView - Private methods
+private extension UICollectionView {
     
     func scrollToCenterForItem(at indexPath: IndexPath, animated: Bool) {
         scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
@@ -87,6 +87,8 @@ private extension DatePickerCollectionView {
     func setupCollectionView() {
         self.register(DateViewCell.self, forCellWithReuseIdentifier: "DateCell")
         self.showsHorizontalScrollIndicator = false
+        
+        //MARK: Assigning delegates
         self.delegate = self
         self.dataSource = self
     }

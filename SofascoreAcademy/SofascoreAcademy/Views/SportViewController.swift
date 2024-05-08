@@ -172,10 +172,12 @@ private extension SportViewController {
             forHeaderFooterViewReuseIdentifier: LeagueInfoViewHeader.identifier
         )
         
-        tableView.dataSource = self
-        tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.reloadData()
+        
+        //MARK: Assigning delegates
+        tableView.dataSource = self
+        tableView.delegate = self
         
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0

@@ -17,6 +17,7 @@ public enum Colors {
     static let colorPrimaryVariant = UIColor(red: 19.0 / 255.0, green: 39.0 / 255.0, blue: 186.0 / 255.0, alpha: 1.0)
 }
 
+//ovo sam kopirao sa zeplina, ali mi neki fontovi ne rade pa sam ostavio i ovo i moj Enum gore :/
 extension UIFont {
   class var headline1Desktop: UIFont {
     return UIFont(name: "Roboto-Bold", size: 32.0)!
