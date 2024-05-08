@@ -9,11 +9,11 @@ enum ApiError: Error {
 
 class ApiClient {
     
-    static let baseURLString = "https://static-api.sofascore.dev/api/"
+    static let baseURLString = "https://static-api.sofascore.dev/"
     
     
     func getEventDataOld(eventID: Int, completionHandler: @escaping (Result<EventDataResponse, Error>) -> Void) {
-        let urlString = "\(ApiClient.baseURLString)event/\(eventID)"
+        let urlString = "\(ApiClient.baseURLString)api/event/\(eventID)"
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(ApiError.invalidURL))
             return
@@ -48,7 +48,7 @@ class ApiClient {
     
     
     func getEventDataNew(eventID: Int) async -> Result<EventDataResponse, Error> {
-        let urlString = "\(ApiClient.baseURLString)event/\(eventID)"
+        let urlString = "\(ApiClient.baseURLString)api/event/\(eventID)"
         guard let url = URL(string: urlString) else {
             return .failure(ApiError.invalidURL)
         }
