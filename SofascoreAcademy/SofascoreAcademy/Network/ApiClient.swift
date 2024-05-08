@@ -6,19 +6,25 @@ enum NetworkError: Error {
     case invalidData
 }
 
+enum ApiError: Error {
+    case invalidData
+    case invalidURL
+}
+
 class ApiClient {
     
     static let shared = ApiClient()
     static let urlBase = "https://academy-backend.sofascore.dev"
     private let urlSession = URLSession.shared
     private let imageCache = ImageCache.shared
-
+    
     func getDataForSport(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
         let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
         
         let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
+            
         }
         
         var request = URLRequest(url: url)
@@ -86,6 +92,9 @@ class ApiClient {
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)
+            
         }
     }
+    
+    
 }

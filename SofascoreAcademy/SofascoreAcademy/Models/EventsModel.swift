@@ -1,7 +1,7 @@
 import Foundation
 
 struct Event: Codable {
-    
+
     let id: Int
     let slug: String
     let tournament: Tournament
