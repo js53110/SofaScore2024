@@ -92,9 +92,6 @@ class ApiClient {
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)
-            
         }
     }
-    
-    
 }
