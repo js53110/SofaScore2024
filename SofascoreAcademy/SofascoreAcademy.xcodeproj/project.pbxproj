@@ -52,6 +52,7 @@
 		D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */; };
 		D2B91A662BA1C22D0004B74A /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */; };
 		D2B91A692BA2200A0004B74A /* SofaAcademic in Frameworks */ = {isa = PBXBuildFile; productRef = D2B91A682BA2200A0004B74A /* SofaAcademic */; };
+		D2DAEEA12BF91048008FD27B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DAEEA02BF91048008FD27B /* LoginViewController.swift */; };
 		D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */; };
 		D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */; };
 		D2FECCB62BE96F3500D2A3A4 /* DayInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */; };
@@ -103,6 +104,7 @@
 		D2A383072BA8FABD001C102F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStatusView.swift; sourceTree = "<group>"; };
 		D2B91A652BA1C22D0004B74A /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		D2DAEEA02BF91048008FD27B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderDelegate.swift; sourceTree = "<group>"; };
 		D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTapDelegate.swift; sourceTree = "<group>"; };
 		D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfoProtocol.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */,
 				D21B982F2BE5182E0094308A /* DateViewCell.swift */,
 				D2FECCB72BE9A1E800D2A3A4 /* CustomScrollView.swift */,
+				D2DAEEA02BF91048008FD27B /* LoginViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DAEEA12BF91048008FD27B /* LoginViewController.swift in Sources */,
 				D2A383042BA88565001C102F /* Styling.swift in Sources */,
 				D21B98322BE53F0A0094308A /* DatePickDelegate.swift in Sources */,
 				D29B8D092BC4C2A70000CA42 /* MatchDataViewController.swift in Sources */,
@@ -507,8 +511,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QDJR8T24H2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SofascoreAcademy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SofascoreAcademy;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -518,7 +524,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sofascore.SofascoreAcademy;
+				PRODUCT_BUNDLE_IDENTIFIER = Sofascore.SofascoreAcademy.js53110;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -533,8 +539,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QDJR8T24H2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SofascoreAcademy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SofascoreAcademy;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -544,7 +552,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Sofascore.SofascoreAcademy;
+				PRODUCT_BUNDLE_IDENTIFIER = Sofascore.SofascoreAcademy.js53110;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
