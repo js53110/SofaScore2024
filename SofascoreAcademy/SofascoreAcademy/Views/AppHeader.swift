@@ -42,8 +42,8 @@ class AppHeader: BaseView {
         appLogo.snp.makeConstraints() {
             $0.height.equalTo(20)
             $0.width.equalTo(132)
-            $0.top.equalToSuperview().offset(14)
-            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().inset(14)
+            $0.leading.equalToSuperview().inset(16)
         }
         
         headerButtonSettings.snp.makeConstraints() {

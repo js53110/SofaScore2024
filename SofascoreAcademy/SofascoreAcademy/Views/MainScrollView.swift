@@ -1,6 +1,7 @@
+import Foundation
 import UIKit
 
-class CustomScrollView: UIScrollView {
+class MainScrollView: UIScrollView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +28,7 @@ class CustomScrollView: UIScrollView {
 }
 
 //MARK: Private Methods
-private extension CustomScrollView {
+private extension MainScrollView {
     
     func configureScrollView() {
         showsVerticalScrollIndicator = false

@@ -38,7 +38,7 @@ class TabItemView: BaseView {
         }
         
         tabLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
+            $0.top.equalToSuperview().inset(24)
             $0.bottom.equalToSuperview().inset(8)
             $0.leading.trailing.equalToSuperview().inset(8)
         }

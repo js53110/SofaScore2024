@@ -6,11 +6,6 @@ enum NetworkError: Error {
     case invalidData
 }
 
-enum ApiError: Error {
-    case invalidData
-    case invalidURL
-}
-
 enum FootballIncident {
     case footballGoal(FootballGoal)
     case footballCard(FootballCard)
@@ -24,13 +19,12 @@ class ApiClient {
     private let urlSession = URLSession.shared
     private let imageCache = ImageCache.shared
     
-    func getDataForSport(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
+    func getData(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
         let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
         
         let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
-            
         }
         
         var request = URLRequest(url: url)
@@ -46,12 +40,6 @@ class ApiClient {
     }
     
     func getLeagueLogoApi(tournamentId: Int) async -> Result<UIImage, NetworkError> {
-        let cacheKey: String = "league_\(tournamentId)"
-        
-        if let cachedImage = imageCache.image(forKey: cacheKey) {
-            return .success(cachedImage)
-        }
-        
         let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/image"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
@@ -66,7 +54,6 @@ class ApiClient {
                 return .failure(.invalidData)
             }
             
-            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)
@@ -74,12 +61,6 @@ class ApiClient {
     }
     
     func getTeamLogoApi(teamId: Int) async -> Result<UIImage, NetworkError> {
-        let cacheKey: String = "team_\(teamId)"
-        
-        if let cachedImage = imageCache.image(forKey: cacheKey) {
-            return .success(cachedImage)
-        }
-        
         let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/image"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
@@ -94,7 +75,6 @@ class ApiClient {
                 return .failure(.invalidData)
             }
             
-            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)

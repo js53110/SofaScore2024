@@ -51,7 +51,7 @@ class MatchView: BaseView {
         }
         
         divider.snp.makeConstraints() {
-            $0.leading.equalToSuperview().offset(63)
+            $0.leading.equalToSuperview().inset(63)
             $0.trailing.equalToSuperview()
             $0.top.bottom.equalToSuperview().inset(8)
         }
@@ -72,12 +72,12 @@ class MatchView: BaseView {
         }
         
         homeResult.snp.makeConstraints() {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().inset(10)
             $0.trailing.equalToSuperview().inset(16)
         }
     
         awayResult.snp.makeConstraints() {
-            $0.top.equalToSuperview().offset(30)
+            $0.top.equalToSuperview().inset(30)
             $0.trailing.equalToSuperview().inset(16)
         }
     }
@@ -90,11 +90,13 @@ extension MatchView {
         matchId = data.id
                 
         homeTeamLabel.update(
+            teamId: data.homeTeam.id,
             teamName: data.homeTeam.name,
             teamLogo: UIImage(),
             color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
         )
         awayTeamLabel.update(
+            teamId: data.awayTeam.id,
             teamName: data.awayTeam.name,
             teamLogo: UIImage(),
             color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
@@ -127,11 +129,11 @@ extension MatchView {
         timeStatusView.updateMatchTime(time: time)
     }
     
-    func updateHomeTeamLogo(teamLogo: UIImage) {
-        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-    }
-    
-    func updateAwayTeamLogo(teamLogo: UIImage) {
-        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-    }
+//    func updateHomeTeamLogo(teamLogo: UIImage) {
+//        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
+//    }
+//    
+//    func updateAwayTeamLogo(teamLogo: UIImage) {
+//        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
+//    }
 }

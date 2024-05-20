@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 import SofaAcademic
 import SnapKit
@@ -36,11 +37,11 @@ extension LeagueInfoViewHeader: BaseViewProtocol {
 //MARK: Additional methods
 extension LeagueInfoViewHeader {
     
-    func update(countryName: String, leagueName: String, leagueLogo: UIImage) {
-        leagueInfoView.update(countryName: countryName, leagueName: leagueName, leagueLogo: leagueLogo)
+    func update(countryName: String, leagueName: String, tournamentId: Int, leagueLogo: UIImage) {
+        leagueInfoView.update(countryName: countryName, leagueName: leagueName, tournamentId: tournamentId, leagueLogo: leagueLogo)
     }
     
-    func updateLeagueLogo(leagueLogo: UIImage) {
-        leagueInfoView.updateLeagueLogo(leagueLogo: leagueLogo)
-    }
+//    func updateLeagueLogo(leagueLogo: UIImage) {
+//        leagueInfoView.updateLeagueLogo(leagueLogo: leagueLogo)
+//    }
 }

@@ -6,16 +6,30 @@ class DatePickerCollectionView: UICollectionView {
     
     static let middleIndexPath: IndexPath = [0, 7]
     weak var datePickDelegate: DatePickDelegate?
+    private var selectedDate: String
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
+    init(selectedDate: String) {
+            self.selectedDate = selectedDate
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 0
+            
+        super.init(frame: .zero, collectionViewLayout: layout)
+            
+            setupCollectionView()
+        }
         
-        super.init(frame: frame, collectionViewLayout: layout)
-        
-        setupCollectionView()
-    }
+        // Override designated initializer
+        override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+            self.selectedDate = ""
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 0
+            
+            super.init(frame: frame, collectionViewLayout: layout)
+            
+            setupCollectionView()
+        }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -34,7 +48,13 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
             withReuseIdentifier: "DateCell", for: indexPath) as? DateViewCell {
             let dataForCell = Helpers.getDataForDateCell(index: indexPath.row)
             cell.update(data: dataForCell)
+            
+            if(cell.fullDate != selectedDate) {
+                cell.setSelected(false)
+            }
+            
             cell.backgroundColor = Colors.colorPrimaryVariant
+            
             if(firstStart) {
                 scrollToTodayDate()
                 if(indexPath == DatePickerCollectionView.middleIndexPath) {
@@ -58,16 +78,18 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         scrollToCenterForItem(at: indexPath, animated: true)
+        
         if let cell = collectionView.cellForItem(at: indexPath) as? DateViewCell {
             if(selectedDate != cell.fullDate){
-                selectedDate = cell.fullDate
+                selectedDate = cell.fullDate ?? selectedDate
                 
                 collectionView.visibleCells.forEach {
                     ($0 as? DateViewCell)?.setSelected(false)
                 }
-                cell.setSelected(true)
                 
-                datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate)
+                cell.setSelected(true)
+
+                datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate ?? selectedDate)
             }
         }
     }

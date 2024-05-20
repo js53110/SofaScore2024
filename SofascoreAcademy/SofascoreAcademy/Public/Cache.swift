@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 class ImageCache {
+    
     static let shared = ImageCache()
     private let cache = NSCache<NSString, UIImage>()
 
@@ -11,7 +12,7 @@ class ImageCache {
         cache.setObject(image, forKey: key as NSString)
     }
 
-    func image(forKey key: String) -> UIImage? {
-        return cache.object(forKey: key as NSString)
+    func getImage(forKey key: String) -> UIImage? {
+        cache.object(forKey: key as NSString)
     }
 }
