@@ -39,13 +39,18 @@ class TeamNameLogoView: BaseView {
 //MARK: Additional methods
 extension TeamNameLogoView {
     
-    func update(teamName: String, teamLogo: UIImage, color: UIColor) {
+    func update(teamId: Int, teamName: String, teamLogo: UIImage, color: UIColor) {
+        updateTeamLogo(teamId: teamId)
         teamNameLabel.text = teamName
         teamLogoImageView.image = teamLogo
         teamNameLabel.textColor = color
     }
     
-    func updateTeamLogo(teamLogo: UIImage) {
-        teamLogoImageView.image = teamLogo
+    func updateTeamLogo(teamId: Int) {
+        Task {
+            do {
+                teamLogoImageView.image = await ImageService().getTeamLogo(teamId: teamId)
+            }
+        }
     }
 }

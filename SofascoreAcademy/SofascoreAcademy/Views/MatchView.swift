@@ -89,11 +89,13 @@ extension MatchView {
         matchId = data.id
                 
         homeTeamLabel.update(
+            teamId: data.homeTeam.id,
             teamName: data.homeTeam.name,
             teamLogo: UIImage(),
             color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
         )
         awayTeamLabel.update(
+            teamId: data.awayTeam.id,
             teamName: data.awayTeam.name,
             teamLogo: UIImage(),
             color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
@@ -126,11 +128,11 @@ extension MatchView {
         timeStatusView.updateMatchTime(time: time)
     }
     
-    func updateHomeTeamLogo(teamLogo: UIImage) {
-        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-    }
-    
-    func updateAwayTeamLogo(teamLogo: UIImage) {
-        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-    }
+//    func updateHomeTeamLogo(teamLogo: UIImage) {
+//        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
+//    }
+//    
+//    func updateAwayTeamLogo(teamLogo: UIImage) {
+//        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
+//    }
 }

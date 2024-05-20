@@ -34,12 +34,6 @@ class ApiClient {
     }
     
     func getLeagueLogoApi(tournamentId: Int) async -> Result<UIImage, NetworkError> {
-        let cacheKey: String = "league_\(tournamentId)"
-        
-        if let cachedImage = imageCache.getImage(forKey: cacheKey) {
-            return .success(cachedImage)
-        }
-        
         let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/image"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
@@ -54,7 +48,6 @@ class ApiClient {
                 return .failure(.invalidData)
             }
             
-            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)
@@ -62,12 +55,6 @@ class ApiClient {
     }
     
     func getTeamLogoApi(teamId: Int) async -> Result<UIImage, NetworkError> {
-        let cacheKey: String = "team_\(teamId)"
-        
-        if let cachedImage = imageCache.getImage(forKey: cacheKey) {
-            return .success(cachedImage)
-        }
-        
         let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/image"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
@@ -82,7 +69,6 @@ class ApiClient {
                 return .failure(.invalidData)
             }
             
-            imageCache.setImage(logoImage, forKey: cacheKey)
             return .success(logoImage)
         } catch {
             return .failure(.invalidData)

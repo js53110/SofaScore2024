@@ -4,7 +4,7 @@ import UIKit
 import SofaAcademic
 
 class LeagueInfoView: BaseView {
- 
+    
     private let arrow: String = "pointer"
     
     private let stackView = UIStackView()
@@ -20,7 +20,7 @@ class LeagueInfoView: BaseView {
         stackView.addArrangedSubview(arrowImageView)
         stackView.addArrangedSubview(leagueNameLabel)
     }
-
+    
     override func styleViews() {
         backgroundColor = .white
         stackView.axis = .horizontal
@@ -31,7 +31,7 @@ class LeagueInfoView: BaseView {
         arrowImageView.image = UIImage(named: arrow)
         leagueLogoImageView.contentMode = .scaleAspectFit
     }
-
+    
     override func setupConstraints() {
         snp.makeConstraints() {
             $0.height.equalTo(56)
@@ -49,7 +49,7 @@ class LeagueInfoView: BaseView {
         
         stackView.snp.makeConstraints() {
             $0.leading.equalTo(leagueLogoImageView.snp.trailing).offset(32)
-            $0.centerY.equalToSuperview() 
+            $0.centerY.equalToSuperview()
         }
     }
 }
@@ -57,13 +57,18 @@ class LeagueInfoView: BaseView {
 //MARK: Additional methods
 extension LeagueInfoView {
     
-    func update(countryName: String, leagueName: String, leagueLogo: UIImage) {
+    func update(countryName: String, leagueName: String, tournamentId: Int, leagueLogo: UIImage) {
         countryNameLabel.text = countryName
         leagueNameLabel.text = leagueName
         leagueLogoImageView.image = leagueLogo
+        updateLeagueLogo(tournamentId: tournamentId)
     }
     
-    func updateLeagueLogo(leagueLogo: UIImage) {
-        leagueLogoImageView.image = leagueLogo
+    func updateLeagueLogo(tournamentId: Int) {
+        Task {
+            do {
+                leagueLogoImageView.image = await ImageService().getLeagueLogo(tournamentId: tournamentId)
+            }
+        }
     }
 }
