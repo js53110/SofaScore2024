@@ -232,7 +232,6 @@ private extension MainViewController {
     }
     
     func reloadData(selectedDate: String, selectedSport: SportSlug) {
-        print("call")
         Task {
             do {
                 switch selectedSport {
@@ -282,12 +281,3 @@ extension MainViewController: UIGestureRecognizerDelegate {
     }
 }
 
-extension MainViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return navigationController?.viewControllers.count ?? 0 > 1
-    }
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}

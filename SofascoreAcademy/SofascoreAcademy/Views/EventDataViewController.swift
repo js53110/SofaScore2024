@@ -139,7 +139,6 @@ extension EventDataViewController: TeamLogoLoadProtocol {
 extension EventDataViewController {
     
     func fetchEventIncidents(eventId: Int) {
-        print(eventId)
         Task {
             do {
                 let requestFootballEventIncidentsResult =  await ApiClient().getFootballIncidents(eventId: eventId)
