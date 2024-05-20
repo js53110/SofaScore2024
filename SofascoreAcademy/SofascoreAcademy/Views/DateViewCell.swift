@@ -12,9 +12,9 @@ class DateViewCell: UICollectionViewCell {
     private let dateLabel = UILabel()
     private let selectedIndicator = UIView()
     
-    private var dayOfWeek = ""
-    private var dateString = ""
-    var fullDate = ""
+    private var dayOfWeek: String?
+    private var dateString: String?
+    var fullDate: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

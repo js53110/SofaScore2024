@@ -19,7 +19,6 @@ class ApiClient {
         let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
         guard let url = URL(string: urlString) else {
             return .failure(.invalidURL)
-            
         }
         
         var request = URLRequest(url: url)
@@ -37,7 +36,7 @@ class ApiClient {
     func getLeagueLogoApi(tournamentId: Int) async -> Result<UIImage, NetworkError> {
         let cacheKey: String = "league_\(tournamentId)"
         
-        if let cachedImage = imageCache.image(forKey: cacheKey) {
+        if let cachedImage = imageCache.getImage(forKey: cacheKey) {
             return .success(cachedImage)
         }
         
@@ -65,7 +64,7 @@ class ApiClient {
     func getTeamLogoApi(teamId: Int) async -> Result<UIImage, NetworkError> {
         let cacheKey: String = "team_\(teamId)"
         
-        if let cachedImage = imageCache.image(forKey: cacheKey) {
+        if let cachedImage = imageCache.getImage(forKey: cacheKey) {
             return .success(cachedImage)
         }
         

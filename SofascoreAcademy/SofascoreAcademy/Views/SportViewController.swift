@@ -30,9 +30,7 @@ class SportViewController: UIViewController {
         setupDayInfo()
         setupTableView()
         
-        if(data.count == 0) {
-            setupNoDataView()
-        }
+        
     }
 }
 
@@ -199,6 +197,19 @@ private extension SportViewController {
         
         noDataLabel.font = Fonts.RobotoBold
         noDataLabel.textColor = Colors.surfaceLv2
+    }
+}
+
+extension SportViewController {
+    
+    func checkNoData() {
+        if(data.count == 0) {
+            setupNoDataView()
+        }
+    }
+    
+    func updateData() {
+        print("a")
     }
 }
 

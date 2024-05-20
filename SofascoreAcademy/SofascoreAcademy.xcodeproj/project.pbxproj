@@ -11,6 +11,7 @@
 		D21B982E2BE516B90094308A /* DatesMatchesDividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */; };
 		D21B98302BE5182E0094308A /* DateViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B982F2BE5182E0094308A /* DateViewCell.swift */; };
 		D21B98322BE53F0A0094308A /* DatePickDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B98312BE53F0A0094308A /* DatePickDelegate.swift */; };
+		D21D3F052BFBA9A10009D444 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21D3F042BFBA9A10009D444 /* ImageService.swift */; };
 		D23289A72BA0F65900139113 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A62BA0F65900139113 /* SnapKit */; };
 		D23289A92BA0F65900139113 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = D23289A82BA0F65900139113 /* SnapKit-Dynamic */; };
 		D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */; };
@@ -55,7 +56,7 @@
 		D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */; };
 		D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */; };
 		D2FECCB62BE96F3500D2A3A4 /* DayInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */; };
-		D2FECCB82BE9A1E800D2A3A4 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECCB72BE9A1E800D2A3A4 /* CustomScrollView.swift */; };
+		D2FECCB82BE9A1E800D2A3A4 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FECCB72BE9A1E800D2A3A4 /* MainScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesMatchesDividerView.swift; sourceTree = "<group>"; };
 		D21B982F2BE5182E0094308A /* DateViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewCell.swift; sourceTree = "<group>"; };
 		D21B98312BE53F0A0094308A /* DatePickDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickDelegate.swift; sourceTree = "<group>"; };
+		D21D3F042BFBA9A10009D444 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoView.swift; sourceTree = "<group>"; };
 		D23289AE2BA0F7B000139113 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D23289B02BA0F99600139113 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
@@ -106,7 +108,7 @@
 		D2FD91BC2BCD733C00591F6A /* AppHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderDelegate.swift; sourceTree = "<group>"; };
 		D2FD91C02BCD7FDB00591F6A /* MatchTapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTapDelegate.swift; sourceTree = "<group>"; };
 		D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfoProtocol.swift; sourceTree = "<group>"; };
-		D2FECCB72BE9A1E800D2A3A4 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		D2FECCB72BE9A1E800D2A3A4 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				D2896E4A2BE4DAFE0040CEBA /* ApiClient.swift */,
+				D21D3F042BFBA9A10009D444 /* ImageService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -236,7 +239,7 @@
 				D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */,
 				D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */,
 				D21B982F2BE5182E0094308A /* DateViewCell.swift */,
-				D2FECCB72BE9A1E800D2A3A4 /* CustomScrollView.swift */,
+				D2FECCB72BE9A1E800D2A3A4 /* MainScrollView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,7 +359,7 @@
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
 				D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */,
 				D23289B12BA0F99600139113 /* MatchView.swift in Sources */,
-				D2FECCB82BE9A1E800D2A3A4 /* CustomScrollView.swift in Sources */,
+				D2FECCB82BE9A1E800D2A3A4 /* MainScrollView.swift in Sources */,
 				D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */,
 				D2896E4B2BE4DAFE0040CEBA /* ApiClient.swift in Sources */,
 				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
@@ -364,6 +367,7 @@
 				D250367B2BE9552C005B3C1A /* LeagueLogoLoadProtocol.swift in Sources */,
 				D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */,
 				D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */,
+				D21D3F052BFBA9A10009D444 /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

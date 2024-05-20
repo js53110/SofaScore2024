@@ -50,7 +50,7 @@ class MatchView: BaseView {
         }
         
         divider.snp.makeConstraints() {
-            $0.leading.equalToSuperview().offset(63)
+            $0.leading.equalToSuperview().inset(63)
             $0.trailing.equalToSuperview()
             $0.top.bottom.equalToSuperview().inset(8)
         }
@@ -71,12 +71,12 @@ class MatchView: BaseView {
         }
         
         homeResult.snp.makeConstraints() {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().inset(10)
             $0.trailing.equalToSuperview().inset(16)
         }
     
         awayResult.snp.makeConstraints() {
-            $0.top.equalToSuperview().offset(30)
+            $0.top.equalToSuperview().inset(30)
             $0.trailing.equalToSuperview().inset(16)
         }
     }
