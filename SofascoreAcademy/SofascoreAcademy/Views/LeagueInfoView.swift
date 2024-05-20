@@ -26,6 +26,7 @@ class LeagueInfoView: BaseView {
         stackView.axis = .horizontal
         stackView.alignment = .center
         countryNameLabel.font = Fonts.RobotoBold
+        countryNameLabel.textColor = .black
         leagueNameLabel.textColor = Colors.surfaceLv2
         leagueNameLabel.font = Fonts.RobotoBold
         arrowImageView.image = UIImage(named: arrow)

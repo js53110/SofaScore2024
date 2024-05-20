@@ -20,6 +20,14 @@ public enum Helpers {
         return timeString
     }
     
+    static func convertTimestampToDate(timeStamp: TimeInterval) -> String {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
+    
     static func dateStringToTimestamp(_ dateString: String) -> TimeInterval? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
@@ -29,6 +37,22 @@ public enum Helpers {
         } else {
             return nil
         }
+    }
+    
+    static func convertTimeStampStringToDate(dateString: String) -> String {
+        if let timeStamp: TimeInterval = dateStringToTimestamp(dateString) {
+            let date = convertTimestampToDate(timeStamp: timeStamp)
+            return date
+        }
+        return ""
+    }
+    
+    static func convertTimeStampStringToTime(dateString: String) -> String {
+        if let timeStamp: TimeInterval = dateStringToTimestamp(dateString) {
+            let time = convertTimestampToTime(timeStamp: timeStamp)
+            return time
+        }
+        return ""
     }
     
     static func getTodaysDate() -> String {

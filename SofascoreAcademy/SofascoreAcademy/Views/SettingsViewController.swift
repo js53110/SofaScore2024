@@ -5,7 +5,13 @@ import SofaAcademic
 class SettingsViewController: UIViewController {
     
     private let blueContainer = UIView()
-    private let dismissButton = UIButton() 
+    private let settingsHeader = SettingsHeaderView()
+    private let aboutView = SettingsAboutView()
+    
+    private let appLogo = UIImageView(image: UIImage(named: "sofascore_logo_blue"))
+    
+    private let logoutView = UIView()
+    private let logoutText = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,6 +19,13 @@ class SettingsViewController: UIViewController {
         addViews()
         styleViews()
         setupConstraints()
+        setupGestureRecognizers()
+        settingsHeader.eventDelegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
 
@@ -21,17 +34,25 @@ extension SettingsViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(blueContainer)
-        view.addSubview(dismissButton)
+        view.addSubview(settingsHeader)
+        view.addSubview(aboutView)
+        view.addSubview(logoutView)
+        logoutView.addSubview(logoutText)
+        view.addSubview(appLogo)
     }
     
     func styleViews() {
         view.backgroundColor = .white
         blueContainer.backgroundColor = Colors.colorPrimaryDefault
-        
-        dismissButton.setTitle("Dismiss", for: .normal)
-        dismissButton.setTitleColor(Colors.colorPrimaryDefault, for: .normal)
-        dismissButton.titleLabel?.font = Fonts.RobotoRegular14
-        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
+        settingsHeader.backgroundColor = Colors.colorPrimaryDefault
+        logoutView.backgroundColor = .colorPrimaryDefault
+        logoutView.layer.cornerRadius = 10.0
+        logoutView.layer.masksToBounds = true
+        logoutText.text = "Logout"
+        logoutText.font = Fonts.RobotoBold16
+        logoutText.textColor = .white
+        logoutText.textAlignment = .center
+        appLogo.contentMode = .scaleAspectFit
     }
     
     func setupConstraints() {
@@ -40,17 +61,52 @@ extension SettingsViewController: BaseViewProtocol {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
-        dismissButton.snp.makeConstraints() {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(8)
-            $0.trailing.equalToSuperview().inset(16)
+        settingsHeader.snp.makeConstraints {
+            $0.top.equalTo(blueContainer.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(48)
         }
+        
+        aboutView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(settingsHeader.snp.bottom)
+            $0.height.equalTo(380)
+        }
+        
+        logoutView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(64)
+            $0.height.equalTo(48)
+            $0.top.equalTo(aboutView.snp.bottom).offset(16)
+        }
+        
+        logoutText.snp.makeConstraints {
+            $0.height.equalTo(20)
+            $0.top.bottom.equalToSuperview().inset(14)
+            $0.leading.trailing.equalToSuperview().inset(30)
+        }
+        
+        appLogo.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(48)
+            $0.leading.trailing.equalToSuperview().inset(114)
+            $0.height.equalTo(20)
+        }
+    }
+    
+    func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(logoutButtonTapped))
+        logoutView.addGestureRecognizer(tapGesture)
     }
 }
 
-// MARK: Private methods
-private extension SettingsViewController {
-    
-    @objc func dismissButtonTapped() {
-        dismiss(animated: true, completion: nil)
+extension SettingsViewController: ReturnButtonDelegate {
+    func reactToReturnTap() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension SettingsViewController {
+    @objc func logoutButtonTapped() {
+        Keychain.deleteTokenFromKeychain(token: "academy_token")
+        navigationController?.popToRootViewController(animated: true)
     }
 }

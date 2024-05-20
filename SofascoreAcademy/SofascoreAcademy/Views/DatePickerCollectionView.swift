@@ -91,6 +91,8 @@ private extension DatePickerCollectionView {
         //MARK: Assigning delegates
         self.delegate = self
         self.dataSource = self
+        
+        backgroundColor = Colors.colorPrimaryVariant
     }
     
     func scrollToTodayDate() {

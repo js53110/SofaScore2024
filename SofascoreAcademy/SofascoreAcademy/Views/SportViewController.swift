@@ -149,6 +149,7 @@ extension SportViewController: BaseViewProtocol{
     
     func styleViews() {
         view.backgroundColor = .white
+        tableView.backgroundColor = .white
     }
     
     func setupConstraints() {

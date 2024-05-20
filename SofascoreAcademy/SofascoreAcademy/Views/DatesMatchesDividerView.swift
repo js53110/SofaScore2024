@@ -35,6 +35,7 @@ class DatesMatchesDividerView: BaseView {
         dayLabel.font = UIFont.assistive
         eventsCountLabel.font = UIFont.assistive
         eventsCountLabel.textColor = Colors.surfaceLv2
+        dayLabel.textColor = .black
     }
 }
 
