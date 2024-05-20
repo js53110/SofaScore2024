@@ -180,9 +180,9 @@ extension MainViewController: DatePickDelegate {
         
         Task {
             do {
-                let requestDataFootballResult =  await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
-                let requestDataBasketballResult =  await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
-                let requestDataAmFootballResult =  await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
+                let requestDataFootballResult =  await ApiClient().getData(sportSlug: .football, date: selectedDate)
+                let requestDataBasketballResult =  await ApiClient().getData(sportSlug: .basketball, date: selectedDate)
+                let requestDataAmFootballResult =  await ApiClient().getData(sportSlug: .americanFootball, date: selectedDate)
                 
                 switch requestDataFootballResult {
                 case .success(let requestDataFootball):

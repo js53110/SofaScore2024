@@ -6,11 +6,6 @@ enum NetworkError: Error {
     case invalidData
 }
 
-enum ApiError: Error {
-    case invalidData
-    case invalidURL
-}
-
 class ApiClient {
     
     static let shared = ApiClient()
@@ -18,7 +13,7 @@ class ApiClient {
     private let urlSession = URLSession.shared
     private let imageCache = ImageCache.shared
     
-    func getDataForSport(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
+    func getData(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
         let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
         
         let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
