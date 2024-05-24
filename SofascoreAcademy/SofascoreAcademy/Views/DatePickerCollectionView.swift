@@ -4,9 +4,7 @@ import UIKit
 
 
 class DatePickerCollectionView: UICollectionView {
-    
-    static let noOfWeeksToDisplay = 2
-    
+        
     private var firstStart: Bool = true
     
     static let middleIndexPath: IndexPath = [0, 7]
