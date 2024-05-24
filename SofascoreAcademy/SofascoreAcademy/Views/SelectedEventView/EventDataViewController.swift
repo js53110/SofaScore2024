@@ -36,14 +36,15 @@ class EventDataViewController: UIViewController {
         styleViews()
         setupConstraints()
         
-//        fetchEventIncidents(eventId: matchData.id)
+        //        fetchEventIncidents(eventId: matchData.id)
         
         eventHeader.update(matchData: matchData)
         eventMatchupView.updateTeamNames(homeTeamName: matchData.homeTeam.name, awayTeamName: matchData.awayTeam.name)
         eventMatchupView.updateScoreView(matchData: matchData)
         
-        fetchLeagueLogoFromApi(tournamentId: matchData.tournament.id, section: 0)
-        fetchTeamsLogosFromApi(homeTeamId: matchData.homeTeam.id, awayTeamId: matchData.awayTeam.id, indexPath: [0,0])
+        eventHeader.updateLeagueLogo(tournamentId: matchData.tournament.id)
+        eventMatchupView.updateHomeTeamLogo(teamId: matchData.homeTeam.id)
+        eventMatchupView.updateAwayTeamLogo(teamId: matchData.awayTeam.id)
         
         if(matchData.status == "notstarted") {
             addNotStartedEventView()
@@ -87,23 +88,6 @@ extension EventDataViewController: BaseViewProtocol {
     }
 }
 
-// MARK: LeagueLogoLoadDelegate
-extension EventDataViewController: LeagueLogoLoadDelegate {
-    func fetchLeagueLogoFromApi(tournamentId: Int, section: Int) {
-        Task {
-            do {
-                let result =  await ApiClient().getLeagueLogoApi(tournamentId: tournamentId)
-                switch result {
-                case .success(let leagueLogo):
-                    eventHeader.updateLeagueLogo(leagueLogo: leagueLogo)
-                case .failure(let error):
-                    print("Error fetching league logo: \(error)")
-                }
-            }
-        }
-    }
-}
-
 // MARK: ReturnButtonDelegate
 extension EventDataViewController: ReturnButtonDelegate {
     func reactToReturnTap() {
@@ -111,31 +95,7 @@ extension EventDataViewController: ReturnButtonDelegate {
     }
 }
 
-// MARK: TeamLogoLoadProtocol
-extension EventDataViewController: TeamLogoLoadProtocol {
-    func fetchTeamsLogosFromApi(homeTeamId: Int, awayTeamId: Int, indexPath: IndexPath) {
-        Task {
-            do {
-                let homeTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: homeTeamId)
-                let awayTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: awayTeamId)
-                
-                switch homeTeamLogoResult {
-                case .success(let homeTeamLogo):
-                    switch awayTeamLogoResult {
-                    case .success(let awayTeamLogo):
-                        eventMatchupView.updateHomeTeamLogo(teamLogo: homeTeamLogo)
-                        eventMatchupView.updateAwayTeamLogo(teamLogo: awayTeamLogo)
-                    case .failure(let error):
-                        print("Error fetching away team logo: \(error)")
-                    }
-                case .failure(let error):
-                    print("Error fetching home team logo: \(error)")
-                }
-            }
-        }
-    }
-}
-
+// MARK: Additional methods
 extension EventDataViewController {
     
     func fetchEventIncidents(eventId: Int) {
@@ -149,7 +109,6 @@ extension EventDataViewController {
                 case .failure(let error):
                     print("Error fetching football data:", error)
                 }
-                
             }
         }
     }

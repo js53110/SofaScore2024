@@ -12,7 +12,7 @@ class EventScoreView: BaseView {
     private let homeTeamScore = UILabel()
     private let divider = UILabel()
     private let awayTeamScore = UILabel()
-        
+    
     override func addViews() {
         addSubview(score)
         
@@ -44,7 +44,7 @@ class EventScoreView: BaseView {
         matchStartTime.font = Fonts.RobotoCondensedRegularMicro
         matchStartTime.textColor = .black
         matchStartTime.textAlignment = .center
-
+        
     }
     
     override func setupConstraints() {
@@ -112,8 +112,8 @@ extension EventScoreView {
             time.text = Helpers.convertTimeStampStringToTime(dateString: matchData.startDate)
         }
     }
-
-
+    
+    
 }
 
 

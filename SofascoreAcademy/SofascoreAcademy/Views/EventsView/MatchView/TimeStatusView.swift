@@ -4,7 +4,7 @@ import UIKit
 import SofaAcademic
 
 class TimeStatusView: BaseView {
-        
+    
     private let timeView = UILabel()
     private let statusView = UILabel()
     
@@ -12,7 +12,7 @@ class TimeStatusView: BaseView {
         addSubview(timeView)
         addSubview(statusView)
     }
-
+    
     override func styleViews() {
         timeView.font = Fonts.RobotoCondensedRegularMicro
         timeView.textColor = Colors.surfaceLv2
@@ -20,7 +20,7 @@ class TimeStatusView: BaseView {
         statusView.font = Fonts.RobotoCondensedRegularMicro
         statusView.textAlignment = .center
     }
-
+    
     override func setupConstraints() {
         timeView.snp.makeConstraints() {
             $0.height.equalTo(16)

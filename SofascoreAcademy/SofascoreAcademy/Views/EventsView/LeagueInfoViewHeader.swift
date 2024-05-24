@@ -4,7 +4,7 @@ import SofaAcademic
 import SnapKit
 
 class LeagueInfoViewHeader: UITableViewHeaderFooterView {
-        
+    
     private let leagueInfoView = LeagueInfoView()
     static let identifier = "leagueHeader"
     
@@ -40,8 +40,4 @@ extension LeagueInfoViewHeader {
     func update(countryName: String, leagueName: String, tournamentId: Int, leagueLogo: UIImage) {
         leagueInfoView.update(countryName: countryName, leagueName: leagueName, tournamentId: tournamentId, leagueLogo: leagueLogo)
     }
-    
-//    func updateLeagueLogo(leagueLogo: UIImage) {
-//        leagueInfoView.updateLeagueLogo(leagueLogo: leagueLogo)
-//    }
 }

@@ -72,8 +72,12 @@ extension EventHeader {
         leagueInfoText.text = "\(matchData.tournament.sport.name), \(matchData.tournament.country.name), \(matchData.tournament.name), Round \(matchData.round)"
     }
     
-    func updateLeagueLogo(leagueLogo: UIImage) {
-        leagueLogoView.image = leagueLogo
+    func updateLeagueLogo(tournamentId: Int) {
+        Task {
+            do {
+                leagueLogoView.image = await ImageService().getLeagueLogo(tournamentId: tournamentId)
+            }
+        }
     }
 }
 

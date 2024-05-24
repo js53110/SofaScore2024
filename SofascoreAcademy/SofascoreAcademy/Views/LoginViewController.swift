@@ -183,7 +183,7 @@ extension LoginViewController: BaseViewProtocol {
         loginForm.backgroundColor = UIColor(white: 0, alpha: 0.7)
         loginForm.layer.cornerRadius = 15
         loginForm.layer.masksToBounds = true
-
+        
         
     }
     
@@ -305,14 +305,6 @@ extension LoginViewController {
             if(self.shouldSpin) {
                 self.spinImage()
             }
-        }
-    }
-}
-
-extension UIView {
-    func changeBackgroundColorWithFade(to color: UIColor) {
-        UIView.animate(withDuration: 1.5) {
-            self.backgroundColor = color
         }
     }
 }

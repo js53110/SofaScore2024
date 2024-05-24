@@ -7,17 +7,17 @@ class TeamNameLogoView: BaseView {
     
     private let teamNameLabel = UILabel()
     private let teamLogoImageView = UIImageView()
-
+    
     override func addViews() {
         addSubview(teamNameLabel)
         addSubview(teamLogoImageView)
     }
-
+    
     override func styleViews() {
         teamNameLabel.font = Fonts.RobotoRegular14
         teamLogoImageView.contentMode = .scaleAspectFit
     }
-
+    
     override func setupConstraints() {
         snp.makeConstraints() {
             $0.height.equalTo(16)

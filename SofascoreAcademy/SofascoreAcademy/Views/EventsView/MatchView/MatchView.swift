@@ -15,7 +15,7 @@ class MatchView: BaseView {
     private var awayTeam: String?
     private var awayTeamLogo: String?
     private var matchId: Int = 0
-
+    
     private var homeTeamLabel = TeamNameLogoView()
     private var awayTeamLabel = TeamNameLogoView()
     private var timeStatusView = TimeStatusView()
@@ -33,12 +33,12 @@ class MatchView: BaseView {
         addSubview(homeResult)
         addSubview(awayResult)
     }
-
+    
     override func styleViews() {
         backgroundColor = .white
         divider.backgroundColor = Colors.surfaceLv4
     }
-
+    
     override func setupConstraints() {
         snp.makeConstraints() {
             $0.height.equalTo(56)
@@ -75,7 +75,7 @@ class MatchView: BaseView {
             $0.top.equalToSuperview().inset(10)
             $0.trailing.equalToSuperview().inset(16)
         }
-    
+        
         awayResult.snp.makeConstraints() {
             $0.top.equalToSuperview().inset(30)
             $0.trailing.equalToSuperview().inset(16)
@@ -88,7 +88,7 @@ extension MatchView {
     
     func update(data: Event) {
         matchId = data.id
-                
+        
         homeTeamLabel.update(
             teamId: data.homeTeam.id,
             teamName: data.homeTeam.name,
@@ -128,12 +128,4 @@ extension MatchView {
     func updateMatchTime(time: Int) {
         timeStatusView.updateMatchTime(time: time)
     }
-    
-//    func updateHomeTeamLogo(teamLogo: UIImage) {
-//        homeTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-//    }
-//    
-//    func updateAwayTeamLogo(teamLogo: UIImage) {
-//        awayTeamLabel.updateTeamLogo(teamLogo: teamLogo)
-//    }
 }

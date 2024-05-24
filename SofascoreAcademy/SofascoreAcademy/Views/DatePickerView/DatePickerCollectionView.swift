@@ -4,7 +4,7 @@ import UIKit
 
 
 class DatePickerCollectionView: UICollectionView {
-        
+    
     private var firstStart: Bool = true
     
     static let middleIndexPath: IndexPath = [0, 7]
@@ -25,7 +25,6 @@ class DatePickerCollectionView: UICollectionView {
         setupCollectionView()
     }
     
-    // Override designated initializer
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         self.selectedDate = ""
         self.datesToDisplay = []
@@ -99,14 +98,6 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
                 datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate ?? selectedDate)
             }
         }
-    }
-}
-
-//MARK: UICollectionView - Private methods
-private extension UICollectionView {
-    
-    func scrollToCenterForItem(at indexPath: IndexPath, animated: Bool) {
-        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
     }
 }
 

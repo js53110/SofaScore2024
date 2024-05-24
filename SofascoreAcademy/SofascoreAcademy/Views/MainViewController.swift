@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
         setupView()
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-
+        
         displayEventsForSelectedDate(selectedDate: selectedDate)
         
     }
@@ -225,7 +225,7 @@ private extension MainViewController {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
     }
     
-
+    
     func loadData(selectedDate: String, selectedSport: SportSlug) {
         sportData = []
         self.selectedDate = selectedDate
@@ -275,7 +275,7 @@ extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return navigationController?.viewControllers.count ?? 0 > 1
     }
-
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }

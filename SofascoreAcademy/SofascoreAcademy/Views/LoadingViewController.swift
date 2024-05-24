@@ -52,7 +52,7 @@ extension LoadingViewController {
             } else {
                 let loginViewController = LoginViewController()
                 self.navigationController?.pushViewController(loginViewController, animated: true)
-
+                
             }
         }
     }

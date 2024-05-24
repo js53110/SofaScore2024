@@ -9,9 +9,7 @@ class EventMatchupView: BaseView {
     private let awayTeamView = EventTeamView()
     
     private let scoreView = EventScoreView()
-    
-    private var matchData: Event?
-    
+        
     weak var eventDelegate: ReturnButtonDelegate?
     
     override func addViews() {
@@ -53,12 +51,12 @@ extension EventMatchupView {
         awayTeamView.updateTeamName(teamName: awayTeamName)
     }
     
-    func updateHomeTeamLogo(teamLogo: UIImage) {
-        homeTeamView.updateTeamLogo(teamLogo: teamLogo)
+    func updateHomeTeamLogo(teamId: Int) {
+        homeTeamView.updateTeamLogo(teamId: teamId)
     }
     
-    func updateAwayTeamLogo(teamLogo: UIImage) {
-        awayTeamView.updateTeamLogo(teamLogo: teamLogo)
+    func updateAwayTeamLogo(teamId: Int) {
+        awayTeamView.updateTeamLogo(teamId: teamId)
     }
     
     func updateScoreView(matchData: Event) {

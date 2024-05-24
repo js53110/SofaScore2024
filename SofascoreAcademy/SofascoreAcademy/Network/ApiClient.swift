@@ -93,7 +93,7 @@ class ApiClient {
         
         do {
             let (data, _) = try await urlSession.data(for: request)
-            let response = try JSONDecoder().decode([FootballIncidentType].self, from: data)
+            _ = try JSONDecoder().decode([FootballIncidentType].self, from: data)
             return .success(1)
         } catch {
             return .failure(.invalidData)

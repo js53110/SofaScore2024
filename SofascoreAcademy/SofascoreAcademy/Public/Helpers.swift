@@ -89,39 +89,39 @@ public enum Helpers {
     
     //MARK: Data Functions
     static func getDatesDataForDisplay(numOfWeeks: Int) -> [DateData] {
-            var datesData: [DateData] = []
-            let currentDate = Date()
-            let calendar = Calendar.current
+        var datesData: [DateData] = []
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+        for i in -numOfWeeks * 7...numOfWeeks * 7 {
+            var dateComponents = DateComponents()
+            dateComponents.day = i
             
-            for i in -numOfWeeks * 7...numOfWeeks * 7 {
-                var dateComponents = DateComponents()
-                dateComponents.day = i
-                
-                guard let date = calendar.date(byAdding: dateComponents, to: currentDate) else {
-                    fatalError("Failed to calculate date")
-                }
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "EEEE"
-                
-                let dayOfWeek: String
-                if calendar.isDate(date, inSameDayAs: currentDate) {
-                    dayOfWeek = "TODAY"
-                } else {
-                    dayOfWeek = dateFormatter.string(from: date).prefix(3).uppercased()
-                }
-                
-                dateFormatter.dateFormat = "dd.MM."
-                let dateString = dateFormatter.string(from: date)
-                
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let fullDate = dateFormatter.string(from: date)
-                
-                let dateData = DateData(dayOfWeek: dayOfWeek, dateString: dateString, fullDate: fullDate)
-                datesData.append(dateData)
+            guard let date = calendar.date(byAdding: dateComponents, to: currentDate) else {
+                fatalError("Failed to calculate date")
             }
-            return datesData
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE"
+            
+            let dayOfWeek: String
+            if calendar.isDate(date, inSameDayAs: currentDate) {
+                dayOfWeek = "TODAY"
+            } else {
+                dayOfWeek = dateFormatter.string(from: date).prefix(3).uppercased()
+            }
+            
+            dateFormatter.dateFormat = "dd.MM."
+            let dateString = dateFormatter.string(from: date)
+            
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let fullDate = dateFormatter.string(from: date)
+            
+            let dateData = DateData(dayOfWeek: dayOfWeek, dateString: dateString, fullDate: fullDate)
+            datesData.append(dateData)
         }
+        return datesData
+    }
     
     static func groupEventsByTournament(eventsData: [Event]) -> [LeagueData] {
         var groupedEvents: [Int: (name: String, slug: String, country: String, id: Int, events: [Event])] = [:]
@@ -143,7 +143,6 @@ public enum Helpers {
         let groupedEventsArray = groupedEvents.values.map { eventData in
             return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, id: eventData.id, events: eventData.events)
         }
-        
         return groupedEventsArray
     }
     

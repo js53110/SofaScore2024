@@ -27,7 +27,7 @@ class ScoreLabel: BaseView {
     }
     
     override func setupConstraints() {
-        snp.makeConstraints() {
+        snp.makeConstraints() { 
             $0.width.equalTo(32)
             $0.height.equalTo(16)
         }

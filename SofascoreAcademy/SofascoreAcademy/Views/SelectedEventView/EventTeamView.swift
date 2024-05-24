@@ -7,7 +7,7 @@ class EventTeamView: BaseView {
     
     private let teamLogoImageView = UIImageView()
     private let teamNameLabel = UILabel()
-        
+    
     weak var eventDelegate: ReturnButtonDelegate?
     
     override func addViews() {
@@ -22,7 +22,7 @@ class EventTeamView: BaseView {
         teamNameLabel.numberOfLines = 0
         teamNameLabel.lineBreakMode = .byWordWrapping
     }
-
+    
     
     override func setupConstraints() {
         teamLogoImageView.snp.makeConstraints {
@@ -44,9 +44,13 @@ extension EventTeamView {
     func updateTeamName(teamName: String) {
         teamNameLabel.text = teamName
     }
-
-    func updateTeamLogo(teamLogo: UIImage) {
-        teamLogoImageView.image = teamLogo
+    
+    func updateTeamLogo(teamId: Int) {
+        Task {
+            do {
+                teamLogoImageView.image = await ImageService().getTeamLogo(teamId: teamId)
+            }
+        }
     }
 }
 

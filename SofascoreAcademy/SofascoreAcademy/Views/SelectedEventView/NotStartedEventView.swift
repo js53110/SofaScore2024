@@ -22,7 +22,7 @@ class NotStartedEventView: BaseView {
         textContainer.backgroundColor = .surfaceSurface2
         textContainer.layer.cornerRadius = 10.0 
         textContainer.layer.masksToBounds = true
-
+        
         textLabel.text = "No results yet."
         textLabel.font = Fonts.RobotoRegular14
         textLabel.textColor = .onSurfaceOnSurfaceLv2
