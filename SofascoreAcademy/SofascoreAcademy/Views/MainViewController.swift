@@ -3,18 +3,16 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-var firstStart: Bool = true
-
 class MainViewController: UIViewController {
     
+    private var sportData: [LeagueData] = []
     private var selectedDate: String = Helpers.getTodaysDate()
-    
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     private let refreshControl = UIRefreshControl()
     private let scrollView = MainScrollView()
     private let contentView = UIView()
     private let appHeader = AppHeader()
-    private let datePickerView = DatePickerCollectionView(selectedDate: Helpers.getTodaysDate())
+    private let datePickerView = DatePickerCollectionView(selectedDate: Helpers.getTodaysDate(), datesToDisplay: Helpers.getDatesDataForDisplay(numOfWeeks: 1))
     private let datesMatchesDivider = DatesMatchesDividerView()
     private var customTabBar: CustomTabView
     private let blueContainer = UIView()
@@ -24,7 +22,7 @@ class MainViewController: UIViewController {
     private var currentSportSlug: SportSlug
     
     init() {
-        self.currentChild = SportViewController(sportSlug: savedSportSlug)
+        self.currentChild = SportViewController(data: sportData)
         self.customTabBar = CustomTabView(sportSlug: savedSportSlug)
         self.currentSportSlug = savedSportSlug
         super.init(nibName: nil, bundle: nil)
@@ -86,7 +84,7 @@ extension MainViewController: BaseViewProtocol {
     
     func updateView() {
         currentChild.remove()
-        currentChild = SportViewController(sportSlug: currentSportSlug)
+        currentChild = SportViewController(data: sportData)
         currentChild.matchTapDelegate = self
         currentChild.dayInfoDelegate = self
         currentChild.checkNoData()
@@ -159,11 +157,7 @@ extension MainViewController: MatchTapDelegate {
 extension MainViewController: DatePickDelegate {
     
     func displayEventsForSelectedDate(selectedDate: String) {
-        self.selectedDate = selectedDate
-        currentChild.remove()
-        startLoading()
-        
-        reloadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
+        loadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
     }
 }
 
@@ -176,7 +170,7 @@ extension MainViewController: ParentSportSlugPicker {
             if let selectedSportSlug = selectedSportSlug {
                 startLoading()
                 currentSportSlug = selectedSportSlug
-                reloadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
+                loadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
             }
         }
     }
@@ -231,7 +225,13 @@ private extension MainViewController {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
     }
     
-    func reloadData(selectedDate: String, selectedSport: SportSlug) {
+
+    func loadData(selectedDate: String, selectedSport: SportSlug) {
+        sportData = []
+        self.selectedDate = selectedDate
+        currentChild.remove()
+        startLoading()
+        
         Task {
             do {
                 switch selectedSport {
@@ -240,7 +240,7 @@ private extension MainViewController {
                     switch requestDataFootballResult {
                     case .success(let requestDataFootball):
                         let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
-                        footballData = dataFootball
+                        sportData = dataFootball
                     case .failure(let error):
                         print("Error fetching football data:", error)
                     }
@@ -249,7 +249,7 @@ private extension MainViewController {
                     switch requestDataBasketballResult {
                     case .success(let requestDataBasketball):
                         let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
-                        basketballData = dataBasketball
+                        sportData = dataBasketball
                     case .failure(let error):
                         print("Error fetching basketball data:", error)
                     }
@@ -258,7 +258,7 @@ private extension MainViewController {
                     switch requestDataAmFootballResult {
                     case .success(let requestDataAmFootball):
                         let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
-                        americanFootballData = dataAmFootball
+                        sportData = dataAmFootball
                     case .failure(let error):
                         print("Error fetching American football data:", error)
                     }

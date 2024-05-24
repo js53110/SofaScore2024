@@ -49,8 +49,3 @@ struct LeagueData {
     let events: [Event]
 }
 
-var footballData: [LeagueData] = []
-var basketballData: [LeagueData] = []
-var americanFootballData: [LeagueData] = []
-
-//var footballIncidents = []

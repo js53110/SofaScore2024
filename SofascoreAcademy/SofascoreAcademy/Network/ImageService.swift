@@ -18,10 +18,9 @@ class ImageService {
                 imageCache.setImage(leagueLogo, forKey: cacheKey)
                 return leagueLogo
             case .failure:
-                print("Error fetching league logo")
+                return UIImage(named: "placeholder") ?? UIImage()
             }
         }
-        return UIImage()
     }
     
     func getTeamLogo(teamId: Int) async -> UIImage {
@@ -37,9 +36,8 @@ class ImageService {
                 imageCache.setImage(teamLogo, forKey: cacheKey)
                 return teamLogo
             case .failure:
-                print("Error fetching team logo")
+                return UIImage(named: "placeholder") ?? UIImage()
             }
         }
-        return UIImage()
     }
 }
