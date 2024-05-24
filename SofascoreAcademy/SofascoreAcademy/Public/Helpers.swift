@@ -69,7 +69,6 @@ public enum Helpers {
             let currentDate = Date()
             let calendar = Calendar.current
             
-            // Loop to cover one week before, current day, and one week after
             for i in -numOfWeeks * 7...numOfWeeks * 7 {
                 var dateComponents = DateComponents()
                 dateComponents.day = i
