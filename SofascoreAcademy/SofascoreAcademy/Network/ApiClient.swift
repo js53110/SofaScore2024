@@ -6,7 +6,7 @@ enum NetworkError: Error {
     case invalidData
 }
 
-enum FootballIncident {
+enum FootballIncident { // TO DO
     case footballGoal(FootballGoal)
     case footballCard(FootballCard)
     case footballPeriod(FootballPeriod)
