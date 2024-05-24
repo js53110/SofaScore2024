@@ -2,34 +2,43 @@ import Foundation
 import SofaAcademic
 import UIKit
 
+
 class DatePickerCollectionView: UICollectionView {
+    
+    static let noOfWeeksToDisplay = 2
+    
+    private var firstStart: Bool = true
     
     static let middleIndexPath: IndexPath = [0, 7]
     weak var datePickDelegate: DatePickDelegate?
     private var selectedDate: String
+    private let datesToDisplay: [DateData]
     
-    init(selectedDate: String) {
-            self.selectedDate = selectedDate
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 0
-            
-        super.init(frame: .zero, collectionViewLayout: layout)
-            
-            setupCollectionView()
-        }
+    
+    init(selectedDate: String, datesToDisplay: [DateData]) {
+        self.selectedDate = selectedDate
+        self.datesToDisplay = datesToDisplay
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         
-        // Override designated initializer
-        override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-            self.selectedDate = ""
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 0
-            
-            super.init(frame: frame, collectionViewLayout: layout)
-            
-            setupCollectionView()
-        }
+        super.init(frame: .zero, collectionViewLayout: layout)
+        
+        setupCollectionView()
+    }
+    
+    // Override designated initializer
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        self.selectedDate = ""
+        self.datesToDisplay = []
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        
+        super.init(frame: frame, collectionViewLayout: layout)
+        
+        setupCollectionView()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -40,13 +49,13 @@ class DatePickerCollectionView: UICollectionView {
 extension DatePickerCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        datesToDisplay.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "DateCell", for: indexPath) as? DateViewCell {
-            let dataForCell = Helpers.getDataForDateCell(index: indexPath.row)
+            let dataForCell = datesToDisplay[indexPath.row]
             cell.update(data: dataForCell)
             
             if(cell.fullDate != selectedDate) {
@@ -88,7 +97,7 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
                 }
                 
                 cell.setSelected(true)
-
+                
                 datePickDelegate?.displayEventsForSelectedDate(selectedDate: cell.fullDate ?? selectedDate)
             }
         }

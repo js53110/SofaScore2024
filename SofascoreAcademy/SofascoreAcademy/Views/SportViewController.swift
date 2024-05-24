@@ -12,8 +12,8 @@ class SportViewController: UIViewController {
     weak var matchTapDelegate: MatchTapDelegate?
     weak var dayInfoDelegate: DayInfoProtocol?
     
-    init(sportSlug: SportSlug) {
-        self.data = Helpers.determineDataForDisplay(sportSlug: sportSlug)
+    init(data: [LeagueData]) {
+        self.data = data
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,8 +29,6 @@ class SportViewController: UIViewController {
         setupConstraints()
         setupDayInfo()
         setupTableView()
-        
-        
     }
 }
 
