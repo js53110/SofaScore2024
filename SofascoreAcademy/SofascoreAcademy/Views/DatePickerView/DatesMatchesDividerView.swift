@@ -33,13 +33,13 @@ class DatesMatchesDividerView: BaseView {
     }
     
     override func styleViews() {
-        backgroundColor = Colors.surface0
-        dayLabel.font = UIFont.assistive
+        backgroundColor = .surfaceSurface0
+        dayLabel.font = .assistive
         dayLabel.textAlignment = .left
         dayLabel.textColor = .black
         eventsCountLabel.textAlignment = .right
-        eventsCountLabel.font = UIFont.assistive
-        eventsCountLabel.textColor = Colors.surfaceLv2
+        eventsCountLabel.font = .assistive
+        eventsCountLabel.textColor = .onSurfaceOnSurfaceLv2
         dayLabel.textColor = .black
     }
 }

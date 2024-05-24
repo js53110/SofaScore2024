@@ -171,9 +171,9 @@ public enum Helpers {
     static func determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: String?) -> UIColor {
         switch matchWinner {
         case "away":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         case "draw":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         default:
             return .black
         }
@@ -183,9 +183,9 @@ public enum Helpers {
     static func determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: String?) -> UIColor {
         switch matchWinner {
         case "home":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         case "draw":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         default:
             return .black
         }
@@ -194,9 +194,9 @@ public enum Helpers {
     static func determineHomeTeamScoreColorBasedOnMatchStatus(matchStatus: String) -> UIColor {
         switch matchStatus {
         case "inprogress":
-            return Colors.red
+            return .red
         case "draw":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         default:
             return .black
         }
@@ -205,9 +205,9 @@ public enum Helpers {
     static func determineAwayTeamScoreColorBasedOnMatchStatus(matchStatus: String) -> UIColor {
         switch matchStatus {
         case "inprogress":
-            return Colors.red
+            return .red
         case "draw":
-            return Colors.surfaceLv2
+            return .onSurfaceOnSurfaceLv2
         default:
             return .black
         }

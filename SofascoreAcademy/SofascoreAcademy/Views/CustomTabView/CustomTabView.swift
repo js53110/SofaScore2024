@@ -34,7 +34,7 @@ class CustomTabView: BaseView {
     }
     
     override func styleViews() {
-        backgroundColor = Colors.colorPrimaryDefault
+        backgroundColor = .colorPrimaryDefault
         stackView.distribution = .fillEqually
         tabIndicator.backgroundColor = .white
         tabIndicator.layer.cornerRadius = 2

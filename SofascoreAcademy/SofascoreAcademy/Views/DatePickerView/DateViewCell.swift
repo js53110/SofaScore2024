@@ -54,14 +54,14 @@ extension DateViewCell: BaseViewProtocol {
     
     func styleViews() {
         dayLabel.text = dayOfWeek
-        dayLabel.font = Fonts.RobotoCondensedRegularMicro
+        dayLabel.font = .micro
         dayLabel.textColor = .white
         dayLabel.textAlignment = .center
         
         dateLabel.text = dateString
         dateLabel.textColor = .white
         dateLabel.textAlignment = .center
-        dateLabel.font = Fonts.RobotoCondensedRegularMicro
+        dateLabel.font = .micro
         
         selectedIndicator.backgroundColor = .white
         selectedIndicator.layer.cornerRadius = 2

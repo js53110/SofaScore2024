@@ -148,8 +148,8 @@ private extension SportViewController {
         }
         noDataLabel.text = "No events found for selected date"
         
-        noDataLabel.font = Fonts.RobotoBold
-        noDataLabel.textColor = Colors.surfaceLv2
+        noDataLabel.font = .action
+        noDataLabel.textColor = .onSurfaceOnSurfaceLv2
     }
 }
 

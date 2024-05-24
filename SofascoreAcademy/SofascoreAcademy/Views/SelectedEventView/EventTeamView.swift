@@ -16,7 +16,7 @@ class EventTeamView: BaseView {
     }
     
     override func styleViews() {
-        teamNameLabel.font = Fonts.RobotoBold12
+        teamNameLabel.font = .assistive
         teamNameLabel.textColor = .black
         teamNameLabel.textAlignment = .center
         teamNameLabel.numberOfLines = 0

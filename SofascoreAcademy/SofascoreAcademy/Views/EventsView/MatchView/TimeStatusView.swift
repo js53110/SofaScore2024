@@ -14,10 +14,10 @@ class TimeStatusView: BaseView {
     }
     
     override func styleViews() {
-        timeView.font = Fonts.RobotoCondensedRegularMicro
-        timeView.textColor = Colors.surfaceLv2
+        timeView.font = .micro
+        timeView.textColor = .onSurfaceOnSurfaceLv2
         timeView.textAlignment = .center
-        statusView.font = Fonts.RobotoCondensedRegularMicro
+        statusView.font = .micro
         statusView.textAlignment = .center
     }
     
@@ -45,7 +45,7 @@ extension TimeStatusView {
         case "inprogress":
             statusView.textColor = .red
         default:
-            statusView.textColor = Colors.surfaceLv2
+            statusView.textColor = .onSurfaceOnSurfaceLv2
         }
     }
     
@@ -54,7 +54,7 @@ extension TimeStatusView {
         case "inprogress":
             statusView.textColor = .red
         default:
-            statusView.textColor = Colors.surfaceLv2
+            statusView.textColor = .onSurfaceOnSurfaceLv2
         }
         statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
     }

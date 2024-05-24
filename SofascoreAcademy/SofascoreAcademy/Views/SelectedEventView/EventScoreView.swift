@@ -25,23 +25,23 @@ class EventScoreView: BaseView {
     }
     
     override func styleViews() {
-        homeTeamScore.font = Fonts.RobotoBold32
+        homeTeamScore.font = .headline1Desktop
         homeTeamScore.textAlignment = .right
         homeTeamScore.textColor = .black
         
-        divider.font = Fonts.RobotoBold32
+        divider.font = .headline1Desktop
         divider.textAlignment = .center
-        divider.textColor = Colors.surfaceLv2
+        divider.textColor = .onSurfaceOnSurfaceLv2
         
-        awayTeamScore.font = Fonts.RobotoBold32
+        awayTeamScore.font = .headline1Desktop
         awayTeamScore.textAlignment = .left
         awayTeamScore.textColor = .black
         
-        time.font = Fonts.RobotoCondensedRegularMicro
+        time.font = .micro
         time.textColor = .black
         time.textAlignment = .center
         
-        matchStartTime.font = Fonts.RobotoCondensedRegularMicro
+        matchStartTime.font = .micro
         matchStartTime.textColor = .black
         matchStartTime.textAlignment = .center
         
@@ -99,13 +99,13 @@ extension EventScoreView {
             }
             
             time.text = "Full time"
-            time.textColor = Colors.surfaceLv2
+            time.textColor = .onSurfaceOnSurfaceLv2
             divider.text = "-"
             
             if matchData.winnerCode == "home" {
-                awayTeamScore.textColor = Colors.surfaceLv2
+                awayTeamScore.textColor = .onSurfaceOnSurfaceLv2
             } else if matchData.winnerCode == "away" {
-                homeTeamScore.textColor = Colors.surfaceLv2
+                homeTeamScore.textColor = .onSurfaceOnSurfaceLv2
             }
         } else {
             matchStartTime.text = Helpers.convertTimeStampStringToDate(dateString: matchData.startDate)

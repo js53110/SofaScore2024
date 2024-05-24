@@ -44,13 +44,13 @@ extension SettingsViewController: BaseViewProtocol {
     
     func styleViews() {
         view.backgroundColor = .white
-        blueContainer.backgroundColor = Colors.colorPrimaryDefault
-        settingsHeader.backgroundColor = Colors.colorPrimaryDefault
+        blueContainer.backgroundColor = .colorPrimaryDefault
+        settingsHeader.backgroundColor = .colorPrimaryDefault
         logoutView.backgroundColor = .colorPrimaryDefault
         logoutView.layer.cornerRadius = 10.0
         logoutView.layer.masksToBounds = true
         logoutText.text = "Logout"
-        logoutText.font = Fonts.RobotoBold16
+        logoutText.font = .action
         logoutText.textColor = .white
         logoutText.textAlignment = .center
         appLogo.contentMode = .scaleAspectFit

@@ -36,7 +36,7 @@ class MatchView: BaseView {
     
     override func styleViews() {
         backgroundColor = .white
-        divider.backgroundColor = Colors.surfaceLv4
+        divider.backgroundColor = .onSurfaceOnSurfaceLv4
     }
     
     override func setupConstraints() {

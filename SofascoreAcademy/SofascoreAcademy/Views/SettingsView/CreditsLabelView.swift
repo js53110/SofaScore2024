@@ -21,11 +21,11 @@ class CreditsLabelView: BaseView {
     }
     
     override func styleViews() {
-        upperLabel.font = Fonts.RobotoBold12
+        upperLabel.font = .assistive
         upperLabel.textColor = .onSurfaceOnSurfaceLv2
         upperLabel.textAlignment = .left
         
-        lowerLabel.font = Fonts.RobotoRegular14
+        lowerLabel.font = .headline3
         lowerLabel.textColor = .black
         lowerLabel.textAlignment = .left
     }

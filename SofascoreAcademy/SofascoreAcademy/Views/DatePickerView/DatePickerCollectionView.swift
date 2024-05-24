@@ -59,7 +59,7 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
                 cell.setSelected(false)
             }
             
-            cell.backgroundColor = Colors.colorPrimaryVariant
+            cell.backgroundColor = .colorPrimaryVariant
             
             if(firstStart) {
                 scrollToTodayDate()
@@ -112,7 +112,7 @@ private extension DatePickerCollectionView {
         self.delegate = self
         self.dataSource = self
         
-        backgroundColor = Colors.colorPrimaryVariant
+        backgroundColor = .colorPrimaryVariant
     }
     
     func scrollToTodayDate() {

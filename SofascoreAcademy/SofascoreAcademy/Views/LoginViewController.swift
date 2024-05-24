@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: Colors.surfaceLv2])
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.onSurfaceOnSurfaceLv2])
         textField.keyboardType = .emailAddress
         textField.borderStyle = .roundedRect
         textField.textContentType = .oneTimeCode
@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "Password",
-            attributes: [NSAttributedString.Key.foregroundColor: Colors.surfaceLv2])
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.onSurfaceOnSurfaceLv2])
         textField.isSecureTextEntry = true
         textField.textContentType = .oneTimeCode
         textField.borderStyle = .roundedRect
@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = Fonts.RobotoBold16
+        button.titleLabel?.font = .action
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
     }
     
     func setupView() {
-        view.backgroundColor = Colors.colorPrimaryDefault
+        view.backgroundColor = .colorPrimaryDefault
         addViews()
         styleViews()
         setupConstraints()

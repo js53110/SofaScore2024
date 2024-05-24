@@ -25,10 +25,10 @@ class LeagueInfoView: BaseView {
         backgroundColor = .white
         stackView.axis = .horizontal
         stackView.alignment = .center
-        countryNameLabel.font = Fonts.RobotoBold
+        countryNameLabel.font = .headline3
         countryNameLabel.textColor = .black
-        leagueNameLabel.textColor = Colors.surfaceLv2
-        leagueNameLabel.font = Fonts.RobotoBold
+        leagueNameLabel.textColor = .onSurfaceOnSurfaceLv2
+        leagueNameLabel.font = .headline3
         arrowImageView.image = UIImage(named: arrow)
         leagueLogoImageView.contentMode = .scaleAspectFit
     }

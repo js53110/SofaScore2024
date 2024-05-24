@@ -61,7 +61,7 @@ extension EventDataViewController: BaseViewProtocol {
     }
     
     func styleViews() {
-        view.backgroundColor = Colors.surface0
+        view.backgroundColor = .surfaceSurface0
         whiteContainer.backgroundColor = .white
         eventHeader.backgroundColor = .white
         eventMatchupView.backgroundColor = .white

@@ -24,7 +24,7 @@ class NotStartedEventView: BaseView {
         textContainer.layer.masksToBounds = true
         
         textLabel.text = "No results yet."
-        textLabel.font = Fonts.RobotoRegular14
+        textLabel.font = .bodyParagraph
         textLabel.textColor = .onSurfaceOnSurfaceLv2
         textLabel.textAlignment = .center
         
@@ -32,7 +32,7 @@ class NotStartedEventView: BaseView {
         tournamentDetailsBox.layer.borderWidth = 2.0
         
         tournamentDetailsText.text = "View Tournament Details"
-        tournamentDetailsText.font = Fonts.RobotoBold16
+        tournamentDetailsText.font = .headline2
         tournamentDetailsText.textColor = .colorPrimaryDefault
         tournamentDetailsText.textAlignment = .center
     }

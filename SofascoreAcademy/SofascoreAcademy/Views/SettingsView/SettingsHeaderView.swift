@@ -20,7 +20,7 @@ class SettingsHeaderView: BaseView {
     override func styleViews() {
         title.textColor = .white
         title.text = "Settings"
-        title.font = Fonts.RobotoBold20
+        title.font = .headline1
         title.textAlignment = .left
         
         backButtonImage.image = UIImage(named: "back_icon_white")

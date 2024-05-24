@@ -28,8 +28,8 @@ class EventHeader: BaseView {
         
         leagueLogoView.contentMode = .scaleAspectFit
         
-        leagueInfoText.textColor = Colors.surfaceLv2
-        leagueInfoText.font = Fonts.RobotoCondensedRegularMicro
+        leagueInfoText.textColor = .onSurfaceOnSurfaceLv2
+        leagueInfoText.font = .micro
     }
     
     override func setupConstraints() {

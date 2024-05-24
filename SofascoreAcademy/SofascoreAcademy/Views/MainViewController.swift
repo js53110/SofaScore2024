@@ -79,7 +79,7 @@ extension MainViewController: BaseViewProtocol {
     func styleViews() {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
-        blueContainer.backgroundColor = Colors.colorPrimaryDefault
+        blueContainer.backgroundColor = .colorPrimaryDefault
     }
     
     func updateView() {

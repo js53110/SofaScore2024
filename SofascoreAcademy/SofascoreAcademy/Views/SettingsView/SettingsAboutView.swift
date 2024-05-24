@@ -32,17 +32,17 @@ class SettingsAboutView: BaseView {
     
     override func styleViews() {
         title.text = "About"
-        title.font = Fonts.RobotoBold20
+        title.font = .headline1
         title.textColor = .black
         title.textAlignment = .left
    
         detailsTitle.text = "Sofascore Academy"
-        detailsTitle.font = Fonts.RobotoBold16
+        detailsTitle.font = .headline2
         detailsTitle.textColor = .black
         detailsTitle.textAlignment = .left
         
         detailsDescription.text = "Class 2024"
-        detailsDescription.font = Fonts.RobotoRegular14
+        detailsDescription.font = .headline3
         detailsDescription.textColor = .black
         detailsDescription.textAlignment = .left
         
