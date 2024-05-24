@@ -211,6 +211,84 @@
 			path = SofascoreAcademy;
 			sourceTree = "<group>";
 		};
+		D26654472C00C52900591AE9 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				D29B8D062BC4BB0D0000CA42 /* SettingsViewController.swift */,
+				D239C0C42BFA583700128E01 /* SettingsHeaderView.swift */,
+				D23180232BFA5EA400DFE549 /* SettingsAboutView.swift */,
+				D23180252BFA67BD00DFE549 /* CreditsLabelView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		D26654482C00C55E00591AE9 /* SelectedEventView */ = {
+			isa = PBXGroup;
+			children = (
+				D29B8D082BC4C2A70000CA42 /* EventDataViewController.swift */,
+				D2DBE0162BF9655400C685DC /* EventHeader.swift */,
+				D239C0B22BF96D1400128E01 /* EventMatchupView.swift */,
+				D239C0B42BF96FC500128E01 /* EventTeamView.swift */,
+				D239C0B62BF9773000128E01 /* EventScoreView.swift */,
+				D239C0C22BFA4DD900128E01 /* NotStartedEventView.swift */,
+			);
+			path = SelectedEventView;
+			sourceTree = "<group>";
+		};
+		D26654492C00C58000591AE9 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */,
+				D2DAEEA02BF91048008FD27B /* LoginViewController.swift */,
+				D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */,
+				D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */,
+				D26654452BFBBE4000591AE9 /* MainScrollView.swift */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		D266544A2C00C5BA00591AE9 /* CustomTabView */ = {
+			isa = PBXGroup;
+			children = (
+				D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */,
+				D2807A8D2BC84CF700F590CA /* TabItemView.swift */,
+			);
+			path = CustomTabView;
+			sourceTree = "<group>";
+		};
+		D266544B2C00C5DC00591AE9 /* EventsView */ = {
+			isa = PBXGroup;
+			children = (
+				D236A63B2B9B598700C2ADB4 /* SportViewController.swift */,
+				D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */,
+				D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */,
+				D266544D2C00C65800591AE9 /* MatchView */,
+			);
+			path = EventsView;
+			sourceTree = "<group>";
+		};
+		D266544C2C00C62000591AE9 /* DatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */,
+				D21B982F2BE5182E0094308A /* DateViewCell.swift */,
+				D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */,
+			);
+			path = DatePickerView;
+			sourceTree = "<group>";
+		};
+		D266544D2C00C65800591AE9 /* MatchView */ = {
+			isa = PBXGroup;
+			children = (
+				D23289B02BA0F99600139113 /* MatchView.swift */,
+				D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */,
+				D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */,
+				D23289B22BA103F700139113 /* TeamNameLogoView.swift */,
+				D23289B62BA10CDF00139113 /* ScoreLabel.swift */,
+			);
+			path = MatchView;
+			sourceTree = "<group>";
+		};
 		D2807A872BC8494B00F590CA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,34 +338,12 @@
 		D29B8CF92BC45A440000CA42 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D2B91A632BA1B7E30004B74A /* TimeStatusView.swift */,
-				D29B8D062BC4BB0D0000CA42 /* SettingsViewController.swift */,
-				D23289B02BA0F99600139113 /* MatchView.swift */,
-				D26EF6FC2BB3577C00A49861 /* LeagueInfoViewHeader.swift */,
-				D23289B22BA103F700139113 /* TeamNameLogoView.swift */,
-				D26EF6FA2BB25DFB00A49861 /* MatchViewCell.swift */,
-				D23289AC2BA0F68D00139113 /* LeagueInfoView.swift */,
-				D236A63B2B9B598700C2ADB4 /* SportViewController.swift */,
-				D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */,
-				D23289B62BA10CDF00139113 /* ScoreLabel.swift */,
-				D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */,
-				D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */,
-				D29B8D082BC4C2A70000CA42 /* EventDataViewController.swift */,
-				D2807A8D2BC84CF700F590CA /* TabItemView.swift */,
-				D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */,
-				D21B982B2BE50DC90094308A /* DatePickerCollectionView.swift */,
-				D21B982D2BE516B90094308A /* DatesMatchesDividerView.swift */,
-				D21B982F2BE5182E0094308A /* DateViewCell.swift */,
-				D2DAEEA02BF91048008FD27B /* LoginViewController.swift */,
-				D2DBE0162BF9655400C685DC /* EventHeader.swift */,
-				D239C0B22BF96D1400128E01 /* EventMatchupView.swift */,
-				D239C0B42BF96FC500128E01 /* EventTeamView.swift */,
-				D239C0B62BF9773000128E01 /* EventScoreView.swift */,
-				D239C0C22BFA4DD900128E01 /* NotStartedEventView.swift */,
-				D239C0C42BFA583700128E01 /* SettingsHeaderView.swift */,
-				D23180232BFA5EA400DFE549 /* SettingsAboutView.swift */,
-				D23180252BFA67BD00DFE549 /* CreditsLabelView.swift */,
-				D26654452BFBBE4000591AE9 /* MainScrollView.swift */,
+				D26654492C00C58000591AE9 /* MainView */,
+				D266544A2C00C5BA00591AE9 /* CustomTabView */,
+				D266544C2C00C62000591AE9 /* DatePickerView */,
+				D266544B2C00C5DC00591AE9 /* EventsView */,
+				D26654482C00C55E00591AE9 /* SelectedEventView */,
+				D26654472C00C52900591AE9 /* SettingsView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
