@@ -36,7 +36,7 @@ class EventDataViewController: UIViewController {
         styleViews()
         setupConstraints()
         
-        //        fetchEventIncidents(eventId: matchData.id)
+        //fetchEventIncidents(eventId: matchData.id)
         
         eventHeader.update(matchData: matchData)
         eventMatchupView.updateTeamNames(homeTeamName: matchData.homeTeam.name, awayTeamName: matchData.awayTeam.name)

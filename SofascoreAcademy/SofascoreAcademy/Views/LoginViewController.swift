@@ -109,7 +109,6 @@ class LoginViewController: UIViewController {
                 
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: true)
-                // how to reset this viewcontroller, becasue when i log ou i want ot return back here
             }
         } else {
             showErrorAlert()

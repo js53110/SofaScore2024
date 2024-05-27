@@ -68,7 +68,6 @@ extension SportViewController: UITableViewDataSource {
                 tournamentId: sectionData.id
             )
             
-            //            fetchLeagueLogoFromApi(tournamentId: sectionData.id, section: section)
             return headerView
         } else {
             fatalError("Failed to dequeue header")
