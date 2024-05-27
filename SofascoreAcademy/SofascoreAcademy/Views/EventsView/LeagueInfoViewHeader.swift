@@ -37,7 +37,7 @@ extension LeagueInfoViewHeader: BaseViewProtocol {
 //MARK: Additional methods
 extension LeagueInfoViewHeader {
     
-    func update(countryName: String, leagueName: String, tournamentId: Int, leagueLogo: UIImage) {
-        leagueInfoView.update(countryName: countryName, leagueName: leagueName, tournamentId: tournamentId, leagueLogo: leagueLogo)
+    func update(countryName: String, leagueName: String, tournamentId: Int) {
+        leagueInfoView.update(countryName: countryName, leagueName: leagueName, tournamentId: tournamentId)
     }
 }

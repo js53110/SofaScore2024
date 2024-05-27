@@ -65,8 +65,7 @@ extension SportViewController: UITableViewDataSource {
             headerView.update(
                 countryName: sectionData.country,
                 leagueName: sectionData.name,
-                tournamentId: sectionData.id,
-                leagueLogo: UIImage()
+                tournamentId: sectionData.id
             )
             
             //            fetchLeagueLogoFromApi(tournamentId: sectionData.id, section: section)
