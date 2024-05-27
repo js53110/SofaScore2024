@@ -1,5 +1,8 @@
+import Foundation
 import UIKit
+import SofaAcademic
 import SnapKit
+
 class MatchViewCell: UITableViewCell {
     
     static let identifier = "MatchViewCell"
@@ -16,11 +19,31 @@ class MatchViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: Additional methods
+extension MatchViewCell {
     
-    func update(data: matchData) {
-        matchId = data.matchId
+    func update(data: Event) {
+        matchId = data.id
         matchView.update(data: data)
     }
+    
+    func updateScore(score: Int, side: TeamSide){
+        matchView.updateScore(score: score, side: side)
+    }
+    
+//    func updateHomeTeamLogo(teamLogo: UIImage) {
+//        matchView.updateHomeTeamLogo(teamLogo: teamLogo)
+//    }
+//    
+//    func updateAwayTeamLogo(teamLogo: UIImage) {
+//        matchView.updateAwayTeamLogo(teamLogo: teamLogo)
+//    }
+}
+
+//MARK: BaseViewProtocol
+extension MatchViewCell: BaseViewProtocol {
     
     func addViews() {
         contentView.addSubview(matchView)
@@ -30,14 +53,6 @@ class MatchViewCell: UITableViewCell {
         matchView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-}
-
-// MARK: Additional methods
-extension MatchViewCell {
-    
-    func updateScore(score: Int, side: TeamSide){
-        matchView.updateScore(score: score, side: side)
     }
 }
 

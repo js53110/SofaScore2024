@@ -2,9 +2,9 @@ import Foundation
 
 struct Tournament: Codable {
     
-    let name: String
     let id: Int
-    let uniqueId: Int
-    let uniqueName: String
-    let hasEventPlayerStatistics: Bool
+    let name: String
+    let slug: String
+    let sport: Sport
+    let country: Country
 }

@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 import SnapKit
 import SofaAcademic
@@ -47,8 +48,8 @@ extension SettingsViewController: BaseViewProtocol {
     }
 }
 
-// MARK: Additional methods
-extension SettingsViewController {
+// MARK: Private methods
+private extension SettingsViewController {
     
     @objc func dismissButtonTapped() {
         dismiss(animated: true, completion: nil)

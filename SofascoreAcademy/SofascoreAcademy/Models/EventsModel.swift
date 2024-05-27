@@ -1,26 +1,16 @@
 import Foundation
 
-struct Events: Codable {
-    
-    let roundInfo: RoundInfo
-    let customId: String
-    let status: Status
-    let venue: Venue
+struct Event: Codable {
+
+    let id: Int
+    let slug: String
+    let tournament: Tournament
     let homeTeam: Team
     let awayTeam: Team
-    let hasHighlights: Bool
-    let hasHighlightsStream: Bool
-    let hasGlobalHighlights: Bool
-    let id: Int
-    let cardsCode: String
-    let defaultPeriodCount: Int
-    let defaultPeriodLength: Int
-    let statusDescription: String
-    let startTimestamp: Int
-    let webUrl: String
-    let fbPostId: String
-    let hasTime: Bool
-    let resultOnly: Bool
-    let showEventNote: Bool
-    let bet365Links: Bet365Links
+    let status: String
+    let startDate: String
+    let homeScore: Score
+    let awayScore: Score
+    let winnerCode: String?
+    let round: Int
 }

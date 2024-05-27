@@ -5,8 +5,16 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
+    private var sportData: [LeagueData] = []
+    private var selectedDate: String = Helpers.getTodaysDate()
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let refreshControl = UIRefreshControl()
+    private let scrollView = MainScrollView()
+    private let contentView = UIView()
     private let appHeader = AppHeader()
-    private let customTabBar: CustomTabView
+    private let datePickerView = DatePickerCollectionView(selectedDate: Helpers.getTodaysDate(), datesToDisplay: Helpers.getDatesDataForDisplay(numOfWeeks: 1))
+    private let datesMatchesDivider = DatesMatchesDividerView()
+    private var customTabBar: CustomTabView
     private let blueContainer = UIView()
     private let containerView = UIView()
     private var currentChild: SportViewController
@@ -14,7 +22,7 @@ class MainViewController: UIViewController {
     private var currentSportSlug: SportSlug
     
     init() {
-        self.currentChild = SportViewController(sportSlug: savedSportSlug)
+        self.currentChild = SportViewController(data: sportData)
         self.customTabBar = CustomTabView(sportSlug: savedSportSlug)
         self.currentSportSlug = savedSportSlug
         super.init(nibName: nil, bundle: nil)
@@ -26,14 +34,23 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupScrollView()
+        setupRefreshControl()
+        setupView()
+        displayEventsForSelectedDate(selectedDate: selectedDate)
+    }
+    
+    func setupView() {
         addViews()
         styleViews()
         setupConstraints()
         
+        //MARK: Assigning delegates
         customTabBar.delegate = self
         appHeader.delegate = self
-        currentChild.delegate = self
+        currentChild.matchTapDelegate = self
+        datePickerView.datePickDelegate = self
+        currentChild.dayInfoDelegate = self
     }
 }
 
@@ -42,11 +59,17 @@ extension MainViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(blueContainer)
-        view.addSubview(appHeader)
-        view.addSubview(customTabBar)
-        view.addSubview(containerView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(appHeader)
+        contentView.addSubview(customTabBar)
+        contentView.addSubview(datePickerView)
+        contentView.addSubview(datesMatchesDivider)
+        contentView.addSubview(containerView)
         
+        setupLoadingIndicator()
         customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
+        
     }
     
     func styleViews() {
@@ -55,14 +78,34 @@ extension MainViewController: BaseViewProtocol {
         blueContainer.backgroundColor = Colors.colorPrimaryDefault
     }
     
+    func updateView() {
+        currentChild.remove()
+        currentChild = SportViewController(data: sportData)
+        currentChild.matchTapDelegate = self
+        currentChild.dayInfoDelegate = self
+        currentChild.checkNoData()
+        customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
+    }
+    
     func setupConstraints() {
         blueContainer.snp.makeConstraints() {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.bottom.equalTo(appHeader.snp.bottom)
+        }
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalTo(scrollView.contentLayoutGuide)
+            $0.height.equalTo(scrollView.frameLayoutGuide)
+            $0.width.equalToSuperview()
         }
         
         appHeader.snp.makeConstraints() {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(contentView.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -71,27 +114,20 @@ extension MainViewController: BaseViewProtocol {
             $0.leading.trailing.equalToSuperview()
         }
         
-        containerView.snp.makeConstraints() {
+        datePickerView.snp.makeConstraints(){
             $0.top.equalTo(customTabBar.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(48)
         }
-    }
-}
-
-// MARK: ParentSportSlugPickerProtocol
-extension MainViewController: ParentSportSlugPicker {
-    
-    func displaySelectedSport(selectedSportSlug: SportSlug?) {
-        if(selectedSportSlug != currentSportSlug) {
-            currentChild.remove()
-            
-            if let selectedSportSlug = selectedSportSlug {
-                UserDefaultsService.saveDataToUserDefaults(sportSlug: selectedSportSlug)
-                currentChild = SportViewController(sportSlug: selectedSportSlug)
-                currentSportSlug = selectedSportSlug
-                currentChild.delegate = self
-                customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
-            }
+        
+        datesMatchesDivider.snp.makeConstraints() {
+            $0.top.equalTo(datePickerView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints() {
+            $0.top.equalTo(datesMatchesDivider.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
@@ -110,7 +146,124 @@ extension MainViewController: AppHeaderDelegate {
 // MARK: MatchTapDelegate
 extension MainViewController: MatchTapDelegate {
     
-    func displayMatchInfoOnTap(selectedMatch: matchData) {
+    func displayMatchInfoOnTap(selectedMatch: Event) {
         navigationController?.pushViewController(MatchDataViewController(matchData: selectedMatch), animated: true)
+    }
+}
+
+//MARK: DatePickDelegate
+extension MainViewController: DatePickDelegate {
+    
+    func displayEventsForSelectedDate(selectedDate: String) {
+        loadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
+    }
+}
+
+// MARK: ParentSportSlugPickerProtocol
+extension MainViewController: ParentSportSlugPicker {
+    
+    func displaySelectedSport(selectedSportSlug: SportSlug?) {
+        if(selectedSportSlug != currentSportSlug) {
+            currentChild.remove()
+            if let selectedSportSlug = selectedSportSlug {
+                startLoading()
+                currentSportSlug = selectedSportSlug
+                loadData(selectedDate: selectedDate, selectedSport: currentSportSlug)
+            }
+        }
+    }
+}
+
+//MARK: DayInfoProtocol
+extension MainViewController: DayInfoProtocol {
+    
+    func displayInfoForDate(count: Int) {
+        datesMatchesDivider.updateInfo(count: count, date: Helpers.getDateAndDayFromString(dateString: selectedDate))
+    }
+}
+
+// MARK: Private Methods
+private extension MainViewController {
+    
+    func setupLoadingIndicator() {
+        containerView.addSubview(loadingIndicator)
+        
+        loadingIndicator.color = .gray
+        loadingIndicator.hidesWhenStopped = true
+        
+        loadingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    func startLoading() {
+        loadingIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+    }
+    
+    func setupScrollView() {
+        scrollView.refreshControl = refreshControl
+    }
+    
+    func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+    }
+    
+    @objc func refreshData() {
+        let workItem = DispatchWorkItem {
+            DispatchQueue.main.async {
+                self.displayEventsForSelectedDate(selectedDate: self.selectedDate)
+                self.refreshControl.endRefreshing()
+                self.refreshControl.isEnabled = true
+            }
+        }
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
+    }
+    
+    func loadData(selectedDate: String, selectedSport: SportSlug) {
+        sportData = []
+        self.selectedDate = selectedDate
+        currentChild.remove()
+        startLoading()
+        
+        Task {
+            do {
+                switch selectedSport {
+                case .football:
+                    let requestDataFootballResult =  await ApiClient().getData(sportSlug: .football, date: selectedDate)
+                    switch requestDataFootballResult {
+                    case .success(let requestDataFootball):
+                        let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
+                        sportData = dataFootball
+                    case .failure(let error):
+                        print("Error fetching football data:", error)
+                    }
+                case .basketball:
+                    let requestDataBasketballResult =  await ApiClient().getData(sportSlug: .basketball, date: selectedDate)
+                    switch requestDataBasketballResult {
+                    case .success(let requestDataBasketball):
+                        let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
+                        sportData = dataBasketball
+                    case .failure(let error):
+                        print("Error fetching basketball data:", error)
+                    }
+                case .americanFootball:
+                    let requestDataAmFootballResult =  await ApiClient().getData(sportSlug: .americanFootball, date: selectedDate)
+                    switch requestDataAmFootballResult {
+                    case .success(let requestDataAmFootball):
+                        let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+                        sportData = dataAmFootball
+                    case .failure(let error):
+                        print("Error fetching American football data:", error)
+                    }
+                }
+                updateView()
+            }
+            
+            stopLoading()
+        }
     }
 }

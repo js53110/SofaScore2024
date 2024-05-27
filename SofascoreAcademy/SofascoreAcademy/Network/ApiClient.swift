@@ -1,71 +1,77 @@
 import Foundation
 import UIKit
-import Network
 
-enum ApiError: Error {
-    case invalidData
+enum NetworkError: Error {
     case invalidURL
+    case invalidData
 }
 
 class ApiClient {
     
-    static let baseURLString = "https://static-api.sofascore.dev/"
+    static let shared = ApiClient()
+    static let urlBase = "https://academy-backend.sofascore.dev"
+    private let urlSession = URLSession.shared
+    private let imageCache = ImageCache.shared
     
-    
-    func getEventDataOld(eventID: Int, completionHandler: @escaping (Result<EventDataResponse, Error>) -> Void) {
-        let urlString = "\(ApiClient.baseURLString)api/event/\(eventID)"
+    func getData(sportSlug: SportSlug, date: String) async -> Result<[Event], NetworkError> {
+        let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
+        
+        let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/events/\(date)"
         guard let url = URL(string: urlString) else {
-            completionHandler(.failure(ApiError.invalidURL))
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let task = URLSession
-            .shared
-            .dataTask(with: request) { data, _, error in
-            if let error = error {
-                completionHandler(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completionHandler(.failure(ApiError.invalidData))
-                return
-            }
-            
-            do {
-                let eventDataResponse = try JSONDecoder().decode(EventDataResponse.self, from: data)
-                completionHandler(.success(eventDataResponse))
-            } catch {
-                completionHandler(.failure(error))
-            }
-        }
-        
-        task.resume()
-    }
-    
-    
-    func getEventDataNew(eventID: Int) async -> Result<EventDataResponse, Error> {
-        let urlString = "\(ApiClient.baseURLString)api/event/\(eventID)"
-        guard let url = URL(string: urlString) else {
-            return .failure(ApiError.invalidURL)
+            return .failure(.invalidURL)
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await URLSession
-                .shared
-                .data(for: request)
-            let eventDataResponse = try JSONDecoder().decode(EventDataResponse.self, from: data)
-            return .success(eventDataResponse)
+            let (data, _) = try await urlSession.data(for: request)
+            let eventResponse = try JSONDecoder().decode([Event].self, from: data)
+            return .success(eventResponse)
         } catch {
-            return .failure(error)
+            return .failure(.invalidData)
         }
     }
     
+    func getLeagueLogoApi(tournamentId: Int) async -> Result<UIImage, NetworkError> {
+        let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/image"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            guard let logoImage = UIImage(data: data) else {
+                return .failure(.invalidData)
+            }
+            
+            return .success(logoImage)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
     
+    func getTeamLogoApi(teamId: Int) async -> Result<UIImage, NetworkError> {
+        let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/image"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            guard let logoImage = UIImage(data: data) else {
+                return .failure(.invalidData)
+            }
+            
+            return .success(logoImage)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
 }

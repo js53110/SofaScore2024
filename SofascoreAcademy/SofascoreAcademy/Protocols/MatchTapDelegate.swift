@@ -1,4 +1,6 @@
+import Foundation
+
 protocol MatchTapDelegate: AnyObject {
     
-    func displayMatchInfoOnTap(selectedMatch: matchData)
+    func displayMatchInfoOnTap(selectedMatch: Event)
 }

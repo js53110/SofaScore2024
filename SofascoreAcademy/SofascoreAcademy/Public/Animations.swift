@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 public enum Animations {
@@ -8,6 +9,7 @@ public enum Animations {
         animation.type = CATransitionType.push
         animation.subtype = CATransitionSubtype.fromRight
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        
         return animation
     }
 }

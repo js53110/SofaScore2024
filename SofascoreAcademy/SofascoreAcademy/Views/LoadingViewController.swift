@@ -1,54 +1,56 @@
-import Foundation
-import UIKit
-
-class LoadingViewController: UIViewController {
-    
-    private let apiClient = ApiClient()
-    let eventID = 11352380
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchDataNew(eventID: eventID)
-        fetchDataOld(eventID: eventID)
-    }
-    
-    func fetchDataNew(eventID: Int) {
-        Task {
-            do {
-                let eventDataResult = await apiClient.getEventDataNew(eventID: eventID)
-                switch eventDataResult {
-                case .success(let eventData):
-                    handleSuccess(eventData: eventData)
-                case .failure(let error):
-                    handleFailure(error: error)
-                }
-            }
-        }
-    }
-    
-    func fetchDataOld(eventID: Int) {
-        ApiClient().getEventDataOld(eventID: eventID) { result in
-            switch result {
-            case .success(let eventData):
-                self.handleSuccess(eventData: eventData)
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-            }
-            
-        }
-        
-    }
-    
-    func handleSuccess(eventData: EventDataResponse) {
-        for tournament in eventData.game.tournaments {
-            print(tournament.category.name)
-            print(tournament.tournament.name)
-            print(tournament.events.first?.homeTeam.name ?? "")
-            print(tournament.events.first?.awayTeam.name ?? "")
-        }
-    }
-    
-    func handleFailure(error: Error) {
-        print("Error fetching data: \(error.localizedDescription)")
-    }
-}
+//import Foundation
+//import UIKit
+//import SofaAcademic
+//import SnapKit
+//
+//class LoadingViewController: UIViewController {
+//    
+//    private let apiClient = ApiClient()
+//    
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        setupView()
+//    }
+//    
+//    func setupView() {
+//        addViews()
+//    }
+//    
+//    func addViews() {
+//        let mainVC = MainViewController()
+//        customAddChild(child: mainVC, parent: view, animation: nil)
+//    }
+//}
+//
+//extension LoadingViewController {
+//    
+//    func displayEventsForCurrentDate(selectedDate: String)  {
+//        Task {
+//            do {
+//                let requestDataFootball = try await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
+//                let requestDataBasketball = try await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
+//                let requestDataAmFootball = try await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
+//                
+//                let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
+//                let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
+//                let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
+//                
+//                footballData = dataFootball
+//                basketballData = dataBasketball
+//                americanFootballData = dataAmFootball
+//                
+//                setupView()
+//            } catch {
+//                print("Error:", error)
+//            }
+//        }
+//    }
+//}
