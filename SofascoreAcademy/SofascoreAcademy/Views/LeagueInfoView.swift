@@ -57,10 +57,9 @@ class LeagueInfoView: BaseView {
 //MARK: Additional methods
 extension LeagueInfoView {
     
-    func update(countryName: String, leagueName: String, tournamentId: Int, leagueLogo: UIImage) {
+    func update(countryName: String, leagueName: String, tournamentId: Int) {
         countryNameLabel.text = countryName
         leagueNameLabel.text = leagueName
-        leagueLogoImageView.image = leagueLogo
         updateLeagueLogo(tournamentId: tournamentId)
     }
     
