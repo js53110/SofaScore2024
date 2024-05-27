@@ -25,19 +25,6 @@ class DatePickerCollectionView: UICollectionView {
         setupCollectionView()
     }
     
-    // Override designated initializer
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        self.selectedDate = ""
-        self.datesToDisplay = []
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        
-        super.init(frame: frame, collectionViewLayout: layout)
-        
-        setupCollectionView()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
