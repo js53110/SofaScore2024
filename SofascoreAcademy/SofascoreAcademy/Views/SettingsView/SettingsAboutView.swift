@@ -9,25 +9,35 @@ class SettingsAboutView: BaseView {
     private let details = UIView()
     private let detailsTitle = UILabel()
     private let detailsDescription = UILabel()
+    private let appName: String
+    private let apiCredit: String
+    private let developer: String
     
-    private let divider1 = UIView()
-    private let divider2 = UIView()
-    private let divider3 = UIView()
+//    private let divider1 = UIView()
+//    private let divider2 = UIView()
+    private let divider = UIView()
     
     private let creditStackView = UIStackView()
+    
+    init(appName: String, apiCredit: String, developer: String) {
+        self.appName = appName
+        self.apiCredit = apiCredit
+        self.developer = developer
+        super.init()
+    }
         
     override func addViews() {
-        addSubview(divider1)
+//        addSubview(divider1)
         addSubview(title)
         addSubview(details)
         details.addSubview(detailsTitle)
         details.addSubview(detailsDescription)
         addSubview(creditStackView)
-        creditStackView.addArrangedSubview(divider2)
-        creditStackView.addArrangedSubview(CreditsLabelView(upperText: "App Name", lowerText: "Mini Sofascore App"))
+        creditStackView.addArrangedSubview(divider)
+        creditStackView.addArrangedSubview(CreditsLabelView(upperText: "App Name", lowerText: appName))
         creditStackView.addArrangedSubview(CreditsLabelView(upperText: "Api Credit", lowerText: "Sofascore"))
         creditStackView.addArrangedSubview(CreditsLabelView(upperText: "Developer", lowerText: "Jakov Sikiric"))
-        creditStackView.addArrangedSubview(divider3)
+        creditStackView.addArrangedSubview(divider)
     }
     
     override func styleViews() {
@@ -51,9 +61,9 @@ class SettingsAboutView: BaseView {
         creditStackView.spacing = 16
         creditStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        divider1.backgroundColor = .onSurfaceOnSurfaceLv4
-        divider2.backgroundColor = .onSurfaceOnSurfaceLv4
-        divider3.backgroundColor = .onSurfaceOnSurfaceLv4
+//        divider1.backgroundColor = .onSurfaceOnSurfaceLv4
+//        divider2.backgroundColor = .onSurfaceOnSurfaceLv4
+        divider.backgroundColor = .onSurfaceOnSurfaceLv4
     }
     
     override func setupConstraints() {
@@ -78,19 +88,23 @@ class SettingsAboutView: BaseView {
             $0.height.equalTo(20)
         }
         
-        divider1.snp.makeConstraints {
+//        divider1.snp.makeConstraints {
+//            $0.height.equalTo(1)
+//            $0.top.equalToSuperview()
+//            $0.leading.trailing.equalToSuperview()
+//        }
+        
+        divider.snp.makeConstraints {
             $0.height.equalTo(1)
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
         }
         
-        divider2.snp.makeConstraints {
-            $0.height.equalTo(1)
-        }
-        
-        divider3.snp.makeConstraints {
-            $0.height.equalTo(1)
-        }
+//        divider2.snp.makeConstraints {
+//            $0.height.equalTo(1)
+//        }
+//        
+//        divider3.snp.makeConstraints {
+//            $0.height.equalTo(1)
+//        }
         
         creditStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(16)

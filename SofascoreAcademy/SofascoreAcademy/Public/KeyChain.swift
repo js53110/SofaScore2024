@@ -1,8 +1,11 @@
 import Security
 import Foundation
 
-public enum Keychain {
+
+public enum KeyChain {
     
+    static let token: String = "academy_token"
+
     static func saveTokenToKeychain(token: String) {
         guard let data = token.data(using: .utf8) else {
             return
@@ -23,7 +26,7 @@ public enum Keychain {
     static func isTokenExistingInKeychain(token: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: "academy_token",
+            kSecAttrAccount as String: KeyChain.token,
             kSecMatchLimit as String: kSecMatchLimitOne,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
@@ -52,7 +55,7 @@ public enum Keychain {
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: "academy_token",
+            kSecAttrAccount as String: KeyChain.token,
             kSecValueData as String: data
         ]
         

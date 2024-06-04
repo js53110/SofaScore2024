@@ -5,53 +5,18 @@ import SofaAcademic
 
 class LoginViewController: UIViewController {
     
-    private let iconImageLabel = UIImageView.init(image: UIImage(named: "sofascore_logo"))
+    private let iconImageLabel = UIImageView(image: UIImage(named: "sofascore_logo"))
     private var shouldSpin: Bool = true
     private let loginForm = UIView()
     private var bottomConstraint: Constraint?
     private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private let backgroundImageView = UIImageView(frame: UIScreen.main.bounds)
+    private let customIndicator = UIImageView(image: UIImage(named: "sofaLogoTransparent"))
     
-    let customIndicator = UIImageView.init(image: UIImage(named: "sofaLogoTransparent"))
+    private let emailTextField = EmailTextField()
+    private let passwordTextField = PasswordTextField()
     
-    
-    private let emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.onSurfaceOnSurfaceLv2])
-        textField.keyboardType = .emailAddress
-        textField.borderStyle = .roundedRect
-        textField.textContentType = .oneTimeCode
-        textField.autocapitalizationType = .none
-        textField.returnKeyType = .done
-        textField.backgroundColor = .white
-        textField.textColor = .black
-        return textField
-    }()
-    
-    private let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "Password",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.onSurfaceOnSurfaceLv2])
-        textField.isSecureTextEntry = true
-        textField.textContentType = .oneTimeCode
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        textField.returnKeyType = .done
-        textField.backgroundColor = .white
-        textField.textColor = .black
-        return textField
-    }()
-    
-    private let loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = .action
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private let loginButton = LoginButton()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -70,9 +35,6 @@ class LoginViewController: UIViewController {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +67,7 @@ class LoginViewController: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 self.activityIndicator.stopAnimating()
-                Keychain.saveTokenToKeychain(token: "academy_token")
+                KeyChain.saveTokenToKeychain(token: KeyChain.token)
                 
                 let mainViewController = MainViewController()
                 self.navigationController?.pushViewController(mainViewController, animated: true)
@@ -165,25 +127,14 @@ extension LoginViewController: BaseViewProtocol {
     func styleViews() {
         customIndicator.contentMode = .scaleAspectFit
         customIndicator.isHidden = true
-        loginButton.backgroundColor = .colorPrimaryDefault
-        
-        loginButton.layer.cornerRadius = 10
-        
         activityIndicator.color = .white
         
         backgroundImageView.image = UIImage(named: "loginBackground")
         backgroundImageView.contentMode = .scaleAspectFill
         
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.masksToBounds = true
-        passwordTextField.layer.cornerRadius = 13
-        passwordTextField.layer.masksToBounds = true
-        
         loginForm.backgroundColor = UIColor(white: 0, alpha: 0.7)
         loginForm.layer.cornerRadius = 15
         loginForm.layer.masksToBounds = true
-        
-        
     }
     
     func setupConstraints() {
@@ -213,19 +164,16 @@ extension LoginViewController: BaseViewProtocol {
         emailTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(40)
         }
         
         passwordTextField.snp.makeConstraints {
             $0.top.equalTo(emailTextField.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(40)
         }
         
         loginButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(15)
             $0.leading.trailing.equalToSuperview().inset(80)
-            $0.height.equalTo(40)
         }
         
         backgroundImageView.snp.makeConstraints {
@@ -235,9 +183,12 @@ extension LoginViewController: BaseViewProtocol {
     
     func setupGestureRecognizers() {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
 }
 
+//MARK: UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -246,6 +197,7 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: Additional functions
 extension LoginViewController {
     
     func subscribeToKeyboardNotifications() {
@@ -291,7 +243,7 @@ extension LoginViewController {
     }
     
     func checkIfKeychainExists() {
-        if(Keychain.isTokenExistingInKeychain(token: "academy_token")) {
+        if(KeyChain.isTokenExistingInKeychain(token: KeyChain.token)) {
             let mainViewController = MainViewController()
             self.navigationController?.pushViewController(mainViewController, animated: true)
         }
@@ -306,9 +258,7 @@ extension LoginViewController {
             }
         }
     }
-}
-
-extension LoginViewController {
+    
     func resetViewController() {
         emailTextField.text = ""
         passwordTextField.text = ""
@@ -319,4 +269,3 @@ extension LoginViewController {
         subscribeToKeyboardNotifications()
     }
 }
-

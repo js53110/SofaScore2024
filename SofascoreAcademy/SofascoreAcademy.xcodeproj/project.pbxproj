@@ -26,6 +26,9 @@
 		D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A63B2B9B598700C2ADB4 /* SportViewController.swift */; };
 		D236A6412B9B598900C2ADB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D236A6402B9B598900C2ADB4 /* Assets.xcassets */; };
 		D236A6442B9B598900C2ADB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D236A6422B9B598900C2ADB4 /* LaunchScreen.storyboard */; };
+		D23758E12C0F650C0080B703 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23758E02C0F650C0080B703 /* PasswordTextField.swift */; };
+		D23758E32C0F651C0080B703 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23758E22C0F651C0080B703 /* EmailTextField.swift */; };
+		D23758E52C0F774B0080B703 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23758E42C0F774B0080B703 /* LoginButton.swift */; };
 		D239C0B32BF96D1400128E01 /* EventMatchupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B22BF96D1400128E01 /* EventMatchupView.swift */; };
 		D239C0B52BF96FC500128E01 /* EventTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B42BF96FC500128E01 /* EventTeamView.swift */; };
 		D239C0B72BF9773000128E01 /* EventScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B62BF9773000128E01 /* EventScoreView.swift */; };
@@ -96,6 +99,9 @@
 		D236A6402B9B598900C2ADB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D236A6432B9B598900C2ADB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D236A6452B9B598900C2ADB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D23758E02C0F650C0080B703 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		D23758E22C0F651C0080B703 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
+		D23758E42C0F774B0080B703 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		D239C0B22BF96D1400128E01 /* EventMatchupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMatchupView.swift; sourceTree = "<group>"; };
 		D239C0B42BF96FC500128E01 /* EventTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTeamView.swift; sourceTree = "<group>"; };
 		D239C0B62BF9773000128E01 /* EventScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScoreView.swift; sourceTree = "<group>"; };
@@ -213,6 +219,17 @@
 			path = SofascoreAcademy;
 			sourceTree = "<group>";
 		};
+		D23758DF2C0F64E40080B703 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				D2DAEEA02BF91048008FD27B /* LoginViewController.swift */,
+				D23758E02C0F650C0080B703 /* PasswordTextField.swift */,
+				D23758E22C0F651C0080B703 /* EmailTextField.swift */,
+				D23758E42C0F774B0080B703 /* LoginButton.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
 		D26654472C00C52900591AE9 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,7 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */,
-				D2DAEEA02BF91048008FD27B /* LoginViewController.swift */,
 				D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */,
 				D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */,
 				D26654452BFBBE4000591AE9 /* MainScrollView.swift */,
@@ -341,6 +357,7 @@
 		D29B8CF92BC45A440000CA42 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D23758DF2C0F64E40080B703 /* LoginView */,
 				D26654492C00C58000591AE9 /* MainView */,
 				D266544A2C00C5BA00591AE9 /* CustomTabView */,
 				D266544C2C00C62000591AE9 /* DatePickerView */,
@@ -441,6 +458,7 @@
 				D239C0BB2BFA43AD00128E01 /* FootballGoalModel.swift in Sources */,
 				D21B98322BE53F0A0094308A /* DatePickDelegate.swift in Sources */,
 				D29B8D092BC4C2A70000CA42 /* EventDataViewController.swift in Sources */,
+				D23758E32C0F651C0080B703 /* EmailTextField.swift in Sources */,
 				D239C0B72BF9773000128E01 /* EventScoreView.swift in Sources */,
 				D239C0C32BFA4DD900128E01 /* NotStartedEventView.swift in Sources */,
 				D23180282BFA70CB00DFE549 /* KeyChain.swift in Sources */,
@@ -483,6 +501,7 @@
 				D2807A8E2BC84CF700F590CA /* TabItemView.swift in Sources */,
 				D2A383082BA8FABD001C102F /* Data.swift in Sources */,
 				D23289AD2BA0F68D00139113 /* LeagueInfoView.swift in Sources */,
+				D23758E12C0F650C0080B703 /* PasswordTextField.swift in Sources */,
 				D23289B12BA0F99600139113 /* MatchView.swift in Sources */,
 				D2FD91C12BCD7FDB00591F6A /* MatchTapDelegate.swift in Sources */,
 				D2896E4B2BE4DAFE0040CEBA /* ApiClient.swift in Sources */,
@@ -492,6 +511,7 @@
 				D250367B2BE9552C005B3C1A /* LeagueLogoLoadProtocol.swift in Sources */,
 				D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */,
 				D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */,
+				D23758E52C0F774B0080B703 /* LoginButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

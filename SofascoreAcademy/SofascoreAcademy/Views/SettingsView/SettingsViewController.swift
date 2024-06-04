@@ -7,7 +7,7 @@ class SettingsViewController: UIViewController {
     
     private let blueContainer = UIView()
     private let settingsHeader = SettingsHeaderView()
-    private let aboutView = SettingsAboutView()
+    private let aboutView = SettingsAboutView(appName: "Mini Sofascore App", apiCredit: "Sofascore", developer: "Jakov Sikirić")
     
     private let appLogo = UIImageView(image: UIImage(named: "sofascore_logo_blue"))
     
@@ -107,7 +107,7 @@ extension SettingsViewController: ReturnButtonDelegate {
 
 extension SettingsViewController {
     @objc func logoutButtonTapped() {
-        Keychain.deleteTokenFromKeychain(token: "academy_token")
+        KeyChain.deleteTokenFromKeychain(token: "academy_token")
         navigationController?.popToRootViewController(animated: true)
     }
 }

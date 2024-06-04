@@ -44,7 +44,7 @@ extension LoadingViewController {
     
     func displayViewController() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let loggedIn = Keychain.isTokenExistingInKeychain(token: "academy_token")
+            let loggedIn = KeyChain.isTokenExistingInKeychain(token: "academy_token")
             
             if loggedIn {
                 let mainViewController = MainViewController()
