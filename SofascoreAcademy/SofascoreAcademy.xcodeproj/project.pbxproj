@@ -22,6 +22,12 @@
 		D23289B32BA103F700139113 /* TeamNameLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289B22BA103F700139113 /* TeamNameLogoView.swift */; };
 		D23289B52BA107EE00139113 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D23289B42BA107EE00139113 /* Roboto-Regular.ttf */; };
 		D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23289B62BA10CDF00139113 /* ScoreLabel.swift */; };
+		D232FF712C10CA400049846F /* FinishedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232FF702C10CA400049846F /* FinishedEventView.swift */; };
+		D232FF742C10CC860049846F /* IncidentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232FF732C10CC860049846F /* IncidentViewCell.swift */; };
+		D232FF762C10CC900049846F /* IncidentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232FF752C10CC900049846F /* IncidentCardView.swift */; };
+		D232FF7A2C10D71A0049846F /* IncidentViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232FF792C10D71A0049846F /* IncidentViewProtocol.swift */; };
+		D232FF7C2C10E8EF0049846F /* IncidentGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D232FF7B2C10E8EF0049846F /* IncidentGoalView.swift */; };
+		D2366BEA2C10FE7700799030 /* PeriodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2366BE92C10FE7700799030 /* PeriodView.swift */; };
 		D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A6372B9B598600C2ADB4 /* AppDelegate.swift */; };
 		D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236A63B2B9B598700C2ADB4 /* SportViewController.swift */; };
 		D236A6412B9B598900C2ADB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D236A6402B9B598900C2ADB4 /* Assets.xcassets */; };
@@ -32,7 +38,7 @@
 		D239C0B32BF96D1400128E01 /* EventMatchupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B22BF96D1400128E01 /* EventMatchupView.swift */; };
 		D239C0B52BF96FC500128E01 /* EventTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B42BF96FC500128E01 /* EventTeamView.swift */; };
 		D239C0B72BF9773000128E01 /* EventScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B62BF9773000128E01 /* EventScoreView.swift */; };
-		D239C0B92BFA42E100128E01 /* FootballIncidentTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B82BFA42E100128E01 /* FootballIncidentTypeModel.swift */; };
+		D239C0B92BFA42E100128E01 /* FootballIncidentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0B82BFA42E100128E01 /* FootballIncidentModel.swift */; };
 		D239C0BB2BFA43AD00128E01 /* FootballGoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0BA2BFA43AD00128E01 /* FootballGoalModel.swift */; };
 		D239C0BD2BFA440F00128E01 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0BC2BFA440F00128E01 /* PlayerModel.swift */; };
 		D239C0BF2BFA449D00128E01 /* FootballCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239C0BE2BFA449D00128E01 /* FootballCardModel.swift */; };
@@ -93,6 +99,12 @@
 		D23289B22BA103F700139113 /* TeamNameLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamNameLogoView.swift; sourceTree = "<group>"; };
 		D23289B42BA107EE00139113 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		D23289B62BA10CDF00139113 /* ScoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
+		D232FF702C10CA400049846F /* FinishedEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedEventView.swift; sourceTree = "<group>"; };
+		D232FF732C10CC860049846F /* IncidentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewCell.swift; sourceTree = "<group>"; };
+		D232FF752C10CC900049846F /* IncidentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentCardView.swift; sourceTree = "<group>"; };
+		D232FF792C10D71A0049846F /* IncidentViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentViewProtocol.swift; sourceTree = "<group>"; };
+		D232FF7B2C10E8EF0049846F /* IncidentGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentGoalView.swift; sourceTree = "<group>"; };
+		D2366BE92C10FE7700799030 /* PeriodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodView.swift; sourceTree = "<group>"; };
 		D236A6342B9B598600C2ADB4 /* SofascoreAcademy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SofascoreAcademy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D236A6372B9B598600C2ADB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D236A63B2B9B598700C2ADB4 /* SportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +117,7 @@
 		D239C0B22BF96D1400128E01 /* EventMatchupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMatchupView.swift; sourceTree = "<group>"; };
 		D239C0B42BF96FC500128E01 /* EventTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTeamView.swift; sourceTree = "<group>"; };
 		D239C0B62BF9773000128E01 /* EventScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScoreView.swift; sourceTree = "<group>"; };
-		D239C0B82BFA42E100128E01 /* FootballIncidentTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballIncidentTypeModel.swift; sourceTree = "<group>"; };
+		D239C0B82BFA42E100128E01 /* FootballIncidentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballIncidentModel.swift; sourceTree = "<group>"; };
 		D239C0BA2BFA43AD00128E01 /* FootballGoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballGoalModel.swift; sourceTree = "<group>"; };
 		D239C0BC2BFA440F00128E01 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		D239C0BE2BFA449D00128E01 /* FootballCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCardModel.swift; sourceTree = "<group>"; };
@@ -174,13 +186,24 @@
 				D25036722BE55378005B3C1A /* CountryModel.swift */,
 				D25036742BE553A2005B3C1A /* TeamModel.swift */,
 				D25036762BE553E1005B3C1A /* ScoreModel.swift */,
-				D239C0B82BFA42E100128E01 /* FootballIncidentTypeModel.swift */,
+				D239C0B82BFA42E100128E01 /* FootballIncidentModel.swift */,
 				D239C0BA2BFA43AD00128E01 /* FootballGoalModel.swift */,
 				D239C0BC2BFA440F00128E01 /* PlayerModel.swift */,
 				D239C0BE2BFA449D00128E01 /* FootballCardModel.swift */,
 				D239C0C02BFA44ED00128E01 /* FootballPeriodModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D232FF722C10CC770049846F /* IncidentView */ = {
+			isa = PBXGroup;
+			children = (
+				D232FF732C10CC860049846F /* IncidentViewCell.swift */,
+				D232FF752C10CC900049846F /* IncidentCardView.swift */,
+				D232FF7B2C10E8EF0049846F /* IncidentGoalView.swift */,
+				D2366BE92C10FE7700799030 /* PeriodView.swift */,
+			);
+			path = IncidentView;
 			sourceTree = "<group>";
 		};
 		D236A62B2B9B598600C2ADB4 = {
@@ -244,12 +267,14 @@
 		D26654482C00C55E00591AE9 /* SelectedEventView */ = {
 			isa = PBXGroup;
 			children = (
+				D232FF722C10CC770049846F /* IncidentView */,
 				D29B8D082BC4C2A70000CA42 /* EventDataViewController.swift */,
 				D2DBE0162BF9655400C685DC /* EventHeader.swift */,
 				D239C0B22BF96D1400128E01 /* EventMatchupView.swift */,
 				D239C0B42BF96FC500128E01 /* EventTeamView.swift */,
 				D239C0B62BF9773000128E01 /* EventScoreView.swift */,
 				D239C0C22BFA4DD900128E01 /* NotStartedEventView.swift */,
+				D232FF702C10CA400049846F /* FinishedEventView.swift */,
 			);
 			path = SelectedEventView;
 			sourceTree = "<group>";
@@ -317,6 +342,7 @@
 				D250367A2BE9552C005B3C1A /* LeagueLogoLoadProtocol.swift */,
 				D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */,
 				D2DBE0182BF9674A00C685DC /* ReturnButtonDelegate.swift */,
+				D232FF792C10D71A0049846F /* IncidentViewProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -465,9 +491,10 @@
 				D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */,
 				D2FECCB62BE96F3500D2A3A4 /* DayInfoProtocol.swift in Sources */,
 				D21B98302BE5182E0094308A /* DateViewCell.swift in Sources */,
-				D239C0B92BFA42E100128E01 /* FootballIncidentTypeModel.swift in Sources */,
+				D239C0B92BFA42E100128E01 /* FootballIncidentModel.swift in Sources */,
 				D239C0BD2BFA440F00128E01 /* PlayerModel.swift in Sources */,
 				D23180242BFA5EA400DFE549 /* SettingsAboutView.swift in Sources */,
+				D232FF712C10CA400049846F /* FinishedEventView.swift in Sources */,
 				D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */,
 				D25036732BE55378005B3C1A /* CountryModel.swift in Sources */,
 				D2896E442BE438BE0040CEBA /* UserDefaultsService.swift in Sources */,
@@ -476,6 +503,7 @@
 				D26654462BFBBE4000591AE9 /* MainScrollView.swift in Sources */,
 				D2896E482BE4DAB20040CEBA /* LoadingViewController.swift in Sources */,
 				D25036752BE553A2005B3C1A /* TeamModel.swift in Sources */,
+				D232FF7A2C10D71A0049846F /* IncidentViewProtocol.swift in Sources */,
 				D26654512C00C8F300591AE9 /* UICollectionViewExtensions.swift in Sources */,
 				D2807A8C2BC84B2900F590CA /* UIViewControllerExtensions.swift in Sources */,
 				D21B982C2BE50DC90094308A /* DatePickerCollectionView.swift in Sources */,
@@ -483,6 +511,7 @@
 				D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */,
 				D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */,
 				D250366F2BE55313005B3C1A /* TournamentModel.swift in Sources */,
+				D232FF762C10CC900049846F /* IncidentCardView.swift in Sources */,
 				D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */,
 				D239C0C12BFA44ED00128E01 /* FootballPeriodModel.swift in Sources */,
 				D250367F2BE964F9005B3C1A /* Cache.swift in Sources */,
@@ -490,9 +519,11 @@
 				D29B8CFD2BC4606A0000CA42 /* AppHeader.swift in Sources */,
 				D239C0B32BF96D1400128E01 /* EventMatchupView.swift in Sources */,
 				D25036712BE55354005B3C1A /* SportModel.swift in Sources */,
+				D232FF7C2C10E8EF0049846F /* IncidentGoalView.swift in Sources */,
 				D2DBE0172BF9655400C685DC /* EventHeader.swift in Sources */,
 				D250366D2BE546DC005B3C1A /* EventsModel.swift in Sources */,
 				D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */,
+				D2366BEA2C10FE7700799030 /* PeriodView.swift in Sources */,
 				D266544F2C00C87800591AE9 /* UIViewExtensions.swift in Sources */,
 				D2896E462BE44B9B0040CEBA /* Animations.swift in Sources */,
 				D25036772BE553E1005B3C1A /* ScoreModel.swift in Sources */,
@@ -507,6 +538,7 @@
 				D2896E4B2BE4DAFE0040CEBA /* ApiClient.swift in Sources */,
 				D239C0B52BF96FC500128E01 /* EventTeamView.swift in Sources */,
 				D26EF6FB2BB25DFB00A49861 /* MatchViewCell.swift in Sources */,
+				D232FF742C10CC860049846F /* IncidentViewCell.swift in Sources */,
 				D2B91A642BA1B7E30004B74A /* TimeStatusView.swift in Sources */,
 				D250367B2BE9552C005B3C1A /* LeagueLogoLoadProtocol.swift in Sources */,
 				D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */,

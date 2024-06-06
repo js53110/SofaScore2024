@@ -4,6 +4,8 @@ import SofaAcademic
 
 class EventDataViewController: UIViewController {
     
+    private let tableView = UITableView()
+    private var eventData: [FootballIncident] = []
     private let whiteContainer = UIView()
     private let matchData: Event
     private let eventHeader = EventHeader()
@@ -12,7 +14,6 @@ class EventDataViewController: UIViewController {
     init(matchData: Event) {
         self.matchData = matchData
         super.init(nibName: nil, bundle: nil)
-        
         eventHeader.eventDelegate = self
     }
     
@@ -32,11 +33,11 @@ class EventDataViewController: UIViewController {
     }
     
     func setupView() {
+        
         addViews()
         styleViews()
         setupConstraints()
         
-        //fetchEventIncidents(eventId: matchData.id)
         
         eventHeader.update(matchData: matchData)
         eventMatchupView.updateTeamNames(homeTeamName: matchData.homeTeam.name, awayTeamName: matchData.awayTeam.name)
@@ -48,6 +49,9 @@ class EventDataViewController: UIViewController {
         
         if(matchData.status == "notstarted") {
             addNotStartedEventView()
+        }
+        else if(matchData.status == "finished") {
+            fetchEventIncidents(eventId: matchData.id)
         }
     }
 }
@@ -105,7 +109,8 @@ extension EventDataViewController {
                 
                 switch requestFootballEventIncidentsResult {
                 case .success(let requestDataFootball):
-                    print(requestDataFootball)
+                    eventData = requestDataFootball.reversed()
+                    setupTableView()
                 case .failure(let error):
                     print("Error fetching football data:", error)
                 }
@@ -123,5 +128,64 @@ extension EventDataViewController {
             $0.height.equalTo(148)
         }
     }
+    
+    func setupTableView() {
+        view.addSubview(tableView)
+        tableView.backgroundColor = .white
+        tableView.snp.makeConstraints() {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(eventMatchupView.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview()
+        }
+        
+        tableView.register(
+            IncidentViewCell.self,
+            forCellReuseIdentifier: IncidentViewCell.identifier
+        )
+        
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        
+    }
 }
+
+// MARK: UITableViewDataSource
+extension EventDataViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        eventData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: IncidentViewCell.identifier,
+            for: indexPath) as? IncidentViewCell {
+            let dataForRow = eventData[indexPath.row]
+            cell.setupCell(data: dataForRow, matchData: matchData)
+            return cell
+        } else {
+            fatalError("Failed to equeue cell")
+        }
+    }
+}
+
+// MARK: UITableViewDelegate
+extension EventDataViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let incident = eventData[indexPath.row]
+        if(incident.type == "period") {
+            return 40
+        }
+        return 56
+    }
+}
+
 

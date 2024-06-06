@@ -6,11 +6,11 @@ enum NetworkError: Error {
     case invalidData
 }
 
-enum FootballIncident { // TO DO
-    case footballGoal(FootballGoal)
-    case footballCard(FootballCard)
-    case footballPeriod(FootballPeriod)
-}
+//enum FootballIncidentType { // TO DO
+//    case footballGoal(FootballGoal)
+//    case footballCard(FootballCard)
+//    case footballPeriod(FootballPeriod)
+//}
 
 class ApiClient {
     
@@ -81,7 +81,7 @@ class ApiClient {
         }
     }
     
-    func getFootballIncidents(eventId: Int) async -> Result<Int, NetworkError> {
+    func getFootballIncidents(eventId: Int) async -> Result<[FootballIncident], NetworkError> {
         
         let urlString: String = "\(ApiClient.urlBase)/event/\(eventId)/incidents"
         guard let url = URL(string: urlString) else {
@@ -93,8 +93,8 @@ class ApiClient {
         
         do {
             let (data, _) = try await urlSession.data(for: request)
-            _ = try JSONDecoder().decode([FootballIncidentType].self, from: data)
-            return .success(1)
+            let eventIncidents = try JSONDecoder().decode([FootballIncident].self, from: data)
+            return .success(eventIncidents)
         } catch {
             return .failure(.invalidData)
         }
