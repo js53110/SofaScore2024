@@ -66,11 +66,26 @@
 		D2896E462BE44B9B0040CEBA /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2896E452BE44B9B0040CEBA /* Animations.swift */; };
 		D2896E482BE4DAB20040CEBA /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */; };
 		D2896E4B2BE4DAFE0040CEBA /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2896E4A2BE4DAFE0040CEBA /* ApiClient.swift */; };
+		D28E692E2C1476EC00BD3AD3 /* TeamHeadlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E692D2C1476EC00BD3AD3 /* TeamHeadlineView.swift */; };
+		D28E69302C14786F00BD3AD3 /* TeamCoachDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E692F2C14786F00BD3AD3 /* TeamCoachDetailsView.swift */; };
+		D28E69322C14824400BD3AD3 /* TeamPlayersDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E69312C14824400BD3AD3 /* TeamPlayersDetailsView.swift */; };
+		D28E69342C14851A00BD3AD3 /* CustomDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E69332C14851A00BD3AD3 /* CustomDivider.swift */; };
+		D28E69362C1486FF00BD3AD3 /* TeamDetailsPlayersCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E69352C1486FF00BD3AD3 /* TeamDetailsPlayersCard.swift */; };
+		D28E69382C1499ED00BD3AD3 /* TournamentCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E69372C1499ED00BD3AD3 /* TournamentCardViewCell.swift */; };
+		D28E693A2C14AD2000BD3AD3 /* VenueDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E69392C14AD2000BD3AD3 /* VenueDetailsView.swift */; };
+		D28E693D2C14BD0F00BD3AD3 /* TeamMatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E693C2C14BD0F00BD3AD3 /* TeamMatchesViewController.swift */; };
 		D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */; };
 		D29B8CFD2BC4606A0000CA42 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */; };
 		D29B8D012BC46B6B0000CA42 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */; };
 		D29B8D072BC4BB0D0000CA42 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8D062BC4BB0D0000CA42 /* SettingsViewController.swift */; };
 		D29B8D092BC4C2A70000CA42 /* EventDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29B8D082BC4C2A70000CA42 /* EventDataViewController.swift */; };
+		D29F234B2C123CF600DFE1FB /* TeamTapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F234A2C123CF600DFE1FB /* TeamTapDelegate.swift */; };
+		D29F234E2C12421500DFE1FB /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F234D2C12421500DFE1FB /* TeamViewController.swift */; };
+		D29F23502C12450300DFE1FB /* TeamHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F234F2C12450300DFE1FB /* TeamHeaderView.swift */; };
+		D29F23532C1459F700DFE1FB /* CustomTeamTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F23522C1459F700DFE1FB /* CustomTeamTabView.swift */; };
+		D29F23552C145A0A00DFE1FB /* TeamTabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F23542C145A0A00DFE1FB /* TeamTabItemView.swift */; };
+		D29F23572C14637000DFE1FB /* TeamTabSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F23562C14637000DFE1FB /* TeamTabSelectDelegate.swift */; };
+		D29F23592C1465A000DFE1FB /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F23582C1465A000DFE1FB /* TeamDetailsViewController.swift */; };
 		D2A383042BA88565001C102F /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383032BA88565001C102F /* Styling.swift */; };
 		D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383052BA8FA7C001C102F /* Helpers.swift */; };
 		D2A383082BA8FABD001C102F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A383072BA8FABD001C102F /* Data.swift */; };
@@ -145,11 +160,26 @@
 		D2896E452BE44B9B0040CEBA /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		D2896E4A2BE4DAFE0040CEBA /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		D28E692D2C1476EC00BD3AD3 /* TeamHeadlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamHeadlineView.swift; sourceTree = "<group>"; };
+		D28E692F2C14786F00BD3AD3 /* TeamCoachDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCoachDetailsView.swift; sourceTree = "<group>"; };
+		D28E69312C14824400BD3AD3 /* TeamPlayersDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPlayersDetailsView.swift; sourceTree = "<group>"; };
+		D28E69332C14851A00BD3AD3 /* CustomDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDivider.swift; sourceTree = "<group>"; };
+		D28E69352C1486FF00BD3AD3 /* TeamDetailsPlayersCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsPlayersCard.swift; sourceTree = "<group>"; };
+		D28E69372C1499ED00BD3AD3 /* TournamentCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentCardViewCell.swift; sourceTree = "<group>"; };
+		D28E69392C14AD2000BD3AD3 /* VenueDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDetailsView.swift; sourceTree = "<group>"; };
+		D28E693C2C14BD0F00BD3AD3 /* TeamMatchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMatchesViewController.swift; sourceTree = "<group>"; };
 		D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 		D29B8D002BC46B6B0000CA42 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		D29B8D062BC4BB0D0000CA42 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D29B8D082BC4C2A70000CA42 /* EventDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataViewController.swift; sourceTree = "<group>"; };
+		D29F234A2C123CF600DFE1FB /* TeamTapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTapDelegate.swift; sourceTree = "<group>"; };
+		D29F234D2C12421500DFE1FB /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
+		D29F234F2C12450300DFE1FB /* TeamHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamHeaderView.swift; sourceTree = "<group>"; };
+		D29F23522C1459F700DFE1FB /* CustomTeamTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTeamTabView.swift; sourceTree = "<group>"; };
+		D29F23542C145A0A00DFE1FB /* TeamTabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTabItemView.swift; sourceTree = "<group>"; };
+		D29F23562C14637000DFE1FB /* TeamTabSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTabSelectDelegate.swift; sourceTree = "<group>"; };
+		D29F23582C1465A000DFE1FB /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
 		D2A383032BA88565001C102F /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		D2A383052BA8FA7C001C102F /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D2A383072BA8FABD001C102F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -282,6 +312,7 @@
 		D26654492C00C58000591AE9 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				D266544A2C00C5BA00591AE9 /* CustomTabView */,
 				D2896E472BE4DAB20040CEBA /* LoadingViewController.swift */,
 				D29B8CFA2BC45A6A0000CA42 /* MainViewController.swift */,
 				D29B8CFC2BC4606A0000CA42 /* AppHeader.swift */,
@@ -343,6 +374,8 @@
 				D2FECCB52BE96F3500D2A3A4 /* DayInfoProtocol.swift */,
 				D2DBE0182BF9674A00C685DC /* ReturnButtonDelegate.swift */,
 				D232FF792C10D71A0049846F /* IncidentViewProtocol.swift */,
+				D29F234A2C123CF600DFE1FB /* TeamTapDelegate.swift */,
+				D29F23562C14637000DFE1FB /* TeamTabSelectDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -380,18 +413,62 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		D28E692C2C1476DC00BD3AD3 /* TeamDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				D29F23582C1465A000DFE1FB /* TeamDetailsViewController.swift */,
+				D28E692D2C1476EC00BD3AD3 /* TeamHeadlineView.swift */,
+				D28E692F2C14786F00BD3AD3 /* TeamCoachDetailsView.swift */,
+				D28E69312C14824400BD3AD3 /* TeamPlayersDetailsView.swift */,
+				D28E69352C1486FF00BD3AD3 /* TeamDetailsPlayersCard.swift */,
+				D28E69372C1499ED00BD3AD3 /* TournamentCardViewCell.swift */,
+				D28E69392C14AD2000BD3AD3 /* VenueDetailsView.swift */,
+			);
+			path = TeamDetailsView;
+			sourceTree = "<group>";
+		};
+		D28E693B2C14BCFE00BD3AD3 /* TeamMatchesView */ = {
+			isa = PBXGroup;
+			children = (
+				D28E693C2C14BD0F00BD3AD3 /* TeamMatchesViewController.swift */,
+			);
+			path = TeamMatchesView;
+			sourceTree = "<group>";
+		};
 		D29B8CF92BC45A440000CA42 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D29F234C2C12420700DFE1FB /* TeamView */,
 				D23758DF2C0F64E40080B703 /* LoginView */,
 				D26654492C00C58000591AE9 /* MainView */,
-				D266544A2C00C5BA00591AE9 /* CustomTabView */,
 				D266544C2C00C62000591AE9 /* DatePickerView */,
 				D266544B2C00C5DC00591AE9 /* EventsView */,
 				D26654482C00C55E00591AE9 /* SelectedEventView */,
 				D26654472C00C52900591AE9 /* SettingsView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D29F234C2C12420700DFE1FB /* TeamView */ = {
+			isa = PBXGroup;
+			children = (
+				D28E693B2C14BCFE00BD3AD3 /* TeamMatchesView */,
+				D28E692C2C1476DC00BD3AD3 /* TeamDetailsView */,
+				D29F23512C1459D300DFE1FB /* TeamTabView */,
+				D29F234D2C12421500DFE1FB /* TeamViewController.swift */,
+				D29F234F2C12450300DFE1FB /* TeamHeaderView.swift */,
+				D28E69332C14851A00BD3AD3 /* CustomDivider.swift */,
+			);
+			path = TeamView;
+			sourceTree = "<group>";
+		};
+		D29F23512C1459D300DFE1FB /* TeamTabView */ = {
+			isa = PBXGroup;
+			children = (
+				D29F23522C1459F700DFE1FB /* CustomTeamTabView.swift */,
+				D29F23542C145A0A00DFE1FB /* TeamTabItemView.swift */,
+			);
+			path = TeamTabView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,11 +556,15 @@
 				D239C0C52BFA583700128E01 /* SettingsHeaderView.swift in Sources */,
 				D2DAEEA12BF91048008FD27B /* LoginViewController.swift in Sources */,
 				D23180262BFA67BD00DFE549 /* CreditsLabelView.swift in Sources */,
+				D29F234B2C123CF600DFE1FB /* TeamTapDelegate.swift in Sources */,
 				D2A383042BA88565001C102F /* Styling.swift in Sources */,
 				D239C0BF2BFA449D00128E01 /* FootballCardModel.swift in Sources */,
+				D29F23592C1465A000DFE1FB /* TeamDetailsViewController.swift in Sources */,
+				D29F23532C1459F700DFE1FB /* CustomTeamTabView.swift in Sources */,
 				D239C0BB2BFA43AD00128E01 /* FootballGoalModel.swift in Sources */,
 				D21B98322BE53F0A0094308A /* DatePickDelegate.swift in Sources */,
 				D29B8D092BC4C2A70000CA42 /* EventDataViewController.swift in Sources */,
+				D28E69342C14851A00BD3AD3 /* CustomDivider.swift in Sources */,
 				D23758E32C0F651C0080B703 /* EmailTextField.swift in Sources */,
 				D239C0B72BF9773000128E01 /* EventScoreView.swift in Sources */,
 				D239C0C32BFA4DD900128E01 /* NotStartedEventView.swift in Sources */,
@@ -498,9 +579,15 @@
 				D236A63C2B9B598700C2ADB4 /* SportViewController.swift in Sources */,
 				D25036732BE55378005B3C1A /* CountryModel.swift in Sources */,
 				D2896E442BE438BE0040CEBA /* UserDefaultsService.swift in Sources */,
+				D29F23552C145A0A00DFE1FB /* TeamTabItemView.swift in Sources */,
 				D23289B72BA10CDF00139113 /* ScoreLabel.swift in Sources */,
 				D29B8D072BC4BB0D0000CA42 /* SettingsViewController.swift in Sources */,
 				D26654462BFBBE4000591AE9 /* MainScrollView.swift in Sources */,
+				D28E692E2C1476EC00BD3AD3 /* TeamHeadlineView.swift in Sources */,
+				D28E693D2C14BD0F00BD3AD3 /* TeamMatchesViewController.swift in Sources */,
+				D29F23502C12450300DFE1FB /* TeamHeaderView.swift in Sources */,
+				D28E69382C1499ED00BD3AD3 /* TournamentCardViewCell.swift in Sources */,
+				D28E69322C14824400BD3AD3 /* TeamPlayersDetailsView.swift in Sources */,
 				D2896E482BE4DAB20040CEBA /* LoadingViewController.swift in Sources */,
 				D25036752BE553A2005B3C1A /* TeamModel.swift in Sources */,
 				D232FF7A2C10D71A0049846F /* IncidentViewProtocol.swift in Sources */,
@@ -509,9 +596,12 @@
 				D21B982C2BE50DC90094308A /* DatePickerCollectionView.swift in Sources */,
 				D2DBE0192BF9674A00C685DC /* ReturnButtonDelegate.swift in Sources */,
 				D2A383062BA8FA7C001C102F /* Helpers.swift in Sources */,
+				D29F23572C14637000DFE1FB /* TeamTabSelectDelegate.swift in Sources */,
 				D26EF6FD2BB3577C00A49861 /* LeagueInfoViewHeader.swift in Sources */,
 				D250366F2BE55313005B3C1A /* TournamentModel.swift in Sources */,
 				D232FF762C10CC900049846F /* IncidentCardView.swift in Sources */,
+				D28E69302C14786F00BD3AD3 /* TeamCoachDetailsView.swift in Sources */,
+				D28E69362C1486FF00BD3AD3 /* TeamDetailsPlayersCard.swift in Sources */,
 				D236A6382B9B598600C2ADB4 /* AppDelegate.swift in Sources */,
 				D239C0C12BFA44ED00128E01 /* FootballPeriodModel.swift in Sources */,
 				D250367F2BE964F9005B3C1A /* Cache.swift in Sources */,
@@ -521,6 +611,7 @@
 				D25036712BE55354005B3C1A /* SportModel.swift in Sources */,
 				D232FF7C2C10E8EF0049846F /* IncidentGoalView.swift in Sources */,
 				D2DBE0172BF9655400C685DC /* EventHeader.swift in Sources */,
+				D28E693A2C14AD2000BD3AD3 /* VenueDetailsView.swift in Sources */,
 				D250366D2BE546DC005B3C1A /* EventsModel.swift in Sources */,
 				D29B8CFB2BC45A6A0000CA42 /* MainViewController.swift in Sources */,
 				D2366BEA2C10FE7700799030 /* PeriodView.swift in Sources */,
@@ -544,6 +635,7 @@
 				D2FD91BD2BCD733C00591F6A /* AppHeaderDelegate.swift in Sources */,
 				D2807A892BC8495E00F590CA /* ParentSportSlugPickerProtocol.swift in Sources */,
 				D23758E52C0F774B0080B703 /* LoginButton.swift in Sources */,
+				D29F234E2C12421500DFE1FB /* TeamViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

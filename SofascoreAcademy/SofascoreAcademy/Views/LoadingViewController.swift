@@ -9,6 +9,7 @@ class LoadingViewController: UIViewController, BaseViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         setupView()
     }
     
@@ -55,5 +56,15 @@ extension LoadingViewController {
                 
             }
         }
+    }
+}
+
+extension LoadingViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
+        }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

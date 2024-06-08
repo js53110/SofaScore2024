@@ -9,6 +9,9 @@ class EventTeamView: BaseView {
     private let teamNameLabel = UILabel()
     
     weak var eventDelegate: ReturnButtonDelegate?
+    weak var teamTapDelegate: TeamTapDelegate?
+    
+    private var teamId: Int?
     
     override func addViews() {
         addSubview(teamLogoImageView)
@@ -23,7 +26,6 @@ class EventTeamView: BaseView {
         teamNameLabel.lineBreakMode = .byWordWrapping
     }
     
-    
     override func setupConstraints() {
         teamLogoImageView.snp.makeConstraints {
             $0.size.equalTo(40)
@@ -37,12 +39,18 @@ class EventTeamView: BaseView {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    override func setupGestureRecognizers() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+    }
 }
 
 extension EventTeamView {
     
-    func updateTeamName(teamName: String) {
-        teamNameLabel.text = teamName
+    func update(team: Team) {
+        teamNameLabel.text = team.name
+        teamId = team.id
     }
     
     func updateTeamLogo(teamId: Int) {
@@ -51,6 +59,10 @@ extension EventTeamView {
                 teamLogoImageView.image = await ImageService().getTeamLogo(teamId: teamId)
             }
         }
+    }
+    
+    @objc private func handleTap() {
+        teamTapDelegate?.reactToTeamTap(teamId: teamId ?? 0)
     }
 }
 

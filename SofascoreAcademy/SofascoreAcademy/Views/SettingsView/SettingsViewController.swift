@@ -22,6 +22,8 @@ class SettingsViewController: UIViewController {
         setupConstraints()
         setupGestureRecognizers()
         settingsHeader.eventDelegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,5 +111,15 @@ extension SettingsViewController {
     @objc func logoutButtonTapped() {
         KeyChain.deleteTokenFromKeychain(token: "academy_token")
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension SettingsViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
+        }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

@@ -7,19 +7,24 @@ class EventMatchupView: BaseView {
     
     private let homeTeamView = EventTeamView()
     private let awayTeamView = EventTeamView()
+    private var homeTeam: Team?
+    private var awayTeam: Team?
     
     private let scoreView = EventScoreView()
-        
-    weak var eventDelegate: ReturnButtonDelegate?
     
+    weak var teamTapDelegate: TeamTapDelegate?
+
     override func addViews() {
         addSubview(homeTeamView)
         addSubview(awayTeamView)
         addSubview(scoreView)
+        
+        homeTeamView.teamTapDelegate = self
+        awayTeamView.teamTapDelegate = self
     }
     
     override func styleViews() {
-        
+        // Add any custom styling here
     }
     
     override func setupConstraints() {
@@ -46,9 +51,11 @@ class EventMatchupView: BaseView {
 
 extension EventMatchupView {
     
-    func updateTeamNames(homeTeamName: String, awayTeamName: String) {
-        homeTeamView.updateTeamName(teamName: homeTeamName)
-        awayTeamView.updateTeamName(teamName: awayTeamName)
+    func updateTeamNames(homeTeam: Team, awayTeam: Team) {
+        self.homeTeam = homeTeam
+        self.awayTeam = awayTeam
+        homeTeamView.update(team: homeTeam)
+        awayTeamView.update(team: awayTeam)
     }
     
     func updateHomeTeamLogo(teamId: Int) {
@@ -64,5 +71,8 @@ extension EventMatchupView {
     }
 }
 
-
-
+extension EventMatchupView: TeamTapDelegate {
+    func reactToTeamTap(teamId: Int) {
+        teamTapDelegate?.reactToTeamTap(teamId: teamId)
+    }
+}

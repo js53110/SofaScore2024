@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         setupView()
         subscribeToKeyboardNotifications()
         
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -267,5 +268,15 @@ extension LoginViewController {
         loginForm.isHidden = false
         loginForm.alpha = 1.0
         subscribeToKeyboardNotifications()
+    }
+}
+
+extension LoginViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            return false
+        }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

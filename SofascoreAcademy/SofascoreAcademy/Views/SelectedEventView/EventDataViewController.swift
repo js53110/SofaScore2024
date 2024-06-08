@@ -10,11 +10,13 @@ class EventDataViewController: UIViewController {
     private let matchData: Event
     private let eventHeader = EventHeader()
     private let eventMatchupView = EventMatchupView()
-    
+        
     init(matchData: Event) {
         self.matchData = matchData
         super.init(nibName: nil, bundle: nil)
+        
         eventHeader.eventDelegate = self
+        eventMatchupView.teamTapDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -23,12 +25,16 @@ class EventDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+
         setupView()
-        
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -40,7 +46,7 @@ class EventDataViewController: UIViewController {
         
         
         eventHeader.update(matchData: matchData)
-        eventMatchupView.updateTeamNames(homeTeamName: matchData.homeTeam.name, awayTeamName: matchData.awayTeam.name)
+        eventMatchupView.updateTeamNames(homeTeam: matchData.homeTeam, awayTeam: matchData.awayTeam)
         eventMatchupView.updateScoreView(matchData: matchData)
         
         eventHeader.updateLeagueLogo(tournamentId: matchData.tournament.id)
@@ -96,6 +102,13 @@ extension EventDataViewController: BaseViewProtocol {
 extension EventDataViewController: ReturnButtonDelegate {
     func reactToReturnTap() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension EventDataViewController: TeamTapDelegate {
+    func reactToTeamTap(teamId: Int) {
+        let teamViewController = TeamViewController(teamId: teamId)
+        navigationController?.pushViewController(teamViewController, animated: true)
     }
 }
 
@@ -185,6 +198,16 @@ extension EventDataViewController: UITableViewDelegate {
             return 40
         }
         return 56
+    }
+}
+
+extension EventDataViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
+        }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 

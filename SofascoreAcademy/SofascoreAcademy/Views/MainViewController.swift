@@ -166,7 +166,7 @@ extension MainViewController: ParentSportSlugPicker {
     
     func displaySelectedSport(selectedSportSlug: SportSlug?) {
         if(selectedSportSlug != currentSportSlug) {
-            currentChild.remove()
+                        currentChild.remove()
             if let selectedSportSlug = selectedSportSlug {
                 startLoading()
                 currentSportSlug = selectedSportSlug
@@ -273,11 +273,10 @@ private extension MainViewController {
 
 extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return navigationController?.viewControllers.count ?? 0 > 1
-    }
+            return false
+        }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
-

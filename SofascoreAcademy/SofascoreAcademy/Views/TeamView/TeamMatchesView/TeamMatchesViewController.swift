@@ -3,7 +3,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class SportViewController: UIViewController {
+class TeamMatchesViewController: UIViewController {
     
     private let tableView = UITableView()
     private var data: Array<LeagueData>
@@ -34,7 +34,7 @@ class SportViewController: UIViewController {
 }
 
 // MARK: UITableViewDataSource
-extension SportViewController: UITableViewDataSource {
+extension TeamMatchesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         data.count
@@ -76,7 +76,7 @@ extension SportViewController: UITableViewDataSource {
 }
 
 // MARK: UITableViewDelegate
-extension SportViewController: UITableViewDelegate {
+extension TeamMatchesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
@@ -90,7 +90,7 @@ extension SportViewController: UITableViewDelegate {
 }
 
 // MARK: BaseViewProtocol
-extension SportViewController: BaseViewProtocol {
+extension TeamMatchesViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(tableView)
@@ -109,7 +109,7 @@ extension SportViewController: BaseViewProtocol {
 }
 
 // MARK: Private methods
-private extension SportViewController {
+private extension TeamMatchesViewController {
     
     func setupTableView() {
         tableView.register(
@@ -151,7 +151,7 @@ private extension SportViewController {
     }
 }
 
-extension SportViewController {
+extension TeamMatchesViewController {
     
     func checkNoData() {
         if(data.count == 0) {
@@ -160,7 +160,7 @@ extension SportViewController {
     }
 }
 
-extension SportViewController: UIGestureRecognizerDelegate {
+extension TeamMatchesViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
             return true
         }
