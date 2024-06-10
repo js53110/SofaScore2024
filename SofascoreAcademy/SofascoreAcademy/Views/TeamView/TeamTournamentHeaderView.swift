@@ -3,7 +3,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class TeamHeaderView: BaseView {
+class TeamTournamentHeaderView: BaseView {
     
     private let backButtonContainer = UIView()
     private let backButtonImage = UIImageView()
@@ -28,6 +28,8 @@ class TeamHeaderView: BaseView {
     }
     
     override func styleViews() {
+        backgroundColor = .colorPrimaryDefault
+        
         backButtonImage.image = UIImage(named: "back_icon_white")
         backButtonImage.contentMode = .scaleAspectFit
         
@@ -93,23 +95,39 @@ class TeamHeaderView: BaseView {
     }
 }
 
-extension TeamHeaderView {
+//MARK: Class methods
+extension TeamTournamentHeaderView {
     
     @objc func backButtonTapped() {
         eventDelegate?.reactToReturnTap()
     }
     
-    func update(teamData: Team) {
+    func updateTeam(teamData: Team) {
         updateTeamLogo(teamId: teamData.id)
         updateCountryFlag(countryId: teamData.country.id)
         teamNameLabel.text = teamData.name
         countryNameLabel.text = teamData.country.name
     }
     
+    func updateTournament(tournamentData: Tournament) {
+        updateTournamentLogo(tournamentId: tournamentData.id)
+        updateCountryFlag(countryId: tournamentData.country.id)
+        teamNameLabel.text = tournamentData.name
+        countryNameLabel.text = tournamentData.country.name
+    }
+    
     private func updateTeamLogo(teamId: Int) {
         Task {
             do {
                 teamImageView.image = await ImageService().getTeamLogo(teamId: teamId)
+            }
+        }
+    }
+    
+    private func updateTournamentLogo(tournamentId: Int) {
+        Task {
+            do {
+                teamImageView.image = await ImageService().getLeagueLogo(tournamentId: tournamentId)
             }
         }
     }

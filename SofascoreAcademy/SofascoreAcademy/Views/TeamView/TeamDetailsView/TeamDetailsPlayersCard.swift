@@ -53,6 +53,7 @@ class TeamDetailsPlayersCard: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension TeamDetailsPlayersCard {
     
     func update(image: UIImage, playersCount: Int, descriptionText: String) {

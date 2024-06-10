@@ -81,6 +81,10 @@ class LoginViewController: UIViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+//MARK: Validation methods
+extension LoginViewController {
     
     func validateEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
@@ -109,6 +113,7 @@ class LoginViewController: UIViewController {
     }
 }
 
+//MARK: BaseViewProtocol
 extension LoginViewController: BaseViewProtocol {
     
     func addViews() {
@@ -271,10 +276,11 @@ extension LoginViewController {
     }
 }
 
+//MARK: UIGestureRecognizerDelegate
 extension LoginViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return false
-        }
+        return false
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

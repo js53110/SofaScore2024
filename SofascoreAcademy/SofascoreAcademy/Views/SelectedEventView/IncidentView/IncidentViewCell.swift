@@ -23,7 +23,7 @@ class IncidentViewCell: UITableViewCell {
 // MARK: Additional methods
 extension IncidentViewCell {
     
-    func setupCell(data: FootballIncident, matchData: Event) {
+    func setupCell(data: EventIncident, matchData: Event) {
         
         if(data.type == "card") {
             incidentView = IncidentCardView()

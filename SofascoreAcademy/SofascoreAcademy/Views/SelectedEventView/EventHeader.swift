@@ -14,6 +14,7 @@ class EventHeader: BaseView {
     private var matchData: Event?
     
     weak var eventDelegate: ReturnButtonDelegate?
+    weak var tournamentTapDelegate: LeagueTapDelegate?
     
     override func addViews() {
         addSubview(backButtonContainer)
@@ -56,15 +57,23 @@ class EventHeader: BaseView {
         }
     }
     override func setupGestureRecognizers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
-        backButtonContainer.addGestureRecognizer(tapGesture)
+        let backButtonTapGesture = UITapGestureRecognizer(target: self, action: #selector(backButtonTapped))
+        let tournamentTapGesture = UITapGestureRecognizer(target: self, action: #selector(tournamentTapped))
+        
+        backButtonContainer.addGestureRecognizer(backButtonTapGesture)
+        addGestureRecognizer(tournamentTapGesture)
     }
     
     @objc func backButtonTapped() {
         eventDelegate?.reactToReturnTap()
     }
+    
+    @objc func tournamentTapped() {
+        tournamentTapDelegate?.reactToLeagueHeaderTap(tournamentId: matchData?.tournament.id ?? 0)
+    }
 }
 
+//MARK: Additional methods
 extension EventHeader {
     
     func update(matchData: Event) {

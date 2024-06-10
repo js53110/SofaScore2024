@@ -50,7 +50,7 @@ extension TeamMatchesViewController: UITableViewDataSource {
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
             let dataForRow = data[indexPath.section].events[indexPath.row]
-            cell.update(data: dataForRow)
+            cell.update(data: dataForRow, displayDate: true)
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -67,6 +67,8 @@ extension TeamMatchesViewController: UITableViewDataSource {
                 leagueName: sectionData.name,
                 tournamentId: sectionData.id
             )
+            
+            headerView.delegate = self
             
             return headerView
         } else {
@@ -85,7 +87,7 @@ extension TeamMatchesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMatch: Event = data[indexPath.section].events[indexPath.row]
         navigationController?.pushViewController(EventDataViewController(matchData: selectedMatch), animated: true)
-//        matchTapDelegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
+        //        matchTapDelegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
     }
 }
 
@@ -125,7 +127,6 @@ private extension TeamMatchesViewController {
         tableView.separatorStyle = .none
         tableView.reloadData()
         
-        //MARK: Assigning delegates
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -151,6 +152,7 @@ private extension TeamMatchesViewController {
     }
 }
 
+// MARK: Additional methods
 extension TeamMatchesViewController {
     
     func checkNoData() {
@@ -160,13 +162,21 @@ extension TeamMatchesViewController {
     }
 }
 
+// MARK: UIGestureRecognizerDelegate
 extension TeamMatchesViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
-        }
+        return true
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+// MARK: LeagueHeaderTapDelegate
+extension TeamMatchesViewController: LeagueTapDelegate {
+    func reactToLeagueHeaderTap(tournamentId: Int) {
+        navigationController?.pushViewController(SelectedLeagueViewController(tournamentId: tournamentId), animated: true)
     }
 }
 

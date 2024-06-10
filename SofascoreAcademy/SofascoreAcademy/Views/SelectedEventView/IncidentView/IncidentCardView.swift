@@ -3,7 +3,6 @@ import SnapKit
 import UIKit
 import SofaAcademic
 
-
 class IncidentCardView: UIView, IncidentViewProtocol {
     
     private var incidentId: Int?
@@ -146,7 +145,7 @@ class IncidentCardView: UIView, IncidentViewProtocol {
 // MARK: Additional methods
 extension IncidentCardView {
     
-    func update(data: FootballIncident, matchData: Event) {
+    func update(data: EventIncident, matchData: Event) {
         incidentId = data.id
         player = data.player
         teamSide = data.teamSide

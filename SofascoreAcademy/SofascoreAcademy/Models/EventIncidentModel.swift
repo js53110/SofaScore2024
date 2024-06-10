@@ -15,7 +15,7 @@ enum GoalType: String, Codable {
 
 
 
-struct FootballIncident: Codable {
+struct EventIncident: Codable {
     
     let player: Player?
     let type: String

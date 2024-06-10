@@ -5,17 +5,18 @@ import SofaAcademic
 class EventDataViewController: UIViewController {
     
     private let tableView = UITableView()
-    private var eventData: [FootballIncident] = []
+    private var eventData: [EventIncident] = []
     private let whiteContainer = UIView()
     private let matchData: Event
     private let eventHeader = EventHeader()
     private let eventMatchupView = EventMatchupView()
-        
+    
     init(matchData: Event) {
         self.matchData = matchData
         super.init(nibName: nil, bundle: nil)
         
         eventHeader.eventDelegate = self
+        eventHeader.tournamentTapDelegate = self
         eventMatchupView.teamTapDelegate = self
     }
     
@@ -26,11 +27,9 @@ class EventDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-
+        
         setupView()
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,6 +52,8 @@ class EventDataViewController: UIViewController {
         eventMatchupView.updateHomeTeamLogo(teamId: matchData.homeTeam.id)
         eventMatchupView.updateAwayTeamLogo(teamId: matchData.awayTeam.id)
         
+        
+        
         if(matchData.status == "notstarted") {
             addNotStartedEventView()
         }
@@ -62,6 +63,7 @@ class EventDataViewController: UIViewController {
     }
 }
 
+//MARK: BaseViewProtocol
 extension EventDataViewController: BaseViewProtocol {
     
     func addViews() {
@@ -105,10 +107,18 @@ extension EventDataViewController: ReturnButtonDelegate {
     }
 }
 
+// MARK: TeamTapDelegate
 extension EventDataViewController: TeamTapDelegate {
     func reactToTeamTap(teamId: Int) {
         let teamViewController = TeamViewController(teamId: teamId)
         navigationController?.pushViewController(teamViewController, animated: true)
+    }
+}
+
+// MARK: LeagueTapDelegate
+extension EventDataViewController: LeagueTapDelegate {
+    func reactToLeagueHeaderTap(tournamentId: Int) {
+        navigationController?.pushViewController(SelectedLeagueViewController(tournamentId: matchData.tournament.id), animated: true)
     }
 }
 
@@ -134,6 +144,8 @@ extension EventDataViewController {
     func addNotStartedEventView() {
         let notStartedEventView = NotStartedEventView()
         view.addSubview(notStartedEventView)
+        
+        notStartedEventView.delegate = self
         
         notStartedEventView.snp.makeConstraints {
             $0.top.equalTo(eventMatchupView.snp.bottom).offset(8)
@@ -165,7 +177,6 @@ extension EventDataViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-        
     }
 }
 
@@ -189,22 +200,30 @@ extension EventDataViewController: UITableViewDataSource {
     }
 }
 
-// MARK: UITableViewDelegate
 extension EventDataViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let incident = eventData[indexPath.row]
-        if(incident.type == "period") {
+        if incident.type == "period" {
             return 40
         }
         return 56
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedIncident = eventData[indexPath.row]
+        if(selectedIncident.type != "period") {
+            navigationController?.pushViewController(PlayerViewController(playerId: selectedIncident.player?.id ?? 0), animated: true)
+        }
+    }
 }
 
+
+// MARK: UIGestureRecognizerDelegate
 extension EventDataViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
-        }
+        return true
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

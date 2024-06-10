@@ -86,7 +86,7 @@ class MatchView: BaseView {
 // MARK: Additional methods
 extension MatchView {
     
-    func update(data: Event) {
+    func update(data: Event, displayDate: Bool) {
         matchId = data.id
         
         homeTeamLabel.update(
@@ -104,7 +104,7 @@ extension MatchView {
         homeResult.update(
             matchId: data.id,
             status: data.status,
-            score: data.homeScore.total,
+            score:  data.homeScore.total,
             color: Helpers.determineHomeTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
         )
         awayResult.update(
@@ -113,7 +113,7 @@ extension MatchView {
             score: data.awayScore.total,
             color: Helpers.determineAwayTeamTextColorBasedOnMatchStatus(matchWinner: data.winnerCode)
         )
-        timeStatusView.update(matchTime: Helpers.dateStringToTimestamp(data.startDate) ?? 0, status: data.status)
+        timeStatusView.update(matchTime: Helpers.dateStringToTimestamp(data.startDate) ?? 0, status: data.status, displayDate: displayDate)
     }
     
     func updateScore(score: Int, side: TeamSide){

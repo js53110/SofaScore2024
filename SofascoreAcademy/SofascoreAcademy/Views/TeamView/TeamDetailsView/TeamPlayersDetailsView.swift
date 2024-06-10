@@ -53,10 +53,11 @@ class TeamPlayersDetailsView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension TeamPlayersDetailsView {
     
     func update(teamPlayers: [Player], country: Country) {
-        totalPlayersView.update(image: UIImage(named: "ic_team") ?? UIImage(), 
+        totalPlayersView.update(image: UIImage(named: "ic_team") ?? UIImage(),
                                 playersCount: teamPlayers.count,
                                 descriptionText: "Total Players")
         

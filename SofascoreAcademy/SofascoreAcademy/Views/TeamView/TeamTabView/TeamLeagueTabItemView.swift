@@ -3,8 +3,8 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-class TeamTabItemView: BaseView {
-        
+class TeamLeagueTabItemView: BaseView {
+    
     let title: String
     private let tabLabel = UILabel()
     

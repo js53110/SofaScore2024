@@ -4,7 +4,7 @@ import UIKit
 import SofaAcademic
 
 
-class IncidentGoalView: UIView, IncidentViewProtocol {
+class IncidentGoalView: UIView {
     
     private var incidentId: Int?
     private var player: Player?
@@ -24,7 +24,29 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
     private let homeScoreLabel = UILabel()
     private let awayScoreLabel = UILabel()
     private let lineLabel = UILabel()
+    
+}
 
+// MARK: Additional methods
+extension IncidentGoalView: IncidentViewProtocol {
+    
+    func update(data: EventIncident, matchData: Event) {
+        incidentId = data.id
+        player = data.player
+        time = String(data.time)
+        scoringTeam = data.scoringTeam
+        homeScore = data.homeScore
+        awayScore = data.awayScore
+        goalType = data.goalType
+        
+        addViews()
+        styleViews()
+        setupConstraints()
+    }
+}
+
+extension IncidentGoalView: BaseViewProtocol {
+    
     func addViews() {
         addSubview(divider)
         addSubview(incidentIcon)
@@ -42,15 +64,6 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
         
         incidentIcon.contentMode = .scaleAspectFit
         
-        switch goalType {
-        case "owngoal":
-            incidentIcon.image = UIImage(named: "icon_autogoal")
-        case "penalty":
-            incidentIcon.image = UIImage(named: "icon_penalty")
-        default:
-            incidentIcon.image = UIImage(named: "icon_goal")
-        }
-        
         homeScoreLabel.text = "\(homeScore ?? 0)"
         homeScoreLabel.textAlignment = .right
         homeScoreLabel.textColor = .black
@@ -60,7 +73,7 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
         awayScoreLabel.textAlignment = .left
         awayScoreLabel.textColor = .black
         awayScoreLabel.font = .headline1
-
+        
         lineLabel.text = "-"
         lineLabel.font = .headline1
         lineLabel.textColor = .black
@@ -70,7 +83,7 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
         timeLabel.textAlignment = .center
         timeLabel.textColor = .onSurfaceOnSurfaceLv2
         timeLabel.font = .micro
-                
+        
         playerName.text = player?.name
         playerName.font = .body
         playerName.textColor = .black
@@ -78,14 +91,41 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
         if (scoringTeam == "away") {
             playerName.textAlignment = .right
         }
-
+        
+        switch goalType {
+        case "owngoal":
+            incidentIcon.image = UIImage(named: "icon_autogoal")
+        case "penalty":
+            incidentIcon.image = UIImage(named: "icon_penalty")
+        case "onepoint":
+            incidentIcon.image = UIImage(named: "icon_onepoint")
+            homeScoreLabel.font = .headline3
+            awayScoreLabel.font = .headline3
+        case "twopoint":
+            incidentIcon.image = UIImage(named: "icon_twopoint")
+            homeScoreLabel.font = .headline3
+            awayScoreLabel.font = .headline3
+        case "threepoint":
+            incidentIcon.image = UIImage(named: "icon_threepoint")
+            homeScoreLabel.font = .headline3
+            awayScoreLabel.font = .headline3
+        case "fieldgoal":
+            incidentIcon.image = UIImage(named: "icon_fieldgoal")
+        case "extrapoint":
+            incidentIcon.image = UIImage(named: "icon_extrapoint")
+        case "touchdown":
+            incidentIcon.image = UIImage(named: "icon_touchdown")
+        default:
+            incidentIcon.image = UIImage(named: "icon_goal")
+        }
+        
     }
     
     func setupConstraints() {
         snp.makeConstraints() {
             $0.height.equalTo(56)
         }
-                
+        
         if(scoringTeam == "home") {
             divider.snp.makeConstraints() {
                 $0.leading.equalToSuperview().inset(55)
@@ -171,23 +211,5 @@ class IncidentGoalView: UIView, IncidentViewProtocol {
             $0.width.equalTo(12)
             $0.centerY.equalToSuperview()
         }
-    }
-}
-
-// MARK: Additional methods
-extension IncidentGoalView {
-    
-    func update(data: FootballIncident, matchData: Event) {
-        incidentId = data.id
-        player = data.player
-        time = String(data.time)
-        scoringTeam = data.scoringTeam
-        homeScore = data.homeScore
-        awayScore = data.awayScore
-        goalType = data.goalType
-        
-        addViews()
-        styleViews()
-        setupConstraints()
     }
 }

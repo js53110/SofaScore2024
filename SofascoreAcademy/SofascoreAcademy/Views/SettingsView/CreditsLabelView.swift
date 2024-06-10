@@ -17,7 +17,6 @@ class CreditsLabelView: BaseView {
     override func addViews() {
         addSubview(upperLabel)
         addSubview(lowerLabel)
-        
     }
     
     override func styleViews() {

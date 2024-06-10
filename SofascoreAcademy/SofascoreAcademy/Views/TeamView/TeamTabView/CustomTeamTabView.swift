@@ -7,18 +7,18 @@ class CustomTeamTabView: BaseView {
     
     static let detailsTitle = "Details"
     static let matchesTitle = "Matches"
-    static let StandingsTitle = "Standings"
+    static let standingsTitle = "Standings"
     static let squadTitle = "Squad"
-
-    private let stackView = UIStackView()
-    private var tabButtonDetails = TeamTabItemView(title: CustomTeamTabView.detailsTitle)
-    private var tabButtonMatches = TeamTabItemView(title: CustomTeamTabView.matchesTitle)
-    private var tabButtonStandings = TeamTabItemView(title: CustomTeamTabView.StandingsTitle)
-    private var tabButtonSquad = TeamTabItemView(title: CustomTeamTabView.squadTitle)
-    private var tabIndicator = UIView()
-    private var selectedTab: TeamTabItemView
     
-    weak var delegate: TeamTabSelectDelegate?
+    private let stackView = UIStackView()
+    private var tabButtonDetails = TeamLeagueTabItemView(title: CustomTeamTabView.detailsTitle)
+    private var tabButtonMatches = TeamLeagueTabItemView(title: CustomTeamTabView.matchesTitle)
+    private var tabButtonStandings = TeamLeagueTabItemView(title: CustomTeamTabView.standingsTitle)
+    private var tabButtonSquad = TeamLeagueTabItemView(title: CustomTeamTabView.squadTitle)
+    private var tabIndicator = UIView()
+    private var selectedTab: TeamLeagueTabItemView
+    
+    weak var delegate: TeamTournamentTabSelectDelegate?
     
     override init(){
         selectedTab = tabButtonDetails
@@ -75,12 +75,12 @@ class CustomTeamTabView: BaseView {
 private extension CustomTeamTabView {
     
     @objc func tabTapped(_ sender: UITapGestureRecognizer) {
-        guard let tappedButton = sender.view as? TeamTabItemView else { return }
-        delegate?.reactToTeamTabSelect(tabTitle: tappedButton.title)
+        guard let tappedButton = sender.view as? TeamLeagueTabItemView else { return }
+        delegate?.reactToTeamTournamentTabSelect(tabTitle: tappedButton.title)
         moveIndicator(selectedTab: tappedButton)
     }
     
-    func moveIndicator(selectedTab: TeamTabItemView) {
+    func moveIndicator(selectedTab: TeamLeagueTabItemView) {
         
         UIView.animate(withDuration: 0.3) {
             self.tabIndicator.snp.remakeConstraints {

@@ -54,6 +54,7 @@ class VenueDetailsView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension VenueDetailsView {
     
     func update(venueDesc: String, venueName: String) {

@@ -44,6 +44,7 @@ class DatesMatchesDividerView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension DatesMatchesDividerView {
     
     func updateInfo(count: Int, date: String) {

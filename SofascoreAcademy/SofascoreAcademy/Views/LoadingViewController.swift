@@ -3,7 +3,7 @@ import UIKit
 import SofaAcademic
 import SnapKit
 
-class LoadingViewController: UIViewController, BaseViewProtocol {
+class LoadingViewController: UIViewController {
     
     let appLogo = UIImageView(image: UIImage(named: "sofascore_logo"))
     
@@ -16,6 +16,9 @@ class LoadingViewController: UIViewController, BaseViewProtocol {
     override func viewWillAppear(_ animated: Bool) {
         displayViewController()
     }
+}
+
+extension LoadingViewController: BaseViewProtocol {
     
     func setupView() {
         addViews()
@@ -41,6 +44,7 @@ class LoadingViewController: UIViewController, BaseViewProtocol {
     }
 }
 
+//MARK: Additional methods
 extension LoadingViewController {
     
     func displayViewController() {
@@ -59,10 +63,11 @@ extension LoadingViewController {
     }
 }
 
+//MARK: UIGestureRecognizerDelegate
 extension LoadingViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
-        }
+        return true
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

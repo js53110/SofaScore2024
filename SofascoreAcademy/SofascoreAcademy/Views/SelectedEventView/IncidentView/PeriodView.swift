@@ -4,7 +4,7 @@ import UIKit
 import SofaAcademic
 
 
-class PeriodView: UIView, IncidentViewProtocol {
+class PeriodView: UIView {
     
     private var incidentId: Int?
     private var homeScore: Score?
@@ -12,6 +12,25 @@ class PeriodView: UIView, IncidentViewProtocol {
     private var time: Int?
     
     private let statusLabel = UILabel()
+}
+
+// MARK: Additional methods
+extension PeriodView: IncidentViewProtocol {
+    
+    func update(data: EventIncident, matchData: Event) {
+        incidentId = data.id
+        time = data.time
+        homeScore = matchData.homeScore
+        awayScore = matchData.awayScore
+        
+        addViews()
+        styleViews()
+        setupConstraints()
+    }
+}
+
+// MARK: BaseViewProtocol
+extension PeriodView: BaseViewProtocol {
     
     func addViews() {
         addSubview(statusLabel)
@@ -41,20 +60,5 @@ class PeriodView: UIView, IncidentViewProtocol {
             $0.leading.trailing.equalToSuperview().inset(8)
             $0.top.bottom.equalToSuperview().inset(8)
         }
-    }
-}
-
-// MARK: Additional methods
-extension PeriodView {
-    
-    func update(data: FootballIncident, matchData: Event) {
-        incidentId = data.id
-        time = data.time
-        homeScore = matchData.homeScore
-        awayScore = matchData.awayScore
-                
-        addViews()
-        styleViews()
-        setupConstraints()
     }
 }

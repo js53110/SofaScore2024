@@ -10,6 +10,8 @@ class NotStartedEventView: BaseView {
     private let tournamentDetailsBox = UIView()
     private let tournamentDetailsText = UILabel()
     
+    weak var delegate: LeagueTapDelegate?
+    
     override func addViews() {
         addSubview(textContainer)
         textContainer.addSubview(textLabel)
@@ -59,5 +61,18 @@ class NotStartedEventView: BaseView {
             $0.top.bottom.equalToSuperview().inset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
+    }
+    
+    override func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tournamentButtonTapped))
+        tournamentDetailsBox.addGestureRecognizer(tapGesture)
+    }
+}
+
+//MARK: Gesture methods
+extension NotStartedEventView {
+    
+    @objc func tournamentButtonTapped() {
+        delegate?.reactToLeagueHeaderTap(tournamentId: 0)
     }
 }

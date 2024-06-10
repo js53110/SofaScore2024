@@ -9,6 +9,9 @@ class TournamentCardViewCell: UICollectionViewCell {
     
     private let tournamentImageView = UIImageView()
     private let tournamentNameLabel = UILabel()
+    private var tournamentId: Int?
+    
+    weak var tournamentTapDelegate: LeagueTapDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,9 +27,11 @@ class TournamentCardViewCell: UICollectionViewCell {
         addViews()
         styleViews()
         setupConstraints()
+        setupGestureRecognizers()
     }
 }
 
+//MARK: BaseViewProtocol
 extension TournamentCardViewCell: BaseViewProtocol {
     func addViews() {
         addSubview(tournamentImageView)
@@ -53,11 +58,22 @@ extension TournamentCardViewCell: BaseViewProtocol {
             $0.top.equalToSuperview().inset(52)
         }
     }
+    
+    func setupGestureRecognizers() {
+        let tournamentTapGesture = UITapGestureRecognizer(target: self, action: #selector(tournamentTapped))
+        addGestureRecognizer(tournamentTapGesture)
+    }
+    
+    @objc func tournamentTapped() {
+        tournamentTapDelegate?.reactToLeagueHeaderTap(tournamentId: tournamentId ?? 0)
+    }
 }
 
+//MARK: Additional methods
 extension TournamentCardViewCell {
     
     func setupCell(tournament: Tournament) {
+        tournamentId = tournament.id
         tournamentNameLabel.text = tournament.name
         updateTournamentImage(tournamentId: tournament.id)
     }

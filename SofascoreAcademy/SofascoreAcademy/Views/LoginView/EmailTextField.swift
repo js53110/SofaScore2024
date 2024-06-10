@@ -7,7 +7,7 @@ class EmailTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-    
+        
         setupTextView()
         styleViews()
         setupConstraints()

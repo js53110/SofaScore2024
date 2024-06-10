@@ -94,6 +94,7 @@ class TeamDetailsViewController: UIViewController {
     }
 }
 
+//MARK: BaseViewProtocol
 extension TeamDetailsViewController: BaseViewProtocol {
     func addViews() {
         view.addSubview(scrollView)
@@ -128,11 +129,11 @@ extension TeamDetailsViewController: BaseViewProtocol {
         
         teamInfoHeadline.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(16)
+            $0.top.equalToSuperview()
         }
         
         teamCoachDetailsView.snp.makeConstraints {
-            $0.top.equalTo(teamInfoHeadline.snp.bottom).offset(16)
+            $0.top.equalTo(teamInfoHeadline.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
@@ -144,11 +145,11 @@ extension TeamDetailsViewController: BaseViewProtocol {
         
         tournamentsInfoHeadline.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(teamPlayersDetailView.snp.bottom).offset(16)
+            $0.top.equalTo(teamPlayersDetailView.snp.bottom)
         }
         
         tournamentCollectionView.snp.makeConstraints {
-            $0.top.equalTo(tournamentsInfoHeadline.snp.bottom).offset(16)
+            $0.top.equalTo(tournamentsInfoHeadline.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             collectionViewHeightConstraint = $0.height.equalTo(0).constraint
         }
@@ -182,6 +183,7 @@ extension TeamDetailsViewController: BaseViewProtocol {
     }
 }
 
+//MARK: UIGestureRecognizerDelegate
 extension TeamDetailsViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -192,6 +194,7 @@ extension TeamDetailsViewController: UIGestureRecognizerDelegate {
     }
 }
 
+//MARK: UICollectionViewDataSource
 extension TeamDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return teamTournaments.count
@@ -201,6 +204,9 @@ extension TeamDetailsViewController: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TournamentCardViewCell.identifier, for: indexPath) as? TournamentCardViewCell {
             let tournament = teamTournaments[indexPath.item]
             cell.setupCell(tournament: tournament)
+            
+            cell.tournamentTapDelegate = self
+            
             return cell
         } else {
             fatalError("Failed to dequeue cell")
@@ -208,12 +214,14 @@ extension TeamDetailsViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: UICollectionViewDelegateFlowLayout
 extension TeamDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 3, height: 96)
     }
 }
 
+//MARK: Private methods
 private extension TeamDetailsViewController {
     
     func setupTableView() {
@@ -251,13 +259,12 @@ extension TeamDetailsViewController: UITableViewDataSource {
         1
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
-            let dataForRow = nextEvent.first
-            cell.update(data: dataForRow!)
+            guard let dataForRow = nextEvent.first else { return cell}
+            cell.update(data: dataForRow, displayDate: true)
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -267,13 +274,15 @@ extension TeamDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: LeagueInfoViewHeader.identifier) as? LeagueInfoViewHeader {
-            let sectionData = nextEvent.first!.tournament
+            guard let sectionData = nextEvent.first?.tournament else { return headerView}
             
             headerView.update(
                 countryName: sectionData.country.name,
                 leagueName: sectionData.name,
                 tournamentId: sectionData.id
             )
+            
+            headerView.delegate = self
             
             return headerView
         } else {
@@ -290,8 +299,14 @@ extension TeamDetailsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMatch: Event = nextEvent.first!
+        guard let selectedMatch: Event = nextEvent.first else { return }
         navigationController?.pushViewController(EventDataViewController(matchData: selectedMatch), animated: true)
     }
 }
 
+//MARK: LeagueTapDelegate
+extension TeamDetailsViewController: LeagueTapDelegate {
+    func reactToLeagueHeaderTap(tournamentId: Int) {
+        navigationController?.pushViewController(SelectedLeagueViewController(tournamentId: tournamentId), animated: true)
+    }
+}

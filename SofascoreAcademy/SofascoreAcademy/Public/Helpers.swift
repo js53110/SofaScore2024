@@ -142,9 +142,29 @@ public enum Helpers {
         }
         
         let groupedEventsArray = groupedEvents.values.map { eventData in
-            return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, id: eventData.id, events: eventData.events)
+            let sortedEvents = eventData.events.sorted(by: { $0.startDate < $1.startDate })
+            return LeagueData(name: eventData.name, slug: eventData.slug, country: eventData.country, id: eventData.id, events: sortedEvents)
         }
+        
         return groupedEventsArray
+    }
+    
+    
+    static func groupMatchesByRound(lastMatches: [Event], nextMatches: [Event]) -> [[Event]] {
+        var groupedMatches = [Int: [Event]]()
+        
+        let allMatches = lastMatches + nextMatches
+        
+        for match in allMatches {
+            if groupedMatches[match.round] != nil {
+                groupedMatches[match.round]?.append(match)
+            } else {
+                groupedMatches[match.round] = [match]
+            }
+        }
+        
+        let groupedArray = groupedMatches.values.sorted { $0.first!.round < $1.first!.round }
+        return groupedArray
     }
     
     static func getEventsCount(data: Array<LeagueData>) -> Int {

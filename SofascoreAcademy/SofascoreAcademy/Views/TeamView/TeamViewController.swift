@@ -15,7 +15,7 @@ class TeamViewController: UIViewController {
     
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
-    private let teamHeaderView: TeamHeaderView = TeamHeaderView()
+    private let teamHeaderView: TeamTournamentHeaderView = TeamTournamentHeaderView()
     private let teamTabBarView = CustomTeamTabView()
     private let containerView = UIView()
     private var currentChild = UIViewController()
@@ -49,14 +49,14 @@ class TeamViewController: UIViewController {
         setupConstraints()
         
         fetchTeamDetails()
-
+        
         teamHeaderView.eventDelegate = self
         teamTabBarView.delegate = self
     }
     
     private func updateView() {
         if let teamDetails = teamDetails {
-            teamHeaderView.update(teamData: teamDetails)
+            teamHeaderView.updateTeam(teamData: teamDetails)
             
             switch selectedTab {
             case CustomTeamTabView.detailsTitle:
@@ -64,8 +64,8 @@ class TeamViewController: UIViewController {
                 
             case CustomTeamTabView.matchesTitle:
                 currentChild = TeamMatchesViewController(data: teamMatches)
-
-            case CustomTeamTabView.StandingsTitle:
+                
+            case CustomTeamTabView.standingsTitle:
                 print("Standings")
                 
             case CustomTeamTabView.squadTitle:
@@ -77,8 +77,12 @@ class TeamViewController: UIViewController {
             customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
         }
     }
+}
+
+//MARK: BaseViewProtocol
+extension TeamViewController: BaseViewProtocol {
     
-    private func addViews() {
+    func addViews() {
         view.addSubview(blueContainer)
         view.addSubview(teamHeaderView)
         view.addSubview(teamTabBarView)
@@ -88,13 +92,12 @@ class TeamViewController: UIViewController {
         customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
     }
     
-    private func styleViews() {
+    func styleViews() {
         blueContainer.backgroundColor = .colorPrimaryDefault
-        teamHeaderView.backgroundColor = .colorPrimaryDefault
         teamTabBarView.backgroundColor = .colorPrimaryDefault
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         blueContainer.snp.makeConstraints() {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -117,8 +120,71 @@ class TeamViewController: UIViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
+}
+
+//MARK: ReturnButtonDelegate
+extension TeamViewController: ReturnButtonDelegate {
+    func reactToReturnTap() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: TeamTournamentTabSelectDelegate
+extension TeamViewController: TeamTournamentTabSelectDelegate {
+    func reactToTeamTournamentTabSelect(tabTitle: String) {
+        if (selectedTab != tabTitle) {
+            selectedTab = tabTitle
+            currentChild.remove()
+            switch selectedTab {
+            case CustomTeamTabView.matchesTitle:
+                fetchTeamMatches()
+            case CustomTeamTabView.detailsTitle:
+                fetchTeamDetails()
+            default:
+                print("Invalid selection")
+            }
+        }
+    }
+}
+
+//MARK: TeamViewController
+private extension TeamViewController {
     
-    private func fetchTeamDetails() {
+    func setupLoadingIndicator() {
+        containerView.addSubview(loadingIndicator)
+        
+        loadingIndicator.color = .gray
+        loadingIndicator.hidesWhenStopped = true
+        
+        loadingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    func startLoading() {
+        loadingIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+    }
+}
+
+//MARK: UIGestureRecognizerDelegate
+extension TeamViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+//MARK: Data loading methods
+private extension TeamViewController {
+    
+    func fetchTeamDetails() {
         startLoading()
         Task {
             do {
@@ -159,7 +225,7 @@ class TeamViewController: UIViewController {
         }
     }
     
-    private func fetchTeamMatches() {
+    func fetchTeamMatches() {
         startLoading()
         Task {
             do {
@@ -174,60 +240,5 @@ class TeamViewController: UIViewController {
             }
             stopLoading()
         }
-    }
-}
-
-extension TeamViewController: ReturnButtonDelegate {
-    func reactToReturnTap() {
-        navigationController?.popViewController(animated: true)
-    }
-}
-
-extension TeamViewController: TeamTabSelectDelegate {
-    func reactToTeamTabSelect(tabTitle: String) {
-        if (selectedTab != tabTitle) {
-            selectedTab = tabTitle
-            currentChild.remove()
-            switch selectedTab {
-            case CustomTeamTabView.matchesTitle:
-                fetchTeamMatches()
-            case CustomTeamTabView.detailsTitle:
-                fetchTeamDetails()
-            default:
-                print("Invalid selection")
-            }
-        }
-    }
-}
-
-private extension TeamViewController {
-    
-    func setupLoadingIndicator() {
-        containerView.addSubview(loadingIndicator)
-        
-        loadingIndicator.color = .gray
-        loadingIndicator.hidesWhenStopped = true
-        
-        loadingIndicator.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-    }
-    
-    func startLoading() {
-        loadingIndicator.startAnimating()
-    }
-    
-    func stopLoading() {
-        loadingIndicator.stopAnimating()
-    }
-}
-
-extension TeamViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }

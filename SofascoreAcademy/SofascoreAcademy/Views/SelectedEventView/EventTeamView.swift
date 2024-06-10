@@ -46,6 +46,7 @@ class EventTeamView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension EventTeamView {
     
     func update(team: Team) {

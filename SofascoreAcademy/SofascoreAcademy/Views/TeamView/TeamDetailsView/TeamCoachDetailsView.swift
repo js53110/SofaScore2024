@@ -24,6 +24,7 @@ class TeamCoachDetailsView: BaseView {
     override func styleViews() {
         coachNameLabel.textAlignment = .left
         coachNameLabel.font = .body
+        coachNameLabel.textColor = .onSurfaceOnSurfaceLv1
         
         coachCountryLabel.font = .assistive
         coachCountryLabel.textColor = .onSurfaceOnSurfaceLv2
@@ -65,6 +66,7 @@ class TeamCoachDetailsView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension TeamCoachDetailsView {
     
     private func updateCountryFlag(countryId: Int) {

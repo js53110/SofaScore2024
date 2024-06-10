@@ -13,8 +13,8 @@ class SettingsAboutView: BaseView {
     private let apiCredit: String
     private let developer: String
     
-//    private let divider1 = UIView()
-//    private let divider2 = UIView()
+    //    private let divider1 = UIView()
+    //    private let divider2 = UIView()
     private let divider = UIView()
     
     private let creditStackView = UIStackView()
@@ -25,9 +25,9 @@ class SettingsAboutView: BaseView {
         self.developer = developer
         super.init()
     }
-        
+    
     override func addViews() {
-//        addSubview(divider1)
+        //        addSubview(divider1)
         addSubview(title)
         addSubview(details)
         details.addSubview(detailsTitle)
@@ -45,7 +45,7 @@ class SettingsAboutView: BaseView {
         title.font = .headline1
         title.textColor = .black
         title.textAlignment = .left
-   
+        
         detailsTitle.text = "Sofascore Academy"
         detailsTitle.font = .headline2
         detailsTitle.textColor = .black
@@ -61,8 +61,8 @@ class SettingsAboutView: BaseView {
         creditStackView.spacing = 16
         creditStackView.translatesAutoresizingMaskIntoConstraints = false
         
-//        divider1.backgroundColor = .onSurfaceOnSurfaceLv4
-//        divider2.backgroundColor = .onSurfaceOnSurfaceLv4
+        //        divider1.backgroundColor = .onSurfaceOnSurfaceLv4
+        //        divider2.backgroundColor = .onSurfaceOnSurfaceLv4
         divider.backgroundColor = .onSurfaceOnSurfaceLv4
     }
     
@@ -71,7 +71,7 @@ class SettingsAboutView: BaseView {
             $0.top.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(28)
         }
-
+        
         details.snp.makeConstraints {
             $0.top.equalTo(title.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -88,23 +88,23 @@ class SettingsAboutView: BaseView {
             $0.height.equalTo(20)
         }
         
-//        divider1.snp.makeConstraints {
-//            $0.height.equalTo(1)
-//            $0.top.equalToSuperview()
-//            $0.leading.trailing.equalToSuperview()
-//        }
+        //        divider1.snp.makeConstraints {
+        //            $0.height.equalTo(1)
+        //            $0.top.equalToSuperview()
+        //            $0.leading.trailing.equalToSuperview()
+        //        }
         
         divider.snp.makeConstraints {
             $0.height.equalTo(1)
         }
         
-//        divider2.snp.makeConstraints {
-//            $0.height.equalTo(1)
-//        }
-//        
-//        divider3.snp.makeConstraints {
-//            $0.height.equalTo(1)
-//        }
+        //        divider2.snp.makeConstraints {
+        //            $0.height.equalTo(1)
+        //        }
+        //
+        //        divider3.snp.makeConstraints {
+        //            $0.height.equalTo(1)
+        //        }
         
         creditStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(16)

@@ -73,4 +73,22 @@ class ImageService {
             }
         }
     }
+    
+    func getPlayerImage(playerId: Int) async -> UIImage {
+        
+        let cacheKey: String = "player_\(playerId)"
+        
+        if let cachedImage = imageCache.getImage(forKey: cacheKey) {
+            return cachedImage
+        } else {
+            let imageResult = await ApiClient().getPlayerImageApi(playerId: playerId)
+            switch imageResult {
+            case .success(let teamLogo):
+                imageCache.setImage(teamLogo, forKey: cacheKey)
+                return teamLogo
+            case .failure:
+                return UIImage(named: "person_placeholder") ?? UIImage()
+            }
+        }
+    }
 }

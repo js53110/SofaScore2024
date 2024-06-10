@@ -6,12 +6,6 @@ enum NetworkError: Error {
     case invalidData
 }
 
-//enum FootballIncidentType { // TO DO
-//    case footballGoal(FootballGoal)
-//    case footballCard(FootballCard)
-//    case footballPeriod(FootballPeriod)
-//}
-
 class ApiClient {
     
     static let shared = ApiClient()
@@ -34,6 +28,26 @@ class ApiClient {
             let (data, _) = try await urlSession.data(for: request)
             let eventResponse = try JSONDecoder().decode([Event].self, from: data)
             return .success(eventResponse)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getLeaguesData(sportSlug: SportSlug) async -> Result<[Tournament], NetworkError> {
+        let slugString: String = Helpers.getSlugStringFromEnum(sportSlug: sportSlug)
+        
+        let urlString: String = "\(ApiClient.urlBase)/sport/\(slugString)/tournaments/"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let tournamentsResponse = try JSONDecoder().decode([Tournament].self, from: data)
+            return .success(tournamentsResponse)
         } catch {
             return .failure(.invalidData)
         }
@@ -102,7 +116,28 @@ class ApiClient {
         }
     }
     
-    func getFootballIncidents(eventId: Int) async -> Result<[FootballIncident], NetworkError> {
+    func getPlayerImageApi(playerId: Int) async -> Result<UIImage, NetworkError> {
+        let urlString: String = "\(ApiClient.urlBase)/player/\(playerId)/image"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            guard let coachImage = UIImage(data: data) else {
+                return .failure(.invalidData)
+            }
+            
+            return .success(coachImage)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getFootballIncidents(eventId: Int) async -> Result<[EventIncident], NetworkError> {
         
         let urlString: String = "\(ApiClient.urlBase)/event/\(eventId)/incidents"
         guard let url = URL(string: urlString) else {
@@ -114,7 +149,7 @@ class ApiClient {
         
         do {
             let (data, _) = try await urlSession.data(for: request)
-            let eventIncidents = try JSONDecoder().decode([FootballIncident].self, from: data)
+            let eventIncidents = try JSONDecoder().decode([EventIncident].self, from: data)
             return .success(eventIncidents)
         } catch {
             return .failure(.invalidData)
@@ -159,6 +194,25 @@ class ApiClient {
         }
     }
     
+    func getTournamentData(tournamentId: Int) async -> Result<Tournament, NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let tournament = try JSONDecoder().decode(Tournament.self, from: data)
+            return .success(tournament)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
     func getTeamTournaments(teamId: Int) async -> Result<[Tournament], NetworkError> {
         
         let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/tournaments"
@@ -178,6 +232,44 @@ class ApiClient {
         }
     }
     
+    func getTournamentNextMatches(tournamentId: Int) async -> Result<[Event], NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/events/next/0"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let event = try JSONDecoder().decode([Event].self, from: data)
+            return .success(event)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getTournamentLastMatches(tournamentId: Int) async -> Result<[Event], NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/tournament/\(tournamentId)/events/last/0"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let events = try JSONDecoder().decode([Event].self, from: data)
+            return .success(events)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
     func getTeamNextMatches(teamId: Int) async -> Result<[Event], NetworkError> {
         
         let urlString: String = "\(ApiClient.urlBase)/team/\(teamId)/events/next/0"
@@ -190,8 +282,8 @@ class ApiClient {
         
         do {
             let (data, _) = try await urlSession.data(for: request)
-            let nextEvent = try JSONDecoder().decode([Event].self, from: data)
-            return .success(nextEvent)
+            let events = try JSONDecoder().decode([Event].self, from: data)
+            return .success(events)
         } catch {
             return .failure(.invalidData)
         }
@@ -209,8 +301,65 @@ class ApiClient {
         
         do {
             let (data, _) = try await urlSession.data(for: request)
-            let nextEvent = try JSONDecoder().decode([Event].self, from: data)
-            return .success(nextEvent)
+            let events = try JSONDecoder().decode([Event].self, from: data)
+            return .success(events)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getPlayerDetails(playerId: Int) async -> Result<Player, NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/player/\(playerId)"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let player = try JSONDecoder().decode(Player.self, from: data)
+            return .success(player)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getPlayerNextMatches(playerId: Int) async -> Result<[Event], NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/player/\(playerId)/events/next/0"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let event = try JSONDecoder().decode([Event].self, from: data)
+            return .success(event)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getPlayerLastMatches(playerId: Int) async -> Result<[Event], NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/player/\(playerId)/events/last/0"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            let event = try JSONDecoder().decode([Event].self, from: data)
+            return .success(event)
         } catch {
             return .failure(.invalidData)
         }

@@ -51,6 +51,7 @@ class SettingsHeaderView: BaseView {
     }
 }
 
+//MARK: Additional method
 extension SettingsHeaderView {
     
     @objc func backButtonTapped() {

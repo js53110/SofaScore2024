@@ -5,7 +5,7 @@ import Foundation
 public enum KeyChain {
     
     static let token: String = "academy_token"
-
+    
     static func saveTokenToKeychain(token: String) {
         guard let data = token.data(using: .utf8) else {
             return

@@ -12,7 +12,6 @@ class DatePickerCollectionView: UICollectionView {
     private var selectedDate: String
     private let datesToDisplay: [DateData]
     
-    
     init(selectedDate: String, datesToDisplay: [DateData]) {
         self.selectedDate = selectedDate
         self.datesToDisplay = datesToDisplay

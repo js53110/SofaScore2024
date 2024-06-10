@@ -21,6 +21,7 @@ class TeamHeadlineView: BaseView {
         headlineLabel.text = title
         headlineLabel.textAlignment = .center
         headlineLabel.font = .headline2
+        headlineLabel.textColor = .onSurfaceOnSurfaceLv1
     }
     
     override func setupConstraints() {

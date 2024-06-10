@@ -1,6 +1,5 @@
 import Foundation
-import UIKit
 
 protocol IncidentViewProtocol: AnyObject {
-    func update(data: FootballIncident, matchData: Event)
+    func update(data: EventIncident, matchData: Event)
 }

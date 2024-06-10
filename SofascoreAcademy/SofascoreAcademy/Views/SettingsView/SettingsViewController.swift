@@ -23,7 +23,6 @@ class SettingsViewController: UIViewController {
         setupGestureRecognizers()
         settingsHeader.eventDelegate = self
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,12 +100,14 @@ extension SettingsViewController: BaseViewProtocol {
     }
 }
 
+// MARK: ReturnButtonDelegate
 extension SettingsViewController: ReturnButtonDelegate {
     func reactToReturnTap() {
         navigationController?.popViewController(animated: true)
     }
 }
 
+// MARK: Additional function
 extension SettingsViewController {
     @objc func logoutButtonTapped() {
         KeyChain.deleteTokenFromKeychain(token: "academy_token")
@@ -114,10 +115,11 @@ extension SettingsViewController {
     }
 }
 
+// MARK: UIGestureRecognizerDelegate
 extension SettingsViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
-        }
+        return true
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

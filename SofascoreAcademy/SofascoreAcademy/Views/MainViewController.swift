@@ -12,7 +12,8 @@ class MainViewController: UIViewController {
     private let scrollView = MainScrollView()
     private let contentView = UIView()
     private let appHeader = AppHeader()
-    private let datePickerView = DatePickerCollectionView(selectedDate: Helpers.getTodaysDate(), datesToDisplay: Helpers.getDatesDataForDisplay(numOfWeeks: 1))
+    private let datePickerView = DatePickerCollectionView(selectedDate: Helpers.getTodaysDate(),
+                                                          datesToDisplay: Helpers.getDatesDataForDisplay(numOfWeeks: 1))
     private let datesMatchesDivider = DatesMatchesDividerView()
     private var customTabBar: CustomTabView
     private let blueContainer = UIView()
@@ -41,7 +42,6 @@ class MainViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         displayEventsForSelectedDate(selectedDate: selectedDate)
-        
     }
     
     func setupView() {
@@ -73,7 +73,6 @@ extension MainViewController: BaseViewProtocol {
         
         setupLoadingIndicator()
         customAddChild(child: currentChild, parent: containerView, animation: Animations.pushFromRight())
-        
     }
     
     func styleViews() {
@@ -138,6 +137,10 @@ extension MainViewController: BaseViewProtocol {
 
 // MARK: AppHeaderDelegate
 extension MainViewController: AppHeaderDelegate {
+    func reactToTrophyTap() {
+        let leaguesViewController = LeaguesViewController()
+        navigationController?.pushViewController(leaguesViewController, animated: true)
+    }
     
     func reactToSetingsTap() {
         let settingsViewController = SettingsViewController()
@@ -166,7 +169,7 @@ extension MainViewController: ParentSportSlugPicker {
     
     func displaySelectedSport(selectedSportSlug: SportSlug?) {
         if(selectedSportSlug != currentSportSlug) {
-                        currentChild.remove()
+            currentChild.remove()
             if let selectedSportSlug = selectedSportSlug {
                 startLoading()
                 currentSportSlug = selectedSportSlug
@@ -265,16 +268,16 @@ private extension MainViewController {
                 }
                 updateView()
             }
-            
             stopLoading()
         }
     }
 }
 
+//MARK: UIGestureRecognizerDelegate
 extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return false
-        }
+        return false
+    }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true

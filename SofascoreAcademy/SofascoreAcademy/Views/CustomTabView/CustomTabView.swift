@@ -63,8 +63,6 @@ class CustomTabView: BaseView {
         let tapAmericanFootball = UITapGestureRecognizer(target: self, action: #selector(tabTapped(_:)))
         tabButtonAmericanFootball.addGestureRecognizer(tapAmericanFootball)
     }
-    
-    
 }
 
 //MARK: Private methods
@@ -89,5 +87,3 @@ private extension CustomTabView {
         }
     }
 }
-
-
