@@ -87,7 +87,6 @@ extension TeamMatchesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMatch: Event = data[indexPath.section].events[indexPath.row]
         navigationController?.pushViewController(EventDataViewController(matchData: selectedMatch), animated: true)
-        //        matchTapDelegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
     }
 }
 
