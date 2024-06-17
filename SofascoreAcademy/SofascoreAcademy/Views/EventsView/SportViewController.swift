@@ -23,6 +23,7 @@ class SportViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         addViews()
         styleViews()
@@ -43,14 +44,12 @@ extension SportViewController: UITableViewDataSource {
         data[section].events.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(
             withIdentifier: MatchViewCell.identifier,
             for: indexPath) as? MatchViewCell {
             let dataForRow = data[indexPath.section].events[indexPath.row]
-            cell.update(data: dataForRow)
-            //            fetchTeamsLogosFromApi(homeTeamId: dataForRow.homeTeam.id, awayTeamId: dataForRow.awayTeam.id, indexPath: indexPath)
+            cell.update(data: dataForRow, displayDate: false)
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -68,24 +67,25 @@ extension SportViewController: UITableViewDataSource {
                 tournamentId: sectionData.id
             )
             
+            headerView.delegate = self
+            
             return headerView
         } else {
             fatalError("Failed to dequeue header")
         }
     }
-    
 }
 
 // MARK: UITableViewDelegate
 extension SportViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMatch: Event = data[indexPath.section].events[indexPath.row]
-        matchTapDelegate?.displayMatchInfoOnTap(selectedMatch: selectedMatch)
+        navigationController?.pushViewController(EventDataViewController(matchData: selectedMatch), animated: true)
     }
 }
 
@@ -151,6 +151,7 @@ private extension SportViewController {
     }
 }
 
+//MARK: Additional methods
 extension SportViewController {
     
     func checkNoData() {
@@ -160,3 +161,21 @@ extension SportViewController {
     }
 }
 
+//MARK: UIGestureRecognizerDelegate
+extension SportViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            return true
+        }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+//MARK: LeagueTapDelegate
+extension SportViewController: LeagueTapDelegate {
+    func reactToLeagueHeaderTap(tournamentId: Int) {
+        navigationController?.pushViewController(SelectedLeagueViewController(tournamentId: tournamentId), animated: true)
+    }
+}

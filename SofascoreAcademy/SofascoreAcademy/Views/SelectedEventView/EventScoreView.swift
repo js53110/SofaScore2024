@@ -86,6 +86,7 @@ class EventScoreView: BaseView {
     }
 }
 
+//MARK: Additional methods
 extension EventScoreView {
     
     func update(matchData: Event) {
@@ -112,8 +113,6 @@ extension EventScoreView {
             time.text = Helpers.convertTimeStampStringToTime(dateString: matchData.startDate)
         }
     }
-    
-    
 }
 
 

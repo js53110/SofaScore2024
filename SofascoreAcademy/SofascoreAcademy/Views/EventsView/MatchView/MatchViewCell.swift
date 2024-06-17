@@ -24,9 +24,9 @@ class MatchViewCell: UITableViewCell {
 // MARK: Additional methods
 extension MatchViewCell {
     
-    func update(data: Event) {
+    func update(data: Event, displayDate: Bool) {
         matchId = data.id
-        matchView.update(data: data)
+        matchView.update(data: data, displayDate: displayDate)
     }
     
     func updateScore(score: Int, side: TeamSide){

@@ -36,6 +36,5 @@ private extension LoginButton {
         snp.makeConstraints {
             $0.height.equalTo(40)
         }
-        
     }
 }

@@ -70,14 +70,19 @@ class AppHeader: BaseView {
     }
     
     override func setupGestureRecognizers() {
-        headerButtonSettings.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        headerButtonSettings.addTarget(self, action: #selector(buttonSettingsClicked), for: .touchUpInside)
+        headerButtonTrophy.addTarget(self, action: #selector(buttonTrophyClicked), for: .touchUpInside)
     }
 }
 
 // MARK: Private methods
 private extension AppHeader {
     
-    @objc func buttonClicked(_ sender: UIButton) {
+    @objc func buttonSettingsClicked(_ sender: UIButton) {
         delegate?.reactToSetingsTap()
+    }
+    
+    @objc func buttonTrophyClicked(_ sender: UIButton) {
+        delegate?.reactToTrophyTap()
     }
 }

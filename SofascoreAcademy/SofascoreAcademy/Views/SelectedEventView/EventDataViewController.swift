@@ -4,6 +4,8 @@ import SofaAcademic
 
 class EventDataViewController: UIViewController {
     
+    private let tableView = UITableView()
+    private var eventData: [EventIncident] = []
     private let whiteContainer = UIView()
     private let matchData: Event
     private let eventHeader = EventHeader()
@@ -14,6 +16,8 @@ class EventDataViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         eventHeader.eventDelegate = self
+        eventHeader.tournamentTapDelegate = self
+        eventMatchupView.teamTapDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -22,36 +26,44 @@ class EventDataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func setupView() {
+        
         addViews()
         styleViews()
         setupConstraints()
         
-        //fetchEventIncidents(eventId: matchData.id)
         
         eventHeader.update(matchData: matchData)
-        eventMatchupView.updateTeamNames(homeTeamName: matchData.homeTeam.name, awayTeamName: matchData.awayTeam.name)
+        eventMatchupView.updateTeamNames(homeTeam: matchData.homeTeam, awayTeam: matchData.awayTeam)
         eventMatchupView.updateScoreView(matchData: matchData)
         
         eventHeader.updateLeagueLogo(tournamentId: matchData.tournament.id)
         eventMatchupView.updateHomeTeamLogo(teamId: matchData.homeTeam.id)
         eventMatchupView.updateAwayTeamLogo(teamId: matchData.awayTeam.id)
         
+        
+        
         if(matchData.status == "notstarted") {
             addNotStartedEventView()
+        }
+        else if(matchData.status == "finished") {
+            fetchEventIncidents(eventId: matchData.id)
         }
     }
 }
 
+//MARK: BaseViewProtocol
 extension EventDataViewController: BaseViewProtocol {
     
     func addViews() {
@@ -95,6 +107,21 @@ extension EventDataViewController: ReturnButtonDelegate {
     }
 }
 
+// MARK: TeamTapDelegate
+extension EventDataViewController: TeamTapDelegate {
+    func reactToTeamTap(teamId: Int) {
+        let teamViewController = TeamViewController(teamId: teamId)
+        navigationController?.pushViewController(teamViewController, animated: true)
+    }
+}
+
+// MARK: LeagueTapDelegate
+extension EventDataViewController: LeagueTapDelegate {
+    func reactToLeagueHeaderTap(tournamentId: Int) {
+        navigationController?.pushViewController(SelectedLeagueViewController(tournamentId: matchData.tournament.id), animated: true)
+    }
+}
+
 // MARK: Additional methods
 extension EventDataViewController {
     
@@ -105,7 +132,8 @@ extension EventDataViewController {
                 
                 switch requestFootballEventIncidentsResult {
                 case .success(let requestDataFootball):
-                    print(requestDataFootball)
+                    eventData = requestDataFootball.reversed()
+                    setupTableView()
                 case .failure(let error):
                     print("Error fetching football data:", error)
                 }
@@ -117,11 +145,89 @@ extension EventDataViewController {
         let notStartedEventView = NotStartedEventView()
         view.addSubview(notStartedEventView)
         
+        notStartedEventView.delegate = self
+        
         notStartedEventView.snp.makeConstraints {
             $0.top.equalTo(eventMatchupView.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(148)
         }
     }
+    
+    func setupTableView() {
+        view.addSubview(tableView)
+        tableView.backgroundColor = .white
+        tableView.snp.makeConstraints() {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(eventMatchupView.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview()
+        }
+        
+        tableView.register(
+            IncidentViewCell.self,
+            forCellReuseIdentifier: IncidentViewCell.identifier
+        )
+        
+        tableView.separatorStyle = .none
+        tableView.reloadData()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+    }
 }
+
+// MARK: UITableViewDataSource
+extension EventDataViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        eventData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: IncidentViewCell.identifier,
+            for: indexPath) as? IncidentViewCell {
+            let dataForRow = eventData[indexPath.row]
+            cell.setupCell(data: dataForRow, matchData: matchData)
+            return cell
+        } else {
+            fatalError("Failed to equeue cell")
+        }
+    }
+}
+
+extension EventDataViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let incident = eventData[indexPath.row]
+        if incident.type == "period" {
+            return 40
+        }
+        return 56
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedIncident = eventData[indexPath.row]
+        if(selectedIncident.type != "period") {
+            navigationController?.pushViewController(PlayerViewController(playerId: selectedIncident.player?.id ?? 0), animated: true)
+        }
+    }
+}
+
+
+// MARK: UIGestureRecognizerDelegate
+extension EventDataViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
 

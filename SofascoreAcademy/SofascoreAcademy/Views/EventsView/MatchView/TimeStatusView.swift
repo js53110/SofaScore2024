@@ -37,13 +37,22 @@ class TimeStatusView: BaseView {
 // MARK: Additional methods
 extension TimeStatusView {
     
-    func update(matchTime: TimeInterval, status: String) {
-        timeView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
-        statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
+    func update(matchTime: TimeInterval, status: String, displayDate: Bool) {
+        
+        if(displayDate) {
+            timeView.text = Helpers.convertTimestampToDate(timeStamp: matchTime)
+            statusView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
+        } else {
+            timeView.text = Helpers.convertTimestampToTime(timeStamp: matchTime)
+            statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
+        }
         
         switch status {
         case "inprogress":
             statusView.textColor = .red
+        case "finished":
+            statusView.text = "FT"
+            statusView.textColor = .onSurfaceOnSurfaceLv2
         default:
             statusView.textColor = .onSurfaceOnSurfaceLv2
         }

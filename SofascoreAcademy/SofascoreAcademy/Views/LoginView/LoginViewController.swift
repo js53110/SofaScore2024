@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
         setupView()
         subscribeToKeyboardNotifications()
         
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -80,6 +81,10 @@ class LoginViewController: UIViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+//MARK: Validation methods
+extension LoginViewController {
     
     func validateEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
@@ -108,6 +113,7 @@ class LoginViewController: UIViewController {
     }
 }
 
+//MARK: BaseViewProtocol
 extension LoginViewController: BaseViewProtocol {
     
     func addViews() {
@@ -267,5 +273,16 @@ extension LoginViewController {
         loginForm.isHidden = false
         loginForm.alpha = 1.0
         subscribeToKeyboardNotifications()
+    }
+}
+
+//MARK: UIGestureRecognizerDelegate
+extension LoginViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
