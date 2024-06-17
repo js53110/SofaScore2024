@@ -4,7 +4,7 @@ import UIKit
 import SofaAcademic
 
 class TimeStatusView: BaseView {
-        
+    
     private let timeView = UILabel()
     private let statusView = UILabel()
     
@@ -12,15 +12,15 @@ class TimeStatusView: BaseView {
         addSubview(timeView)
         addSubview(statusView)
     }
-
+    
     override func styleViews() {
-        timeView.font = Fonts.RobotoCondensedRegularMicro
-        timeView.textColor = Colors.surfaceLv2
+        timeView.font = .micro
+        timeView.textColor = .onSurfaceOnSurfaceLv2
         timeView.textAlignment = .center
-        statusView.font = Fonts.RobotoCondensedRegularMicro
+        statusView.font = .micro
         statusView.textAlignment = .center
     }
-
+    
     override func setupConstraints() {
         timeView.snp.makeConstraints() {
             $0.height.equalTo(16)
@@ -45,7 +45,7 @@ extension TimeStatusView {
         case "inprogress":
             statusView.textColor = .red
         default:
-            statusView.textColor = Colors.surfaceLv2
+            statusView.textColor = .onSurfaceOnSurfaceLv2
         }
     }
     
@@ -54,7 +54,7 @@ extension TimeStatusView {
         case "inprogress":
             statusView.textColor = .red
         default:
-            statusView.textColor = Colors.surfaceLv2
+            statusView.textColor = .onSurfaceOnSurfaceLv2
         }
         statusView.text = Helpers.determineMatchStatusString(matchStatus: status)
     }

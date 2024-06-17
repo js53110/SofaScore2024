@@ -37,7 +37,11 @@ class MainViewController: UIViewController {
         setupScrollView()
         setupRefreshControl()
         setupView()
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
         displayEventsForSelectedDate(selectedDate: selectedDate)
+        
     }
     
     func setupView() {
@@ -75,7 +79,7 @@ extension MainViewController: BaseViewProtocol {
     func styleViews() {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
-        blueContainer.backgroundColor = Colors.colorPrimaryDefault
+        blueContainer.backgroundColor = .colorPrimaryDefault
     }
     
     func updateView() {
@@ -137,9 +141,7 @@ extension MainViewController: AppHeaderDelegate {
     
     func reactToSetingsTap() {
         let settingsViewController = SettingsViewController()
-        settingsViewController.modalPresentationStyle = .fullScreen
-        settingsViewController.title = "Settings"
-        present(settingsViewController, animated: true)
+        navigationController?.pushViewController(settingsViewController, animated: true)
     }
 }
 
@@ -147,7 +149,7 @@ extension MainViewController: AppHeaderDelegate {
 extension MainViewController: MatchTapDelegate {
     
     func displayMatchInfoOnTap(selectedMatch: Event) {
-        navigationController?.pushViewController(MatchDataViewController(matchData: selectedMatch), animated: true)
+        navigationController?.pushViewController(EventDataViewController(matchData: selectedMatch), animated: true)
     }
 }
 
@@ -223,6 +225,7 @@ private extension MainViewController {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: workItem)
     }
     
+    
     func loadData(selectedDate: String, selectedSport: SportSlug) {
         sportData = []
         self.selectedDate = selectedDate
@@ -267,3 +270,14 @@ private extension MainViewController {
         }
     }
 }
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return navigationController?.viewControllers.count ?? 0 > 1
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+

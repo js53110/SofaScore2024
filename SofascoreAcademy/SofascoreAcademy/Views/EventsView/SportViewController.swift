@@ -50,7 +50,7 @@ extension SportViewController: UITableViewDataSource {
             for: indexPath) as? MatchViewCell {
             let dataForRow = data[indexPath.section].events[indexPath.row]
             cell.update(data: dataForRow)
-//            fetchTeamsLogosFromApi(homeTeamId: dataForRow.homeTeam.id, awayTeamId: dataForRow.awayTeam.id, indexPath: indexPath)
+            //            fetchTeamsLogosFromApi(homeTeamId: dataForRow.homeTeam.id, awayTeamId: dataForRow.awayTeam.id, indexPath: indexPath)
             return cell
         } else {
             fatalError("Failed to equeue cell")
@@ -68,7 +68,6 @@ extension SportViewController: UITableViewDataSource {
                 tournamentId: sectionData.id
             )
             
-//            fetchLeagueLogoFromApi(tournamentId: sectionData.id, section: section)
             return headerView
         } else {
             fatalError("Failed to dequeue header")
@@ -90,55 +89,8 @@ extension SportViewController: UITableViewDelegate {
     }
 }
 
-// MARK: LeagueLogoLoadDelegate
-//extension SportViewController: LeagueLogoLoadDelegate {
-//    func fetchLeagueLogoFromApi(tournamentId: Int, section: Int) {
-//        Task {
-//            do {
-//                let result =  await ApiClient().getLeagueLogoApi(tournamentId: tournamentId)
-//                switch result {
-//                case .success(let leagueLogo):
-//                    if let headerView = self.tableView.headerView(forSection: section) as? LeagueInfoViewHeader {
-//                        headerView.updateLeagueLogo(leagueLogo: leagueLogo )
-//                    }
-//                case .failure(let error):
-//                    print("Error fetching league logo: \(error)")
-//                }
-//            }
-//        }
-//    }
-//}
-
-//// MARK: TeamLogoLoadProtocol
-//extension SportViewController: TeamLogoLoadProtocol {
-//    func fetchTeamsLogosFromApi(homeTeamId: Int, awayTeamId: Int, indexPath: IndexPath) {
-//        Task {
-//            do {
-//                let homeTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: homeTeamId)
-//                let awayTeamLogoResult =  await ApiClient().getTeamLogoApi(teamId: awayTeamId)
-//                
-//                switch homeTeamLogoResult {
-//                case .success(let homeTeamLogo):
-//                    switch awayTeamLogoResult {
-//                    case .success(let awayTeamLogo):
-//                        if let cell = self.tableView.cellForRow(at: indexPath) as? MatchViewCell {
-//                            cell.updateHomeTeamLogo(teamLogo: homeTeamLogo )
-//                            cell.updateAwayTeamLogo(teamLogo: awayTeamLogo )
-//                        }
-//                    case .failure(let error):
-//                        print("Error fetching away team logo: \(error)")
-//                    }
-//                case .failure(let error):
-//                    print("Error fetching home team logo: \(error)")
-//                }
-//            }
-//        }
-//    }
-//}
-
-
 // MARK: BaseViewProtocol
-extension SportViewController: BaseViewProtocol{
+extension SportViewController: BaseViewProtocol {
     
     func addViews() {
         view.addSubview(tableView)
@@ -146,6 +98,7 @@ extension SportViewController: BaseViewProtocol{
     
     func styleViews() {
         view.backgroundColor = .white
+        tableView.backgroundColor = .white
     }
     
     func setupConstraints() {
@@ -193,8 +146,8 @@ private extension SportViewController {
         }
         noDataLabel.text = "No events found for selected date"
         
-        noDataLabel.font = Fonts.RobotoBold
-        noDataLabel.textColor = Colors.surfaceLv2
+        noDataLabel.font = .action
+        noDataLabel.textColor = .onSurfaceOnSurfaceLv2
     }
 }
 
@@ -204,10 +157,6 @@ extension SportViewController {
         if(data.count == 0) {
             setupNoDataView()
         }
-    }
-    
-    func updateData() {
-        print("a")
     }
 }
 

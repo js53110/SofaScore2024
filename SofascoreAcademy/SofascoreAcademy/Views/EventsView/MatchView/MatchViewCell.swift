@@ -32,14 +32,6 @@ extension MatchViewCell {
     func updateScore(score: Int, side: TeamSide){
         matchView.updateScore(score: score, side: side)
     }
-    
-//    func updateHomeTeamLogo(teamLogo: UIImage) {
-//        matchView.updateHomeTeamLogo(teamLogo: teamLogo)
-//    }
-//    
-//    func updateAwayTeamLogo(teamLogo: UIImage) {
-//        matchView.updateAwayTeamLogo(teamLogo: teamLogo)
-//    }
 }
 
 //MARK: BaseViewProtocol

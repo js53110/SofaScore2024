@@ -4,7 +4,7 @@ import UIKit
 
 
 class DatePickerCollectionView: UICollectionView {
-        
+    
     private var firstStart: Bool = true
     
     static let middleIndexPath: IndexPath = [0, 7]
@@ -47,7 +47,7 @@ extension DatePickerCollectionView: UICollectionViewDataSource {
                 cell.setSelected(false)
             }
             
-            cell.backgroundColor = Colors.colorPrimaryVariant
+            cell.backgroundColor = .colorPrimaryVariant
             
             if(firstStart) {
                 scrollToTodayDate()
@@ -89,14 +89,6 @@ extension DatePickerCollectionView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: UICollectionView - Private methods
-private extension UICollectionView {
-    
-    func scrollToCenterForItem(at indexPath: IndexPath, animated: Bool) {
-        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
-    }
-}
-
 //MARK: Private methods
 private extension DatePickerCollectionView {
     
@@ -107,6 +99,8 @@ private extension DatePickerCollectionView {
         //MARK: Assigning delegates
         self.delegate = self
         self.dataSource = self
+        
+        backgroundColor = .colorPrimaryVariant
     }
     
     func scrollToTodayDate() {

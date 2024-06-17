@@ -48,3 +48,4 @@ struct LeagueData {
     let id: Int
     let events: [Event]
 }
+

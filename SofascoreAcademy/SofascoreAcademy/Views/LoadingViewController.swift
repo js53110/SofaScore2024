@@ -1,56 +1,59 @@
-//import Foundation
-//import UIKit
-//import SofaAcademic
-//import SnapKit
-//
-//class LoadingViewController: UIViewController {
-//    
-//    private let apiClient = ApiClient()
-//    
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupView()
-//    }
-//    
-//    func setupView() {
-//        addViews()
-//    }
-//    
-//    func addViews() {
-//        let mainVC = MainViewController()
-//        customAddChild(child: mainVC, parent: view, animation: nil)
-//    }
-//}
-//
-//extension LoadingViewController {
-//    
-//    func displayEventsForCurrentDate(selectedDate: String)  {
-//        Task {
-//            do {
-//                let requestDataFootball = try await ApiClient().getDataForSport(sportSlug: .football, date: selectedDate)
-//                let requestDataBasketball = try await ApiClient().getDataForSport(sportSlug: .basketball, date: selectedDate)
-//                let requestDataAmFootball = try await ApiClient().getDataForSport(sportSlug: .americanFootball, date: selectedDate)
-//                
-//                let dataFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataFootball)
-//                let dataBasketball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataBasketball)
-//                let dataAmFootball: [LeagueData] = Helpers.groupEventsByTournament(eventsData: requestDataAmFootball)
-//                
-//                footballData = dataFootball
-//                basketballData = dataBasketball
-//                americanFootballData = dataAmFootball
-//                
-//                setupView()
-//            } catch {
-//                print("Error:", error)
-//            }
-//        }
-//    }
-//}
+import Foundation
+import UIKit
+import SofaAcademic
+import SnapKit
+
+class LoadingViewController: UIViewController, BaseViewProtocol {
+    
+    let appLogo = UIImageView(image: UIImage(named: "sofascore_logo"))
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        displayViewController()
+    }
+    
+    func setupView() {
+        addViews()
+        styleViews()
+        setupConstraints()
+    }
+    
+    func addViews() {
+        view.addSubview(appLogo)
+    }
+    
+    func styleViews() {
+        view.backgroundColor = .colorPrimaryDefault
+        appLogo.contentMode = .scaleAspectFit
+    }
+    
+    func setupConstraints() {
+        appLogo.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(20)
+            $0.width.equalTo(132)
+        }
+    }
+}
+
+extension LoadingViewController {
+    
+    func displayViewController() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let loggedIn = KeyChain.isTokenExistingInKeychain(token: "academy_token")
+            
+            if loggedIn {
+                let mainViewController = MainViewController()
+                self.navigationController?.pushViewController(mainViewController, animated: true)
+            } else {
+                let loginViewController = LoginViewController()
+                self.navigationController?.pushViewController(loginViewController, animated: true)
+                
+            }
+        }
+    }
+}

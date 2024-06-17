@@ -6,6 +6,12 @@ enum NetworkError: Error {
     case invalidData
 }
 
+enum FootballIncident { // TO DO
+    case footballGoal(FootballGoal)
+    case footballCard(FootballCard)
+    case footballPeriod(FootballPeriod)
+}
+
 class ApiClient {
     
     static let shared = ApiClient()
@@ -70,6 +76,25 @@ class ApiClient {
             }
             
             return .success(logoImage)
+        } catch {
+            return .failure(.invalidData)
+        }
+    }
+    
+    func getFootballIncidents(eventId: Int) async -> Result<Int, NetworkError> {
+        
+        let urlString: String = "\(ApiClient.urlBase)/event/\(eventId)/incidents"
+        guard let url = URL(string: urlString) else {
+            return .failure(.invalidURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await urlSession.data(for: request)
+            _ = try JSONDecoder().decode([FootballIncidentType].self, from: data)
+            return .success(1)
         } catch {
             return .failure(.invalidData)
         }

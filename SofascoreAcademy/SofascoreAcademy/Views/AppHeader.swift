@@ -27,7 +27,7 @@ class AppHeader: BaseView {
     }
     
     override func styleViews() {
-        backgroundColor = Colors.colorPrimaryDefault
+        backgroundColor = .colorPrimaryDefault
         appLogo.image = UIImage(named: logoPath)
         appLogo.contentMode = .scaleAspectFit
         headerIconTrophy.image = UIImage(named: headerButtonIconTrophyPath)

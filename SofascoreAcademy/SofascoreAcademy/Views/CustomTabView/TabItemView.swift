@@ -11,7 +11,7 @@ class TabItemView: BaseView {
     private let title: String
     private let tabLogo = UIImageView()
     private let tabLabel = UILabel()
-        
+    
     init(sportSlug : SportSlug) {
         self.sportSlug = sportSlug
         (logoString, title) = (sportSlug.logo, sportSlug.title)
